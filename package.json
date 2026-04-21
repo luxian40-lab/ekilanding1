@@ -1,0 +1,14 @@
+{
+  "name": "eki-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing site for eki - Educacion con equidad",
+  "scripts": {
+    "validate:js": "node --check eki_v9_final.js && node --check js/main.js && node --check js/modules/legacy-app.js",
+    "validate:paths": "node scripts/check-paths.mjs",
+    "validate:a11y": "node scripts/check-a11y.mjs",
+    "validate:perf": "node scripts/check-performance.mjs",
+    "validate": "npm run validate:js && npm run validate:paths && npm run validate:a11y && npm run validate:perf",
+    "build": "node scripts/build.mjs"
+  }
+}

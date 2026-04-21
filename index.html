@@ -1,0 +1,494 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="eki - Educación con equidad: soluciones educativas rurales con IA, WhatsApp, LXP y proyectos a medida.">
+<meta property="og:title" content="eki - Educación con equidad">
+<meta property="og:description" content="Soluciones educativas rurales con IA, WhatsApp, LXP y proyectos a medida.">
+<meta property="og:type" content="website">
+<title>eki - Educación con equidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/main.css?v=20260415a">
+</head>
+<body>
+<button id="demo-float-btn" type="button" data-modal="mHablemos" aria-label="Abrir chat Hablemos">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm2 4v2h12V7H6zm0 4v2h8v-2H6z"/>
+  </svg>
+</button>
+
+<!-- MODALS -->
+<div class="mo" id="mH" role="dialog" aria-modal="true" aria-label="Política de Tratamiento de Datos Personales"><div class="mod"><div class="mhd"><div><div class="mlb">Legal</div><h3>Política de Tratamiento de Datos Personales</h3></div><button class="mcl" type="button" data-close="mH" aria-label="Cerrar modal">X</button></div><div class="mbd"><p style="font-size:13px;color:var(--m);line-height:1.8;margin-bottom:12px;">En eki - Educación con equidad reconocemos que sus datos personales son suyos. Esta política explica de manera clara y transparente cómo recolectamos, usamos, almacenamos y protegemos su información.</p><p style="font-size:12px;color:var(--m);line-height:1.7;margin-bottom:14px;"><strong style="color:var(--p2);">Vigente desde:</strong> 10 de marzo de 2026<br><strong style="color:var(--p2);">Última revisión:</strong> 10 de marzo de 2026<br><strong style="color:var(--p2);">Normativa aplicable:</strong> Ley 1581 de 2012 y Decreto 1377 de 2013</p><div class="mbls" style="gap:12px;"><div style="border:1px solid var(--bd);padding:12px;"><div class="mlb" style="margin-bottom:6px;">I. Responsable del tratamiento</div><p style="font-size:12px;color:var(--g);line-height:1.65;">eki - Educación con equidad<br>Correo de atención: comunidad.educativa@eki.com.co<br>Canal principal: WhatsApp (integrado vía Twilio).</p></div><div style="border:1px solid var(--bd);padding:12px;"><div class="mlb" style="margin-bottom:6px;">II. Datos que recolectamos</div><p style="font-size:12px;color:var(--g);line-height:1.65;">Nombre completo, número de celular, documento de identidad, municipio/departamento, conversaciones y audios de WhatsApp, progreso académico, evaluaciones y datos de gamificación.</p><p style="font-size:12px;color:var(--g);line-height:1.65;margin-top:6px;">eki no solicita ni trata datos sensibles en los términos del artículo 5 de la Ley 1581 de 2012.</p></div><div style="border:1px solid var(--bd);padding:12px;"><div class="mlb" style="margin-bottom:6px;">III. Finalidades del tratamiento</div><p style="font-size:12px;color:var(--g);line-height:1.65;">Prestación del servicio educativo, tutoría asistida por IA, seguimiento académico y gamificación, emisión de certificados digitales, comunicación institucional, reportes al cliente contratante y cumplimiento legal.</p><p style="font-size:12px;color:var(--g);line-height:1.65;margin-top:6px;">Sus datos no se venden ni se comercializan con terceros para fines distintos a los aquí descritos.</p></div><div style="border:1px solid var(--bd);padding:12px;"><div class="mlb" style="margin-bottom:6px;">IV. Derechos del titular (ARCOP + queja SIC)</div><p style="font-size:12px;color:var(--g);line-height:1.65;">Usted puede ejercer: Acceso, Rectificación, Cancelación, Oposición y Portabilidad. También puede presentar queja ante la SIC cuando considere vulnerados sus derechos.</p><p style="font-size:12px;color:var(--g);line-height:1.65;margin-top:6px;">Consultas: hasta 10 días hábiles. Reclamos: hasta 15 días hábiles, conforme a la ley.</p></div><div style="border:1px solid var(--bd);padding:12px;"><div class="mlb" style="margin-bottom:6px;">V. Datos en WhatsApp</div><p style="font-size:12px;color:var(--g);line-height:1.65;">Los mensajes y audios enviados son tratados para soporte pedagógico y seguimiento del aprendizaje. Los audios pueden transcribirse automáticamente para accesibilidad y tutoría con IA.</p><p style="font-size:12px;color:var(--g);line-height:1.65;margin-top:6px;">Los registros de conversación se conservan mientras el estudiante esté activo y hasta 5 años después del último curso, salvo obligación legal diferente.</p></div><div style="border:1px solid var(--bd);padding:12px;"><div class="mlb" style="margin-bottom:6px;">VI. Medidas de seguridad</div><p style="font-size:12px;color:var(--g);line-height:1.65;">Aplicamos medidas técnicas, humanas y administrativas: cifrado en tránsito, control de accesos, monitoreo y auditoría, y gestión de incidentes conforme a la normativa colombiana.</p></div><div style="border:1px solid var(--bd);padding:12px;"><div class="mlb" style="margin-bottom:6px;">VII. Vigencia y conservación</div><p style="font-size:12px;color:var(--g);line-height:1.65;">Los datos se conservan por el tiempo necesario para cumplir la finalidad, obligaciones legales y trazabilidad de certificados. Esta política rige desde el 10 de marzo de 2026.</p></div><div style="border:1px solid var(--bd);padding:12px;"><div class="mlb" style="margin-bottom:6px;">VIII. Ejercicio de derechos</div><p style="font-size:12px;color:var(--g);line-height:1.65;">Para ejercer sus derechos, envíe solicitud a comunidad.educativa@eki.com.co incluyendo: nombre, documento, derecho que desea ejercer, descripción de la solicitud y canal de respuesta.</p></div></div></div><div class="mfb"><button class="mbp" data-close="mH" type="button">Acepto</button><button class="mbs" data-close="mH" type="button">Cerrar</button></div></div></div>
+
+<div class="mo" id="mV" role="dialog" aria-modal="true" aria-label="Video institucional eki"><div class="mod"><div class="mvid"><video controls preload="metadata" playsinline poster="experiencias/fotos/experiencia1.jpg"><source src="experiencias/videos/ekivideo1.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div><div class="mhd"><div><div class="mlb">Video institucional</div><h3>eki - Educación con equidad</h3></div><button class="mcl" type="button" data-close="mV" aria-label="Cerrar modal">X</button></div><div class="mfb"><button class="mbp" type="button" data-close="mV">Cerrar video</button></div></div></div>
+
+<div class="mo" id="mVideo" role="dialog" aria-modal="true" aria-label="Video de experiencia"><div class="mod"><div class="mvid"><video id="mVideoPlayer" controls preload="metadata" playsinline poster="experiencias/fotos/experiencia1.jpg"><source id="mVideoSource" src="" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div><div class="mhd"><div><div class="mlb">Video de experiencia</div><h3 id="mVideoTitle">Video desde el territorio</h3></div><button class="mcl" type="button" data-close="mVideo" aria-label="Cerrar modal">X</button></div><div class="mfb"><button class="mbp" type="button" data-close="mVideo">Cerrar video</button></div></div></div>
+
+<div class="mo" id="mR" role="dialog" aria-modal="true" aria-label="Galería de recuerdos"><div class="mod modal-large"><div class="mhd"><div><div class="mlb" id="mRlabel">Nuestros recuerdos</div><h3 id="mRtitle">Galería de fotos</h3></div><button class="mcl" type="button" data-close="mR" aria-label="Cerrar modal">X</button></div><div class="mbd modal-image-wrap"><img id="mRimg" src="experiencias/fotos/Anuc.jpeg" alt="Recuerdo eki" class="modal-image"></div></div></div>
+
+<div class="mo" id="m1" role="dialog" aria-modal="true" aria-label="Solución 01: WhatsApp + Agentes de IA"><div class="mod"><div class="mvid yt"><video controls preload="metadata" playsinline poster="miniatura-whatsapp.svg"><source src="Videoekiwhatsapp.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div><div class="mhd"><div><div class="mlb">Solución 01</div><h3>WhatsApp + Agentes de IA</h3></div><button class="mcl" type="button" data-close="m1" aria-label="Cerrar modal">X</button></div><div class="mbd"><div class="mst"><div class="ms"><div class="msn">92%</div><div class="msl">Reducción costos</div></div><div class="ms"><div class="msn">63%</div><div class="msl">Tasa culminación</div></div><div class="ms"><div class="msn">24/7</div><div class="msl">Disponibilidad IA</div></div></div><div class="mbls"><div class="mbl"><div class="mbd2"></div><span>Microcápsulas diseñadas para contextos rurales, desde el celular en cualquier momento</span></div><div class="mbl"><div class="mbd2"></div><span>Agentes de IA que responden, explican y acompañan el aprendizaje en tiempo real</span></div><div class="mbl"><div class="mbd2"></div><span>Gamificación, certificaciones e insignias digitales al completar los programas</span></div></div><div class="mpls"><span class="pi">Microcápsulas</span><span class="pi">Agentes IA</span><span class="pi">Gamificación</span><span class="pi">Certificados</span></div></div><div class="mfb"><button class="mbp" type="button" data-close="m1" data-modal="mChat">Solicitar demo</button><button class="mbs" type="button" data-close="m1">Cerrar</button></div></div></div>
+
+<div class="mo" id="m2" role="dialog" aria-modal="true" aria-label="Solución 02: Proyectos a la medida"><div class="mod"><div class="mvid sol-img"><img src="trabajo-en-campo.jpg" alt="Programas a la medida"><div class="mvl">Proyectos en territorio</div></div><div class="mhd"><div><div class="mlb">Solución 02</div><h3>Proyectos a la medida</h3></div><button class="mcl" type="button" data-close="m2" aria-label="Cerrar modal">X</button></div><div class="mbd"><div class="mbls"><div class="mbl"><div class="mbd2"></div><span>Diagnóstico previo del territorio y necesidades reales de formación</span></div><div class="mbl"><div class="mbd2"></div><span>Diseño 20/80 teórico y práctico, co-creado con tu organización</span></div><div class="mbl"><div class="mbd2"></div><span>Implementación presencial, virtual o híbrida según el contexto</span></div><div class="mbl"><div class="mbd2"></div><span>Lego Serious Play: pensamiento creativo y soluciones colectivas</span></div></div><div class="mpls"><span class="pi">Presencial</span><span class="pi">Virtual</span><span class="pi">Híbrido</span><span class="pi">Lego SP</span></div></div><div class="mfb"><button class="mbp" type="button" data-close="m2" data-page="contacto">Solicitar demo</button><button class="mbs" type="button" data-close="m2">Cerrar</button></div></div></div>
+
+<div class="mo" id="m3" role="dialog" aria-modal="true" aria-label="Solución 03: Contenido rural"><div class="mod"><div class="mvid sol-img"><img src="generacion-contenido.jpeg" alt="Generacion de contenido rural"><div class="mvl">Contenido educativo rural</div></div><div class="mhd"><div><div class="mlb">Solución 03</div><h3>Contenido rural</h3></div><button class="mcl" type="button" data-close="m3" aria-label="Cerrar modal">X</button></div><div class="mbd"><div class="mbls"><div class="mbl"><div class="mbd2"></div><span>Diagnóstico de necesidades de formación de tu organización</span></div><div class="mbl"><div class="mbd2"></div><span>Producción de microcápsulas en video, audio y texto para WhatsApp</span></div><div class="mbl"><div class="mbd2"></div><span>Curaduría con expertos, instituciones educativas y proveedores del sector rural</span></div><div class="mbl"><div class="mbd2"></div><span>Temas: productividad, finanzas, sostenibilidad, habilidades blandas, IA</span></div></div><div class="mpls"><span class="pi">A medida</span><span class="pi">Expertos</span><span class="pi">Video</span><span class="pi">WhatsApp</span></div></div><div class="mfb"><button class="mbp" type="button" data-close="m3" data-page="contacto">Solicitar demo</button><button class="mbs" type="button" data-close="m3">Cerrar</button></div></div></div>
+
+<div class="mo" id="m4" role="dialog" aria-modal="true" aria-label="Solución 04: Plataforma LXP + Métricas"><div class="mod"><div class="mvid sol-img"><img src="lxp-metricas.jpeg" alt="LXP mas metricas"><div class="mvl">Plataforma LXP — demo interactivo</div></div><div class="mhd"><div><div class="mlb">Solución 04</div><h3>Plataforma LXP + Métricas</h3></div><button class="mcl" type="button" data-close="m4" aria-label="Cerrar modal">X</button></div><div class="mbd"><div class="mst"><div class="ms"><div class="msn">700</div><div class="msl">Sesiones individuales</div></div><div class="ms"><div class="msn">345</div><div class="msl">Sesiones empresa</div></div><div class="ms"><div class="msn">100</div><div class="msl">Usuarios activos</div></div></div><div class="mbls"><div class="mbl"><div class="mbd2"></div><span>Gestiona el conocimiento y mide el impacto de la formación con indicadores en tiempo real</span></div><div class="mbl"><div class="mbd2"></div><span>Seguimiento individual y grupal del progreso de tus colaboradores</span></div><div class="mbl"><div class="mbd2"></div><span>Reportes exportables para directivos, aliados y clientes</span></div></div><div class="mpls"><span class="pi">LXP</span><span class="pi">Métricas</span><span class="pi">IA</span><span class="pi">Dashboard</span></div></div><div class="mfb"><button class="mbp" type="button" data-close="m4" data-page="contacto">Solicitar demo</button><button class="mbs" type="button" data-close="m4">Cerrar</button></div></div></div>
+
+<div class="mo" id="mChat" role="dialog" aria-modal="true" aria-label="Chat de demo">
+  <div class="mod">
+    <div class="mhd">
+      <div>
+        <div class="mlb">Demo</div>
+        <h3>Chat de demostración</h3>
+      </div>
+      <button class="mcl" type="button" data-close="mChat" aria-label="Cerrar modal">X</button>
+    </div>
+    <div class="mbd">
+      <div class="celular-eki">
+        <div class="cabecera-wa">
+          <img src="logo-eki.png" alt="eki" class="avatar-cabecera">
+          <div class="info-cabecera">
+            <h4>Demo eki</h4>
+            <p>en línea</p>
+          </div>
+        </div>
+        <div id="pantalla-chat" class="cuerpo-wa">
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-bubble incoming">
+              <div class="chat-text">Hola soy el asistente de eki, somos una plataforma educativa para ruralidad y mi propósito es acompañarte paso a paso en un recorrido que te permitirá descubrir quiénes somos, cómo trabajamos y cómo podemos impulsar juntos la educación desde cualquier lugar.</div>
+              <div class="chat-meta">eki</div>
+            </div>
+          </div>
+        </div>
+        <div id="area-interaccion" class="pie-wa">
+          <button id="btn-iniciar" class="mbp" type="button">Comenzar Demo Interactivo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mo" id="mHablemos" role="dialog" aria-modal="true" aria-label="Chat de hablemos">
+  <div class="mod">
+    <div class="mhd">
+      <div>
+        <div class="mlb">Hablemos</div>
+        <h3>Chat con eki</h3>
+      </div>
+      <button class="mcl" type="button" data-close="mHablemos" aria-label="Cerrar modal">X</button>
+    </div>
+    <div class="mbd">
+      <div class="chat-window hablemos-window">
+        <div id="pantalla-hablemos" class="hablemos-panel">
+          <div class="chat-messages" id="chatMessagesHablemos"></div>
+        </div>
+        <div id="area-hablemos" class="hablemos-actions">
+          <div class="chat-form">
+            <input id="hablemosInput" type="text" placeholder="Escribe aquí..." autocomplete="off">
+            <button id="hablemosSend" class="mbp" type="button">Enviar</button>
+          </div>
+          <div id="hablemosOptions" class="hablemos-options"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form id="hablemos-form" action="https://formsubmit.co/luxian40@gmail.com" method="POST" style="display:none;">
+    <input type="hidden" name="_subject" value="Nuevo registro desde Hablemos - eki">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" id="hablemos-next" value="">
+    <input type="hidden" name="fuente" value="Hablemos">
+    <input type="hidden" name="nombre-organizacion" id="hablemos-nombre-organizacion" value="">
+    <input type="hidden" name="correo" id="hablemos-correo" value="">
+    <input type="hidden" name="solucion" id="hablemos-solucion" value="">
+    <input type="hidden" name="necesidad" id="hablemos-necesidad" value="">
+  </form>
+</div>
+
+<!-- NAV -->
+<header role="banner">
+<nav role="navigation" aria-label="Menú principal">
+  <a class="lt" href="#page-home" ><img class="lt-logo" src="logo-eki-removebg-preview.png" alt="eki Educación con equidad" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';"><span class="lt-fallback">eki.</span></a>
+  <ul>
+    <li><a href="#page-nosotros"  id="n-nosotros">Nosotros</a></li>
+    <li><a href="#page-soluciones"  id="n-soluciones">Soluciones</a></li>
+    <li><a href="#page-experiencias"  id="n-experiencias">Experiencias</a></li>
+  </ul>
+  <div class="nr">
+    <a class="bd" href="#" data-modal="mChat">Demo</a>
+    <a class="bs" href="#page-contacto"  id="n-contacto">Agéndate</a>
+  </div>
+</nav>
+</header>
+<main>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hl"><h1>Educación con<br><em>equidad</em></h1><p class="heq">Impulsamos el desarrollo rural a través de educación.<br>Y tecnologías impulsadas por IA.</p></div>
+  </section>
+  <div class="stats"><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="4000" data-count-prefix="+">+0</div><div class="sl">Personas impactadas</div></div><div class="si-icon si-icon-large"><img src="assets/personas.png" alt="Personas"></div></div><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="6" data-count-prefix="+">+0</div><div class="sl">Años de experiencia</div></div><div class="si-icon si-icon-large"><img src="assets/experiencias.png" alt="Experiencias"></div></div><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="8" data-count-prefix="+">+0</div><div class="sl">Alianzas activas</div></div><div class="si-icon si-icon-large si-icon-aliados"><img src="assets/aliados.png" alt="Aliados"></div></div><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="10" data-count-prefix="+">+0</div><div class="sl">Regiones Colombia</div></div><div class="si-icon si-icon-colombia"><img src="assets/colombia.png" alt="Colombia"></div></div></div>
+
+  <section class="sec sec-transform">
+    <div class="tg"><span class="ll"></span> Cómo lo hacemos</div>
+    <div class="tw"><h2>Tres formas de <em>transformar</em></h2><p class="hd">Soluciones que llegan a donde nadie llega.<br>Con tecnología y metodologías probadas en territorio.</p></div>
+    <div class="clh">
+      <div class="cc"><div class="ch"><span class="ctg">WhatsApp + IA</span><span class="cn">01</span></div><div class="cb2"><h4>WhatsApp y Agentes de IA</h4><p>Microcápsulas por WhatsApp con tutores de IA que acompañan 24/7. 92% reducción en costos.</p><div class="pills"><span class="pi">Microcápsulas</span><span class="pi">Agentes IA</span><span class="pi">24/7</span></div><button class="vm" data-page="soluciones" type="button">Ver más →</button></div></div>
+      <div class="cc"><div class="ch"><span class="ctg">Proyectos</span><span class="cn">02</span></div><div class="cb2"><h4>Programas a medida</h4><p>Experiencias presenciales, virtuales e híbridas con impacto social y de negocios. Metodología 20/80 y Lego Serious Play.</p><div class="pills"><span class="pi">Presencial</span><span class="pi">Virtual</span><span class="pi">Lego SP</span></div><button class="vm" data-page="soluciones" type="button">Ver más →</button></div></div>
+      <div class="cc"><div class="ch"><span class="ctg">Contenidos + LXP</span><span class="cn">03</span></div><div class="cb2"><h4>Generación de contenido + plataforma LXP</h4><p>Producimos contenido educativo rural a la medida y lo gestionamos en nuestra plataforma LXP con indicadores de medición de impacto.</p><div class="pills"><span class="pi">Contenidos</span><span class="pi">LXP</span><span class="pi">Métricas</span></div><button class="vm" data-page="soluciones" type="button">Ver más →</button></div></div>
+    </div>
+  </section>
+
+  <section class="sec casos-hero">
+    <div class="casos-hero-inner">
+      <div class="casos-hero-section section-1">
+        <div class="casos-hero-copy">
+          <div class="tg"><span class="ll"></span> Casos de éxito</div>
+          <h2>Impacto <em>real</em></h2>
+          <p class="hd">Resultados medibles en territorio. Números concretos con aliados reales.</p>
+          <p class="casos-hero-text">Historias reales de café, agroindustria y palma que muestran resultados concretos en campo.</p>
+        </div>
+        <article class="caso-card card-1">
+          <div class="card-content">
+            <div class="card-section">Nitrofert — Caficultores Antioquia</div>
+            <div class="card-label">Fortalecimos capacidades de café y ventas en Antioquia.</div>
+            <div class="card-metric js-count" data-count-target="2500" data-count-prefix="+">+0</div>
+            <p>Con una plataforma SaaS acompañamos a productores en formación, gestión de calidad y relación comercial.</p>
+            <span class="card-badge">Plataforma SaaS</span>
+          </div>
+        </article>
+      </div>
+      <div class="casos-hero-section section-2">
+        <article class="caso-card card-2">
+          <div class="card-content">
+            <div class="card-section">TechnoServe — Cauca</div>
+            <div class="card-label">Capacitamos a productores de gallinas de engorde con seguimiento en el campo.</div>
+            <div class="card-metric js-count" data-count-target="250" data-count-prefix="+">+0</div>
+            <p>Mejoramos prácticas productivas y disminuimos mortalidad utilizando formación contextual desde la LXP.</p>
+            <span class="card-badge">Plataforma LXP</span>
+          </div>
+        </article>
+        <div class="exp-j exp-j-section2"><a href="#page-experiencias" >Leer más casos de éxito →</a></div>
+      </div>
+      <div class="casos-hero-section section-3">
+        <article class="caso-card card-3">
+          <div class="card-content">
+            <div class="card-section">Cenipalma — Llanos Orientales</div>
+            <div class="card-label">Impulsamos talento y retención con formación híbrida en palma.</div>
+            <div class="card-metric js-count" data-count-target="125" data-count-prefix="+">+0</div>
+            <p>Diseñamos un acompañamiento estratégico para mejorar atracción, retención y capacidades clave del equipo.</p>
+            <span class="card-badge">LXP + Métricas</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEMICIRCUNFERENCIA: arcos concéntricos con mismo centro y radios consistentes -->
+  <div class="pw">
+    <div class="tg"><span class="ll"></span> Nuestro proceso</div>
+    <div class="tw"><h2>Construcción de <em>experiencias</em></h2><p class="hd">Cada experiencia tiene como objetivo potenciar y transformar al equipo, diseñada con base en la necesidad de nuestros clientes.</p></div>
+    <svg width="100%" viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" class="hero-svg">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#3C7BBF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+        <filter id="glow"><feGaussianBlur stdDeviation="3.4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <line x1="40" y1="280" x2="660" y2="280" stroke="rgba(60,123,191,.26)" stroke-width="1.5"/>
+      <!-- Centro común: (350,280). Arcos completos y concéntricos. -->
+      <path d="M 110 280 A 240 240 0 0 1 590 280" fill="none" stroke="rgba(60,123,191,.20)" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 145 280 A 205 205 0 0 1 555 280" fill="none" stroke="rgba(60,123,191,.38)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 180 280 A 170 170 0 0 1 520 280" fill="none" stroke="rgba(60,123,191,.48)" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M 215 280 A 135 135 0 0 1 485 280" fill="none" stroke="rgba(60,123,191,.58)" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M 250 280 A 100 100 0 0 1 450 280" fill="none" stroke="#3C7BBF" stroke-width="5.5" stroke-linecap="round"/>
+      <!-- Puntos con halo: distribución en espejo izquierda/derecha -->
+      <circle cx="146" cy="262" r="18" fill="rgba(154,108,172,0.1)"/><circle cx="146" cy="262" r="10" fill="#9A6CAC" stroke="#fff" stroke-width="3" filter="url(#glow)"/>
+      <circle cx="218" cy="123" r="18" fill="rgba(154,108,172,0.1)"/><circle cx="218" cy="123" r="10" fill="#9A6CAC" stroke="#fff" stroke-width="3" filter="url(#glow)"/>
+      <circle cx="482" cy="123" r="18" fill="rgba(154,108,172,0.1)"/><circle cx="482" cy="123" r="10" fill="#9A6CAC" stroke="#fff" stroke-width="3" filter="url(#glow)"/>
+      <circle cx="554" cy="262" r="18" fill="rgba(154,108,172,0.1)"/><circle cx="554" cy="262" r="10" fill="#9A6CAC" stroke="#fff" stroke-width="3" filter="url(#glow)"/>
+      <!-- Centro libre para evitar saturación visual -->
+      <!-- Labels — solo #7A4E8E y #9A6CAC, CERO negro -->
+      <text x="196" y="92" text-anchor="end" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" fill="#9A6CAC" letter-spacing="1">DISEÑAMOS</text>
+      <text x="196" y="105" text-anchor="end" font-family="Montserrat,sans-serif" font-size="10" fill="#7A4E8E">A la medida 20/80</text>
+      <text x="504" y="92" text-anchor="start" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" fill="#9A6CAC" letter-spacing="1">PUESTA EN MARCHA</text>
+      <text x="504" y="105" text-anchor="start" font-family="Montserrat,sans-serif" font-size="10" fill="#7A4E8E">Implementamos juntos</text>
+      <text x="126" y="231" text-anchor="end" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" fill="#9A6CAC" letter-spacing="1">CONECTAMOS</text>
+      <text x="126" y="244" text-anchor="end" font-family="Montserrat,sans-serif" font-size="10" fill="#7A4E8E">Tus necesidades</text>
+      <text x="574" y="231" text-anchor="start" font-family="Montserrat,sans-serif" font-size="11" font-weight="700" fill="#9A6CAC" letter-spacing="1">ACOMPAÑAMOS</text>
+      <text x="574" y="244" text-anchor="start" font-family="Montserrat,sans-serif" font-size="10" fill="#7A4E8E">Retroalimentación</text>
+    </svg>
+    <div class="pst">
+      <div class="ps"><div class="psn">01</div><div class="pst2">Conectamos</div><div class="psd">Conocemos tus necesidades y el contexto del territorio.</div></div>
+      <div class="ps"><div class="psn">02</div><div class="pst2">Diseñamos</div><div class="psd">Experiencia a la medida 20/80. Co-creamos contigo.</div></div>
+      <div class="ps"><div class="psn">03</div><div class="pst2">Puesta en marcha</div><div class="psd">Vivimos juntos la experiencia acompañando el aprendizaje.</div></div>
+      <div class="ps"><div class="psn">04</div><div class="pst2">Acompañamos</div><div class="psd">Retroalimentación, métricas y mejora continua.</div></div>
+    </div>
+  </div>
+
+  <section class="sec sec-final"><div class="lg-s"><div class="lg-l"><span class="ll"></span> Reconocimientos</div><div class="lg-c"><div class="lg-g"><div class="lbox"><div class="lr2"><img src="assets/logos/bancolombia.png" alt="Bancolombia"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/emprelatam.png" alt="Emprelatam"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/innvalab.png" alt="InnovaLab"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/nogalesplus_logo.jpg" alt="Nogales Plus"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/technoserve.png" alt="TechnoServe"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/tecprize-removebg-preview.png" alt="TecPrize"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/bancolombia.png" alt="Bancolombia"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/emprelatam.png" alt="Emprelatam"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/innvalab.png" alt="InnovaLab"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/nogalesplus_logo.jpg" alt="Nogales Plus"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/technoserve.png" alt="TechnoServe"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/tecprize-removebg-preview.png" alt="TecPrize"></div></div></div></div></div>
+
+  <div class="lg-s"><div class="lg-l"><span class="ll"></span> Testimonios</div><div class="test-v"><div class="tv anim-in"><div class="tvh">testimonio 1</div><div class="tvb"><div class="tv-copy"><p class="tvq">"Quiero aprender a saber si mi negocio me da lo que necesito, pero no puedo ausentarme para estudiar. A través de WhatsApp es lo que necesito."</p><div class="tvn">Adriana Feo</div><div class="tvr">Participante rural</div></div><div class="tvp"><video controls preload="metadata" playsinline><source src="experiencias/videos/testimonio2.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div></div><div class="tv anim-in"><div class="tvh">testimonio 2</div><div class="tvb"><div class="tv-copy"><p class="tvq">"Aprender por WhatsApp es fácil: recibo los módulos, veo los videos cuantas veces quiera y lo aplico de una vez en el campo."</p><div class="tvn">Néstor Buelvas</div><div class="tvr">Productor agrícola</div></div><div class="tvp"><video controls preload="metadata" playsinline><source src="experiencias/videos/testimonio1.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div></div></div></div>
+
+  <div class="cta"><div class="bq">¿Quieres ser parte de la revolución de la educación en la ruralidad con <span class="ek">ekidad</span>?</div><div class="cbw"><a class="cw" href="#" data-modal="mChat">Demo</a></div></div>
+</section>
+</div>
+
+<!-- NOSOTROS -->
+<div class="page" id="page-nosotros">
+  <section class="sec">
+    <div class="nosotros-hero">
+      <div class="tg"><span class="ll"></span> Nosotros</div>
+      <div class="tw"><h2>¿Por qué <em>existimos?</em></h2><p class="hd">Sabemos que no todos partimos del mismo lugar. Nacimos para cerrar la brecha educativa en la ruralidad con herramientas reales.</p></div>
+      <div class="nv"><div class="nv-cover" data-modal="mV"><img class="nv-logo" src="logo-eki.png" alt="Logo eki" onerror="this.style.display='none';"><div class="nv-play"></div></div></div>
+    </div>
+    <div class="np"><div class="npl">Nuestro propósito</div><p>eki tiene como propósito impulsar el <strong>desarrollo rural integral</strong> a través de la educación, el liderazgo, la innovación y las nuevas tecnologías, entendidas como herramientas transformadoras que fortalecen capacidades, generan <strong>autonomía</strong> y abren <strong>oportunidades reales de inclusión productiva</strong>. Su apuesta busca que más jóvenes, personas y comunidades rurales puedan reconocer su potencial, construir proyectos de vida con sentido y encontrar en la ruralidad un lugar donde sí es posible aprender, crecer y prosperar.</p><p>Desde un enfoque práctico y aplicado, eki trabaja de la mano de organizaciones con interés en lo rural para diseñar e implementar <strong>experiencias educativas pertinentes</strong> que conecten formación, propósito y oportunidades reales. Así, contribuye a territorios más productivos, sostenibles y socialmente cohesionados.</p></div>
+    <div class="tg" style="margin-bottom:16px;"><span class="ll"></span> Nuestro enfoque</div>
+    <div class="ef-g">
+      <div class="ef"><div class="efn">01</div><div class="eft">Las personas primero</div><div class="efd">Formamos criterio, carácter y proyecto de vida, porque el desarrollo comienza cuando las personas encuentran su propio propósito.</div></div>
+      <div class="ef"><div class="efn">02</div><div class="eft">Autonomía que construye territorio</div><div class="efd">Diseñamos educación para fortalecer capacidades locales, no para crear dependencia. El desarrollo rural nace desde el territorio.</div></div>
+      <div class="ef"><div class="efn">03</div><div class="eft">Innovar con sentido</div><div class="efd">Usamos tecnología e innovación educativa solo cuando generan valor real. Siempre al servicio de las personas.</div></div>
+      <div class="ef"><div class="efn">04</div><div class="eft">Impacto real en LATAM</div><div class="efd">Nos mueve transformar realidades. Medimos lo que importa y trabajamos para generar cambios sostenibles en los territorios.</div></div>
+    </div>
+    <div class="tlw"><div class="tll"><span class="ll"></span> Línea en el tiempo</div><div class="tl"><div class="tl-ln"></div><div class="tl-its"><div class="tl-it"><div class="tld"></div><div class="tly">2020</div><div class="tle">RadioEducación 4.0</div></div><div class="tl-it"><div class="tld"></div><div class="tly">2022</div><div class="tle">Incubación IFE Explora Tec Monterrey</div></div><div class="tl-it"><div class="tld"></div><div class="tly">Ene 23</div><div class="tle">Creación Smart Skills Factory SAS</div></div><div class="tl-it"><div class="tld"></div><div class="tly">Sep 23</div><div class="tle">Etapa 1 Formación WhatsApp</div></div><div class="tl-it"><div class="tld"></div><div class="tly">2024</div><div class="tle">TecPrize finalistas + Bancolombia</div></div><div class="tl-it"><div class="tld act"></div><div class="tly" class="timeline-highlight">Hoy</div><div class="tle" class="timeline-highlight-strong">Etapa 2 Plataforma Agentes IA</div></div></div></div></div>
+    <div class="tll"><span class="ll"></span> El equipo</div>
+    <div class="eq-slider" aria-label="Carrusel del equipo">
+      <button class="eq-nav eq-prev" type="button" aria-label="Equipo anterior">‹</button>
+      <button class="eq-nav eq-next" type="button" aria-label="Equipo siguiente">›</button>
+      <div class="eq-track">
+        <div class="eq-slide">
+          <div class="eqc"><div class="eqav"><img src="ekipo/Andres.png" alt="Andrés Rubiano" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">AR</span></div><div class="eqnm">Andrés Rubiano</div><div class="eqrl">CEO — Sector real y docencia</div></div>
+          <div class="eqc"><div class="eqav"><img src="ekipo/Rosmery.png" alt="Rosemery Carrillo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">RC</span></div><div class="eqnm">Rosemery Carrillo</div><div class="eqrl">Experiencia en finanzas</div></div>
+        </div>
+        <div class="eq-slide">
+          <div class="eqc"><div class="eqav"><img src="ekipo/Julian_desarrollador.png" alt="Julian Ramirez" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">JR</span></div><div class="eqnm">Julian Ramirez</div><div class="eqrl">Tecnología y Sistemas Fullstack</div></div>
+          <div class="eqc"><div class="eqav"><img src="ekipo/Luisa.png" alt="Luisa Salazar" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">LS</span></div><div class="eqnm">Luisa Salazar</div><div class="eqrl">Gestión Comercial y administrativa</div></div>
+        </div>
+        <div class="eq-slide">
+          <div class="eqc"><div class="eqav"><img src="ekipo/Andrea.png" alt="Andrea Ramos" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">AN</span></div><div class="eqnm">Andrea Ramos</div><div class="eqrl">Frontend</div></div>
+          <div class="eqc"><div class="eqav"><img src="ekipo/Julian_diseñador.png" alt="Julian Cubides" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">JC</span></div><div class="eqnm">Julian Cubides</div><div class="eqrl">Diseñador</div></div>
+        </div>
+        <div class="eq-slide">
+          <div class="eqc"><div class="eqav"><img src="ekipo/Juliana.png" alt="Juliana Rodriguez" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">JR</span></div><div class="eqnm">Juliana Rodriguez</div><div class="eqrl">Backend</div></div>
+          <div class="eqc eqc-placeholder"><div class="eqav"><span>+</span></div><div class="eqnm">Más miembros</div><div class="eqrl">Estamos creciendo con nuevos aliados y roles.</div></div>
+        </div>
+      </div>
+      <div class="eq-page-indicators" role="tablist" aria-label="Páginas del carrusel del equipo">
+        <button class="eq-dot active" type="button" aria-label="Página 1" role="tab" aria-selected="true"></button>
+        <button class="eq-dot" type="button" aria-label="Página 2" role="tab" aria-selected="false"></button>
+        <button class="eq-dot" type="button" aria-label="Página 3" role="tab" aria-selected="false"></button>
+        <button class="eq-dot" type="button" aria-label="Página 4" role="tab" aria-selected="false"></button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SOLUCIONES -->
+<div class="page" id="page-soluciones">
+  <section class="sec">
+    <div class="sol-bg">
+      <div class="tg"><span class="ll"></span> Soluciones</div>
+      <div class="tw"><h2>Cómo lo <em>hacemos</em></h2><p class="hd">Soluciones educativas para empresas, fundaciones, instituciones educativas y cooperación internacional.</p></div>
+    </div>
+    <div class="tg" style="margin-bottom:16px;"><span class="ll"></span> A quiénes nos dirigimos</div>
+    <div class="ar"><div class="ac"><div class="at2"><div class="atp">Sector privado</div><div class="att">Fundaciones y empresas</div></div><div class="ab"><p>Diseñamos programas de impacto social rural a la medida con medición rigurosa del retorno formativo.</p></div></div><div class="ac"><div class="at2"><div class="atp">Sector público</div><div class="att">Instituciones y sector público</div></div><div class="ab"><p>Capacitación docente, formación técnica y programas territoriales para comunidades rurales.</p></div></div><div class="ac"><div class="at2"><div class="atp">Internacional</div><div class="att">Cooperación internacional</div></div><div class="ab"><p>Alianzas globales para implementar soluciones educativas con impacto territorial medible.</p></div></div></div>
+    <div class="trust-block">
+      <div class="trust-photo"><img src="eki_2026.jpg" alt="Han confiado en nosotros"></div>
+    </div>
+    <div class="tg" style="margin-bottom:16px;"><span class="ll"></span> Haz clic para ver detalles y video de cada solución</div>
+    <div class="sg">
+      <div class="sc" data-modal="m1"><div class="sh"><span class="st">WhatsApp + IA</span><span class="sn3">01</span></div><div class="sb"><h4>WhatsApp y Agentes de IA</h4><p>Microcápsulas por WhatsApp con tutores de IA que acompañan 24/7. 92% reducción en costos.</p><div class="pills" style="margin-top:9px;padding-top:9px;border-top:1px solid var(--lt);"><span class="pi">Microcápsulas</span><span class="pi">Agentes IA</span><span class="pi">24/7</span></div><div class="sc-cta">Ver más →</div></div></div>
+      <div class="sc" data-modal="m2"><div class="sh"><span class="st">Proyectos</span><span class="sn3">02</span></div><div class="sb"><h4>Programas a la medida</h4><p>Diseño e implementación con impacto social y de negocios. Incluye Lego Serious Play.</p><div class="pills" style="margin-top:9px;padding-top:9px;border-top:1px solid var(--lt);"><span class="pi">Presencial</span><span class="pi">Virtual</span><span class="pi">Lego SP</span></div><div class="sc-cta">Ver más →</div></div></div>
+      <div class="sc" data-modal="m3"><div class="sh"><span class="st">Contenidos</span><span class="sn3">03</span></div><div class="sb"><h4>Generación de contenido rural</h4><p>Producción de contenido a la medida para tu escuela de formación interna, con expertos del sector.</p><div class="pills" style="margin-top:9px;padding-top:9px;border-top:1px solid var(--lt);"><span class="pi">A medida</span><span class="pi">Expertos</span><span class="pi">Curaduría</span></div><div class="sc-cta">Ver más →</div></div></div>
+      <div class="sc" data-modal="m4"><div class="sh"><span class="st">Plataforma</span><span class="sn3">04</span></div><div class="sb"><h4>LXP + Métricas</h4><p>Gestión del conocimiento a través de indicadores de medición de impacto de la formación.</p><div class="pills" style="margin-top:9px;padding-top:9px;border-top:1px solid var(--lt);"><span class="pi">LXP</span><span class="pi">Métricas</span><span class="pi">IA</span></div><div class="sc-cta">Ver más →</div></div></div>
+    </div>
+    <div style="text-align:center;"><a class="mbp" href="#page-contacto" data-page="contacto">Solicitar demo gratuito</a></div>
+  </section>
+</div>
+
+<!-- EXPERIENCIAS -->
+<div class="page" id="page-experiencias">
+  <section class="sec">
+    <div class="tg"><span class="ll"></span> Experiencias</div>
+    <div class="tw"><h2>Lo que <em>vivimos</em> en el campo</h2><p class="hd">Mostramos cómo eki acompaña procesos formativos rurales con tecnología, seguimiento y resultados reales en territorio.</p></div>
+    <div class="exp-hero-block">
+      <div class="exp-hero-video ev" data-video="experiencias/videos/campocolombiano.mp4" data-video-title="Campo colombiano" data-related-photos="experiencias/fotos/experiencia1.jpg,experiencias/fotos/experiencia2.jpg,experiencias/fotos/campesinos.jpeg,experiencias/fotos/territorio.jpeg,experiencias/fotos/Anuc.jpeg,experiencias/fotos/pruebas.jpeg,experiencias/fotos/empreexperiencia2.jpeg" data-photo-captions="Formación rural|Trabajo colaborativo|Comunidades rurales|Territorio productivo|Proceso en campo|Aprendizaje aplicado|Acompañamiento local">
+        <video src="experiencias/videos/campocolombiano.mp4" preload="metadata" autoplay playsinline muted></video>
+      </div>
+    </div>
+
+    <div class="exp-collage-grid">
+      <div class="exp-photo exp-photo-1" data-image="experiencias/fotos/experiencia1.jpg" data-title="Formación rural en territorio">
+        <img src="experiencias/fotos/experiencia1.jpg" alt="Formación rural en territorio">
+      </div>
+      <div class="exp-collage-right">
+        <div class="exp-photo exp-photo-2" data-image="experiencias/fotos/experiencia2.jpg" data-title="Trabajo colaborativo">
+          <img src="experiencias/fotos/experiencia2.jpg" alt="Trabajo colaborativo">
+        </div>
+        <div class="exp-photo exp-photo-3" data-image="experiencias/fotos/territorio.jpeg" data-title="Territorio rural">
+          <img src="experiencias/fotos/territorio.jpeg" alt="Territorio rural">
+        </div>
+        <div class="exp-photo exp-photo-4" data-image="experiencias/fotos/campesinos.jpeg" data-title="Comunidades campesinas">
+          <img src="experiencias/fotos/campesinos.jpeg" alt="Comunidades campesinas">
+        </div>
+        <div class="exp-photo exp-photo-5" data-image="experiencias/fotos/Anuc.jpeg" data-title="Práctica productiva">
+          <img src="experiencias/fotos/Anuc.jpeg" alt="Práctica productiva">
+        </div>
+        <div class="exp-photo exp-photo-6" data-image="experiencias/fotos/pruebas.jpeg" data-title="Acompañamiento técnico">
+          <img src="experiencias/fotos/pruebas.jpeg" alt="Acompañamiento técnico">
+        </div>
+        <div class="exp-photo exp-photo-7" data-image="experiencias/fotos/empreexperiencia2.jpeg" data-title="Implementación en campo">
+          <img src="experiencias/fotos/empreexperiencia2.jpeg" alt="Implementación en campo">
+        </div>
+        <div class="exp-photo exp-photo-8" data-image="experiencias/fotos/adriana.jpeg" data-title="Adriana en campo">
+          <img src="experiencias/fotos/adriana.jpeg" alt="Adriana en campo">
+        </div>
+        <div class="exp-photo exp-photo-9" data-image="experiencias/fotos/experiencia2.jpg" data-title="Formación colectiva">
+          <img src="experiencias/fotos/experiencia2.jpg" alt="Formación colectiva">
+        </div>
+        <div class="exp-photo exp-photo-10" data-image="experiencias/fotos/territorio.jpeg" data-title="Territorio rural">
+          <img src="experiencias/fotos/territorio.jpeg" alt="Territorio rural">
+        </div>
+      </div>
+    </div>
+
+    <div class="tg" style="margin-bottom:16px;"><span class="ll"></span> Más videos</div>
+    <div class="exp-videos-grid">
+      <div class="ev" data-video="experiencias/videos/videos2.mp4" data-video-title="Proceso formativo en territorio" data-related-photos="experiencias/fotos/Anuc.jpeg,experiencias/fotos/pruebas.jpeg,experiencias/fotos/empreexperiencia2.jpeg,experiencias/fotos/experiencia2.jpg,experiencias/fotos/campesinos.jpeg,experiencias/fotos/territorio.jpeg,experiencias/fotos/experiencia1.jpg" data-photo-captions="Práctica rural|Trabajo productivo|Acompañamiento cercano|Trabajo en equipo|Comunidad campesina|Entorno rural|Implementación local">
+        <video src="experiencias/videos/videos2.mp4" preload="metadata" autoplay loop playsinline muted></video>
+        <div class="tpl"><div class="tpt"></div></div>
+      </div>
+      <div class="ev" data-video="experiencias/videos/campocolombiano.mp4" data-video-title="Formación rural en acción" data-related-photos="experiencias/fotos/WhatsApp Image 2026-04-17 at 3.22.47 PM.jpeg,experiencias/fotos/WhatsApp Image 2026-04-17 at 3.22.49 PM.jpeg,experiencias/fotos/WhatsApp Image 2026-04-17 at 3.22.53 PM.jpeg,experiencias/fotos/WhatsApp Image 2026-04-17 at 3.22.54 PM.jpeg,experiencias/fotos/WhatsApp Image 2026-04-17 at 3.22.56 PM.jpeg,experiencias/fotos/WhatsApp Image 2026-04-17 at 3.23.01 PM.jpeg,experiencias/fotos/WhatsApp Image 2026-04-17 at 3.23.03 PM.jpeg" data-photo-captions="Sesión de formación|Trabajo en equipo|Aprendizaje colaborativo|Acompañamiento local|Impacto comunitario|Capacitación continua|Gestión territorial">
+        <video src="experiencias/videos/campocolombiano.mp4" preload="metadata" autoplay loop playsinline muted></video>
+        <div class="tpl"><div class="tpt"></div></div>
+      </div>
+      <div class="ev" data-video="experiencias/videos/principal-experiencias.mp4" data-video-title="Implementación con aliados" data-related-photos="experiencias/fotos/experiencia1.jpg,experiencias/fotos/territorio.jpeg,experiencias/fotos/experiencia2.jpg,experiencias/fotos/campesinos.jpeg,experiencias/fotos/WhatsApp Image 2026-04-17 at 3.23.14 PM.jpeg,experiencias/fotos/WhatsApp Image 2026-04-17 at 3.23.20 PM.jpeg,experiencias/fotos/WhatsApp Image 2026-04-17 at 3.23.24 PM.jpeg" data-photo-captions="Inicio de jornada|Contexto rural|Trabajo formativo|Participación comunitaria|Aliados locales|Transferencia práctica|Resultados en territorio">
+        <video src="experiencias/videos/principal-experiencias.mp4" preload="metadata" autoplay loop playsinline muted></video>
+        <div class="tpl"><div class="tpt"></div></div>
+      </div>
+    </div>
+
+    <div class="tg" style="margin-bottom:16px;"><span class="ll"></span> Casos de éxito en detalle</div>
+    <div class="res-g">
+      <article class="res-c">
+        <div class="res-k">Referencia de caso</div>
+        <h4>Curso gratuito para caficultores en Colombia</h4>
+        <p>Caso sobre fortalecimiento de capacidades para caficultores y apropiación tecnológica en territorio.</p>
+        <a class="res-a" href="https://www.lafm.com.co/sociedad/curso-gratuito-para-caficultores-en-colombia-364359" target="_blank" rel="noopener noreferrer">Ver publicación →</a>
+      </article>
+      <article class="res-c">
+        <div class="res-k">Referencia de impacto</div>
+        <h4>Plataforma eki en el Observatorio del Tec</h4>
+        <p>Contexto institucional y visión de cómo la plataforma impulsa educación rural con innovación aplicada.</p>
+        <a class="res-a" href="https://observatorio.tec.mx/edu-news/plataforma-eki/" target="_blank" rel="noopener noreferrer">Ver publicación →</a>
+      </article>
+    </div>
+    <div class="cp-g">
+      <article class="cp anim-in">
+        <div class="cp-l"><div class="cp-logo"><img src="aliados/LogoFinalU.jpg" alt="Universidad del Rosario"></div><div class="cp-org">Convenio con Mineducación</div></div>
+        <div class="cp-m"><h4>Universidad del Rosario</h4><p>Implementación de cursos para docentes en Orinoquia y Amazonas en convenio con el Ministerio de Educación.</p><div class="cp-s"><strong>Servicios:</strong> Plataforma WhatsApp, módulo de métricas y seguimiento de cobertura.</div></div>
+        <div class="cp-i"><div class="cp-il">Impacto</div><div class="cp-in js-count" data-count-target="768">0</div><p>Docentes beneficiados y cobertura cercana al 90% en participación.</p></div>
+      </article>
+      <article class="cp anim-in">
+        <div class="cp-l"><div class="cp-logo"><img src="aliados/anuc.png" alt="ANUC"></div></div>
+        <div class="cp-m"><h4>ANUC + MEEJR</h4><p>Programa de aceleración para campesinos enfocado en modelo de negocio rural con acompañamiento continuo.</p><div class="cp-s"><strong>Servicios:</strong> Acompañamiento en modelo de negocio y Plataforma LXP.</div></div>
+        <div class="cp-i"><div class="cp-il">Impacto</div><div class="cp-in js-count" data-count-target="350">0</div><p>Beneficiarios en segunda versión y proyección del 10% en utilidad de negocios.</p></div>
+      </article>
+      <article class="cp anim-in">
+        <div class="cp-l"><div class="cp-logo"><img src="aliados/cenipalma.jpg" alt="Cenipalma"></div></div>
+        <div class="cp-m"><h4>Cenipalma</h4><p>Diplomado en innovación y talento humano para el sector palmero, con enfoque en liderazgo y retención.</p><div class="cp-s"><strong>Servicios:</strong> Diagnóstico, creación de cursos, Plataforma LXP y módulo de métricas.</div></div>
+        <div class="cp-i"><div class="cp-il">Impacto</div><div class="cp-in js-count" data-count-target="140">0</div><p>Gestores impactados y alcance potencial superior a 1000 personas.</p></div>
+      </article>
+      <article class="cp anim-in">
+        <div class="cp-l"><div class="cp-logo"><img src="aliados/NITROFERT.png" alt="Nitrofert"></div></div>
+        <div class="cp-m"><h4>Nitrofert</h4><p>Estrategia de formación para colaboradores y asociaciones cafeteras en ruralidad mediante un enfoque SaaS.</p><div class="cp-s"><strong>Servicios:</strong> Diseño de cursos, Plataforma LXP, creación de rutas y métricas.</div></div>
+        <div class="cp-i"><div class="cp-il">Impacto</div><div class="cp-in js-count" data-count-target="3000">0</div><p>Beneficiarios directos y crecimiento de 12% en venta de productos.</p></div>
+      </article>
+      <article class="cp anim-in">
+        <div class="cp-l"><div class="cp-logo"><img src="aliados/02_logo_technoserve.webp" alt="TechnoServe"></div></div>
+        <div class="cp-m"><h4>TechnoServe</h4><p>Fortalecimiento de familias granjeras en Cauca para reducir mortalidad de pollitos y mejorar ingresos.</p><div class="cp-s"><strong>Servicios:</strong> Acompañamiento en modelo de negocio y Plataforma LXP.</div></div>
+        <div class="cp-i"><div class="cp-il">Impacto</div><div class="cp-in js-count" data-count-target="500">0</div><p>Familias beneficiadas y reducción del 20% en mortalidad de pollitos.</p></div>
+      </article>
+    </div>
+  </section>
+</div>
+
+<!-- DEMO -->
+<div class="page" id="page-demo">
+  <div class="dg">
+    <div class="dl">
+      <div>
+        <div class="tg section-note"><span class="ll" style="background:rgba(255,255,255,.28);"></span> Demo eki</div>
+        <h2 class="section-title-large">Conoce eki<br><span style="color:rgba(255,255,255,.42);">en acción</span></h2>
+        <p style="font-size:13px;color:rgba(255,255,255,.68);line-height:1.7;">Te mostramos cómo funciona la plataforma, las microcápsulas por WhatsApp y los Agentes de IA en tiempo real.</p>
+      </div>
+      <div class="dv"><div class="prg"><div class="prt"></div></div><div class="dvl">Demo interactivo eki — 8 min</div></div>
+      <div class="dbul">
+        <div class="db"><div class="dbd"></div><span>Plataforma LXP con módulo de métricas en vivo</span></div>
+        <div class="db"><div class="dbd"></div><span>Microcápsulas vía WhatsApp + Agentes IA</span></div>
+        <div class="db"><div class="dbd"></div><span>Casos de éxito: Nitrofert, TechnoServe, Cenipalma</span></div>
+        <div class="db"><div class="dbd"></div><span>Personalización según sector y territorio</span></div>
+      </div>
+    </div>
+    <form class="dr" action="https://formsubmit.co/luxian40@gmail.com" method="POST">
+      <h3>Solicita tu demo</h3>
+      <p class="sub">Completa el formulario y un miembro del equipo se pondrá en contacto contigo.</p>
+      <input type="hidden" name="_subject" value="Nuevo registro desde Demo - eki">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="fuente" value="Demo">
+      <label class="dfl" for="demo-nombre-organizacion">Nombre y organización</label><div class="dfi"><input id="demo-nombre-organizacion" type="text" name="nombre-organizacion" placeholder="Tu nombre y empresa" required></div>
+      <label class="dfl" for="demo-correo">Correo electrónico</label><div class="dfi"><input id="demo-correo" type="email" name="correo" placeholder="correo@organizacion.com" required></div>
+      <label class="dfl" for="demo-sector">Sector de tu organización</label><div class="dfs"><select id="demo-sector" name="sector"><option value="" selected>Selecciona una opción</option><option>Agroindustria</option><option>Educación</option><option>ONG / Fundación</option><option>Sector público</option><option>Otro</option></select></div>
+      <label class="dfl" for="demo-solucion">¿Qué solución te interesa?</label><div class="dfs"><select id="demo-solucion" name="solucion"><option value="" selected>Selecciona una solución</option><option>WhatsApp + IA</option><option>Proyectos a la medida</option><option>Contenido rural</option><option>Plataforma LXP + Métricas</option></select></div>
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:14px;"><input id="demo-acepta-habeas" type="checkbox" name="acepta-habeas-demo" required class="checkbox-input"><label for="demo-acepta-habeas" style="font-size:11px;color:var(--m);">Acepto la <a data-modal="mH" class="link-action" href="#" role="button">Política de Habeas Data</a></label></div>
+      <button class="dfu" type="submit">Solicitar demo gratuito</button>
+    </form>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div class="page" id="page-contacto">
+  <section class="cs2">
+    <div class="tg"><span class="ll"></span> Contacto</div>
+    <div class="cg">
+      <div>
+        <h2>Hablemos<br><em>de tu proyecto</em></h2>
+        <p style="font-size:14px;color:var(--m);line-height:1.75;margin-bottom:0;">Empresas, organizaciones o entidades públicas: diseñamos la solución educativa que tu comunidad necesita.</p>
+        <div class="cib"><div class="ci"><span class="cil">Email</span><span class="civ">comunidad.educativa@eki.com.co</span></div><div class="ci"><span class="cil">WhatsApp</span><span class="civ">310 3844274</span></div><div class="ci"><span class="cil">Instagram</span><span class="civ">@eki.educa</span></div><div class="ci"><span class="cil">LinkedIn</span><span class="civ">eki educa</span></div></div>
+      </div>
+      <form action="https://formsubmit.co/luxian40@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nuevo mensaje desde Agéndate - eki">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="fuente" value="Agéndate">
+        <label class="cfl" for="contacto-nombre">Nombre y organización</label><div class="cfi"><input id="contacto-nombre" type="text" name="contacto-nombre" placeholder="Tu nombre y empresa" required></div>
+        <label class="cfl" for="contacto-correo">Correo electrónico</label><div class="cfi"><input id="contacto-correo" type="email" name="contacto-correo" placeholder="correo@organizacion.com" required></div>
+        <label class="cfl" for="contacto-mensaje">Mensaje</label><div class="cft"><textarea id="contacto-mensaje" name="contacto-mensaje" placeholder="Cuéntanos brevemente qué necesitas..." required></textarea></div>
+        <div class="habeas-consent"><input id="contacto-acepta-habeas" type="checkbox" name="acepta-habeas-agendate" required class="checkbox-input"><label for="contacto-acepta-habeas" style="font-size:11px;color:var(--m);">Acepto el tratamiento de mis datos conforme a la <a data-modal="mH" class="link-action" href="#" role="button">Política de Habeas Data</a></label></div>
+        <div class="contacto-actions"><button class="cfs" type="submit">Enviar mensaje</button><a class="agenda-cita-link" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3eovVMkn9wK5aXUAztO2V13MJzu8_4BxIPor0VFv2Wa_xxbB5IAT6a-wKcbZ1iO0uVwZKntl71" target="_blank" rel="noopener noreferrer">Cómo agendar cita</a></div>
+      </form>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="fg">
+    <div class="fb">
+      <div class="fl"><img class="fl-logo" src="logo-eki-removebg-preview.png" alt="eki" onerror="this.style.display='none';this.parentNode.textContent='eki.';"></div>
+      <p>Educación con equidad para la ruralidad. Smart Skills Factory SAS. Colombia 2025.</p>
+      <div class="fs">
+        <a class="fsi" href="https://www.instagram.com/eki.educa/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="logos/insta.png" alt="Instagram" onerror="this.style.display='none';this.parentNode.textContent='IG';"></a>
+        <a class="fsi" href="https://www.linkedin.com/company/eki.educa/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="logos/Linkedin-Logo-PNG-Free-Download.png" alt="LinkedIn" onerror="this.style.display='none';this.parentNode.textContent='IN';"></a>
+        <a class="fsi" href="https://wa.me/573103844274" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><img src="logos/1499955335whatsapp-icon-logo-png.png" alt="WhatsApp" onerror="this.style.display='none';this.parentNode.textContent='WA';"></a>
+      </div>
+    </div>
+    <div class="fc"><h5>Páginas</h5><ul><li><a href="#page-home" >Inicio</a></li><li><a href="#page-nosotros" >Nosotros</a></li><li><a href="#page-soluciones" >Soluciones</a></li><li><a href="#page-experiencias" >Experiencias</a></li><li><a href="#" data-modal="mChat">Demo</a></li></ul></div>
+    <div class="fc"><h5>Soluciones</h5><ul><li><a href="#" data-modal="m1" role="button">WhatsApp + IA</a></li><li><a href="#" data-modal="m2" role="button">Proyectos</a></li><li><a href="#" data-modal="m3" role="button">Contenidos</a></li><li><a href="#" data-modal="m4" role="button">Plataforma LXP</a></li></ul></div>
+    <div class="fc"><h5>Contacto</h5><ul><li><a href="mailto:comunidad.educativa@eki.com.co">comunidad.educativa@eki.com.co</a></li><li><a href="https://wa.me/573103844274" target="_blank" rel="noopener noreferrer">WhatsApp: 310 3844274</a></li><li><a href="#" data-modal="mH" role="button">Habeas Data</a></li></ul></div>
+  </div>
+  <div class="fbt"><p>2025 Smart Skills Factory SAS — eki. Educación con equidad para la ruralidad. www.eki.com.co</p><div class="footer-policy-links"><a data-modal="mH" href="#" role="button">Política de Privacidad</a><a data-modal="mH" href="#" role="button">Habeas Data</a></div></div>
+</footer>
+
+<script type="module" src="js/main.js?v=20260415a"></script>
+</body>
+</html>
