@@ -13,6 +13,7 @@ const setActivePage = id => {
   } catch (error) {
     window.location.hash = `#page-${id}`;
   }
+  document.dispatchEvent(new CustomEvent('eki:pagechange', { detail: { id } }));
 };
 
 const openModal = id => {
@@ -927,14 +928,53 @@ const initExperienceAutoRotation = () => {
 };
 
 const initNosotrosVideoSound = () => {
-  const video = document.querySelector('.page#page-nosotros .nv-video');
+  const page = document.getElementById('page-nosotros');
+  const video = page?.querySelector('.nv-video');
   if(!video) return;
 
-  video.muted = false;
-  video.loop = false;
+  video.defaultMuted = true;
+  video.muted = true;
+  video.loop = true;
   video.playsInline = true;
-  video.preload = 'metadata';
-  video.autoplay = false;
+  video.preload = 'auto';
+  video.autoplay = true;
+  video.setAttribute('playsinline', '');
+  video.setAttribute('muted', '');
+  video.setAttribute('autoplay', '');
+  video.setAttribute('loop', '');
+
+  const playSafely = () => {
+    const playPromise = video.play();
+    if(playPromise && typeof playPromise.catch === 'function'){
+      playPromise.catch(() => {});
+    }
+  };
+
+  const syncVideoPlayback = pageId => {
+    const isNosotrosActive = pageId ? pageId === 'nosotros' : page.classList.contains('active');
+    if(isNosotrosActive){
+      playSafely();
+      return;
+    }
+    video.pause();
+    video.currentTime = 0;
+  };
+
+  if(video.readyState >= 2){
+    syncVideoPlayback();
+  } else {
+    video.addEventListener('loadeddata', () => syncVideoPlayback(), { once: true });
+  }
+
+  document.addEventListener('eki:pagechange', event => {
+    syncVideoPlayback(event.detail?.id);
+  });
+
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash || '';
+    const pageId = hash.startsWith('#page-') ? hash.replace('#page-', '') : '';
+    syncVideoPlayback(pageId);
+  });
 };
 
 document.addEventListener('DOMContentLoaded', () => {

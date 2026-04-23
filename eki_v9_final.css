@@ -697,7 +697,7 @@ h2 em{font-style:normal;color:var(--p2);}
 footer{background:var(--pd);padding:44px 48px 26px;position:relative;overflow:hidden;}
 .fg{display:grid;grid-template-columns:minmax(250px,2fr) repeat(3,minmax(140px,1fr));gap:32px;align-items:start;padding:36px 0 32px;border-bottom:1px solid rgba(255,255,255,.09);}
 .fl{font-size:19px;font-weight:900;letter-spacing:-1px;margin-bottom:11px;color:var(--p);display:inline-flex;align-items:center;}
-.fl-logo{height:64px;width:auto;display:block;object-fit:contain;}
+.fl-logo{height:140px;width:auto;display:block;object-fit:contain;}
 .fb{max-width:340px;}
 .fb p{font-size:11px;color:rgba(255,255,255,.3);line-height:1.7;max-width:190px;}
 .fs{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
@@ -711,8 +711,8 @@ footer{background:var(--pd);padding:44px 48px 26px;position:relative;overflow:hi
 .fbt{padding-top:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
 .fbt p{font-size:10px;color:rgba(255,255,255,.18);}
 .fbt a{font-size:10px;color:rgba(255,255,255,.27);text-decoration:underline;cursor:pointer;}.fbt a:hover{color:var(--p);}
-@media (max-width:980px){.fg{grid-template-columns:repeat(2,minmax(0,1fr));}}
-@media (max-width:640px){footer{padding:36px 22px 22px;}.fg{grid-template-columns:1fr;gap:24px;}}
+@media (max-width:980px){.fg{grid-template-columns:repeat(2,minmax(0,1fr));}.fl-logo{height:120px;}}
+@media (max-width:640px){footer{padding:36px 22px 22px;}.fg{grid-template-columns:1fr;gap:24px;}.fl-logo{height:108px;}}
 /* Botón Ver más en tarjetas de soluciones */
 .sc-ver-mas{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:var(--p);color:#fff;border:none;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:background .2s,transform .15s;margin-bottom:8px;}
 .sc-ver-mas:hover{background:var(--p2);transform:translateY(-1px);}
