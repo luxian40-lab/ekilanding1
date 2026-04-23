@@ -827,6 +827,17 @@ const initExperienceAutoRotation = () => {
   if(!heroVideo) return;
 
   const parseList = value => (value || '').split(',').map(item => item.trim()).filter(Boolean);
+  const FALLBACK_COLLAGE_IMAGE = 'experiencias/fotos/Anuc.jpeg';
+  const applySafeImage = (img, src, fallback = FALLBACK_COLLAGE_IMAGE) => {
+    if(!img) return;
+    img.onerror = () => {
+      if(img.dataset.fallbackApplied === '1') return;
+      img.dataset.fallbackApplied = '1';
+      img.src = fallback;
+    };
+    img.dataset.fallbackApplied = '0';
+    img.src = src;
+  };
 
   const heroSlide = {
     src: hero.dataset.video || heroVideo.src,
@@ -870,7 +881,7 @@ const initExperienceAutoRotation = () => {
       const src = encodeURI(`experiencias/fotos/${fileName}`);
       item.dataset.image = src;
       if(img){
-        img.src = src;
+        applySafeImage(img, src);
         img.alt = captionText || fileName;
       }
       if(caption){
@@ -915,7 +926,7 @@ const initExperienceAutoRotation = () => {
       img.style.opacity = '0';
       setTimeout(() => {
         item.dataset.image = nextSrc;
-        img.src = nextSrc;
+        applySafeImage(img, nextSrc);
         img.style.opacity = '1';
       }, 320);
     });
