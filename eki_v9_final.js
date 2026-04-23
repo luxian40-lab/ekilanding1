@@ -437,7 +437,7 @@ const resetHablemosChat = () => {
   setHablemosField('solucion', '');
   setHablemosField('necesidad', '');
 
-  pintarMensajeHablemos('Hola soy el asistente de eki, somos una plataforma educativa para ruralidad y mi propósito es acompañarte paso a paso en un recorrido que te permitirá descubrir quiénes somos, cómo trabajamos y cómo podemos impulsar juntos la educación desde cualquier lugar.', 'incoming', 'eki');
+  pintarMensajeHablemos('¡Hola! Soy el asistente de eki. Te acompañaré a descubrir cómo impulsamos el desarrollo rural integral mediante procesos que conectan el conocimiento con las necesidades reales del territorio.', 'incoming', 'eki');
   setHablemosInputState(false, 'Primero selecciona una solución');
   clearHablemosOptions();
   scrollHablemosToBottom();
@@ -482,9 +482,6 @@ const handleHablemosReply = async (message, source = 'input') => {
 const submitHablemosForm = async () => {
   const form = document.getElementById('hablemos-form');
   if(!form) return false;
-  const nextField = document.getElementById('hablemos-next');
-  if(nextField) nextField.value = window.location.href;
-
   const payload = new FormData(form);
 
   try {
@@ -499,6 +496,54 @@ const submitHablemosForm = async () => {
   }
 };
 
+const submitExternalForm = async form => {
+  if(!form) return false;
+  try {
+    await fetch(form.action, {
+      method: (form.method || 'POST').toUpperCase(),
+      mode: 'no-cors',
+      body: new FormData(form),
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+const initAsyncLeadForms = () => {
+  const forms = Array.from(document.querySelectorAll('form[data-async-form="true"]'));
+  forms.forEach(form => {
+    if(form.dataset.asyncBound === 'true') return;
+    form.dataset.asyncBound = 'true';
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if(!form.reportValidity()) return;
+
+      const submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+      const originalLabel = submitButton?.textContent;
+
+      if(submitButton){
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+      }
+
+      const sent = await submitExternalForm(form);
+      if(sent){
+        showToast(form.dataset.successMessage || 'Solicitud enviada. Gracias por escribirnos.', 'success');
+        form.reset();
+      } else {
+        showToast('No pudimos confirmar el envio. Revisaremos tu solicitud.', 'warning');
+      }
+
+      if(submitButton){
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel || 'Enviar';
+      }
+    });
+  });
+};
+
 const updateModalImage = (src, alt) => {
   const img = document.getElementById('mRimg');
   const label = document.getElementById('mRlabel');
@@ -506,7 +551,7 @@ const updateModalImage = (src, alt) => {
   if(!img) return;
   img.src = src;
   img.alt = alt || 'Recuerdo eki';
-  const teamImgs = ['andres.jpg','rosmery.jpg','julian.jpg','luisa.jpg','andre.jpg','disenador.jpg','juliana.jpg'];
+  const teamImgs = ['andres.jpeg','rosmery.jpeg','julian.jpeg','luisa.jpeg','andre.jpeg','juliand.jpeg','juliana.jpeg','andres.jpg','rosmery.jpg','julian.jpg','luisa.jpg','andre.jpg','disenador.jpg','juliana.jpg'];
   const isTeam = teamImgs.some(name => src.includes(name));
   if(label && title){
     label.textContent = isTeam ? 'El equipo' : 'Nuestros recuerdos';
@@ -875,35 +920,21 @@ const initExperienceAutoRotation = () => {
     });
   };
 
-  const heroLoopEnd = 6;
-  const heroLoopFade = 220;
-  let heroLooping = false;
-
-  const applyHeroLoop = () => {
-    heroVideo.loop = false;
-    heroVideo.muted = true;
-    heroVideo.currentTime = 0;
-    heroVideo.style.opacity = '1';
-    heroVideo.play().catch(() => {});
-  };
-
-  heroVideo.addEventListener('timeupdate', () => {
-    if(heroLooping || heroVideo.currentTime < heroLoopEnd - 0.16) return;
-    heroLooping = true;
-    heroVideo.style.transition = `opacity ${heroLoopFade}ms ease`;
-    heroVideo.style.opacity = '0';
-    setTimeout(() => {
-      heroVideo.currentTime = 0.05;
-      heroVideo.play().catch(() => {});
-      heroVideo.style.opacity = '1';
-      setTimeout(() => { heroLooping = false; }, heroLoopFade + 20);
-    }, heroLoopFade);
-  });
-
   startCardPreviews();
   updateCollage(heroSlide);
-  applyHeroLoop();
+  heroVideo.loop = false;
   setInterval(rotateCollagePhotos, 7500);
+};
+
+const initNosotrosVideoSound = () => {
+  const video = document.querySelector('.page#page-nosotros .nv-video');
+  if(!video) return;
+
+  video.muted = false;
+  video.loop = false;
+  video.playsInline = true;
+  video.preload = 'metadata';
+  video.autoplay = false;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -933,6 +964,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initTeamCarousel();
   initExperienceAutoRotation();
+  initNosotrosVideoSound();
+  initAsyncLeadForms();
   initImpactCounters();
   resetChatDemo();
 });
