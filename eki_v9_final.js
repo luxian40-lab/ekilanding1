@@ -821,39 +821,156 @@ const initTeamCarousel = () => {
 const initExperienceAutoRotation = () => {
   const hero = document.querySelector('.exp-hero-video');
   const videoCards = Array.from(document.querySelectorAll('.exp-videos-grid .ev[data-video]'));
-  if(!hero || videoCards.length === 0) return;
-  const heroVideo = hero.querySelector('video');
-  const heroLabel = hero.querySelector('.exp-label');
-  if(!heroVideo) return;
+  if(videoCards.length === 0) return;
+  const heroVideo = hero?.querySelector('video');
 
   const parseList = value => (value || '').split(',').map(item => item.trim()).filter(Boolean);
   const FALLBACK_COLLAGE_IMAGE = 'experiencias/fotos/Anuc.jpeg';
+  const PLACEHOLDER_COLLAGE_IMAGE = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8daef"/><stop offset="100%" stop-color="#d7e7f9"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/></svg>')}`;
+  const COLLAGE_FILENAME_POOL = [
+    'adriana.jpeg',
+    'Anuc.jpeg',
+    'empreexperiencia2.jpeg',
+    'experiencia1.jpg',
+    'foto 14 panela .jpeg',
+    'foto 16 panela .jpeg',
+    'foto 22 panela .jpeg',
+    'WhatsApp Image 2026-04-17 at 3.22.47 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.22.49 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.22.56 PM (2).jpeg',
+    'WhatsApp Image 2026-04-17 at 3.22.56 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.22.57 PM (1).jpeg',
+    'WhatsApp Image 2026-04-17 at 3.22.57 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.22.58 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.00 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.01 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.03 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.04 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.05 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.06 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.07 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.14 PM (1).jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.14 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.16 PM (1).jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.16 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.17 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.18 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.19 PM (1).jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.19 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.20 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.21 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.23 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.24 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.25 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.28 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.35 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.36 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.37 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.39 PM (1).jpeg',
+    'WhatsApp Image 2026-04-17 at 3.23.39 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 7.32.33 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 7.32.34 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 7.32.345PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 7.32.51 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 7.32.52 PM.jpeg',
+    'WhatsApp Image 2026-04-17 at 7.32.523 PM.jpeg'
+  ];
+  const DEFAULT_COLLAGE_POOL = COLLAGE_FILENAME_POOL.map(name => `experiencias/fotos/${name}`);
   const applySafeImage = (img, src, fallback = FALLBACK_COLLAGE_IMAGE) => {
     if(!img) return;
     img.onerror = () => {
-      if(img.dataset.fallbackApplied === '1') return;
+      if(img.dataset.fallbackApplied === '1'){
+        img.onerror = null;
+        img.src = PLACEHOLDER_COLLAGE_IMAGE;
+        return;
+      }
       img.dataset.fallbackApplied = '1';
       img.src = fallback;
     };
     img.dataset.fallbackApplied = '0';
     img.src = src;
   };
-
-  const heroSlide = {
-    src: hero.dataset.video || heroVideo.src,
-    title: hero.dataset.videoTitle || 'Video institucional de eki',
-    poster: hero.dataset.poster || heroVideo.poster || '',
-    relatedPhotos: parseList(hero.dataset.relatedPhotos),
-    photoCaptions: parseList((hero.dataset.photoCaptions || '').replace(/\|/g, ','))
+  const photoPathToSrc = rawPath => {
+    const normalized = (rawPath || '').replace(/^\/+/, '');
+    const fileName = normalized.split('/').pop();
+    if(!fileName) return '';
+    return encodeURI(`experiencias/fotos/${fileName}`);
   };
 
-  const slides = [heroSlide, ...videoCards.map(card => ({
+  const normalizeCollagePath = value => {
+    if(!value) return '';
+    let path = String(value).replace(/^\/+/, '');
+    try {
+      path = decodeURI(path);
+    } catch (error) {
+      /* ignore */
+    }
+    return path;
+  };
+
+  const ensureCollagePath = raw => {
+    const t = (raw || '').trim();
+    if(!t) return '';
+    if(t.includes('/')) return t.replace(/^\/+/, '');
+    return `experiencias/fotos/${t}`;
+  };
+
+  const dedupeCollagePaths = paths => {
+    const seen = new Set();
+    const out = [];
+    for(const raw of paths){
+      const full = ensureCollagePath(raw);
+      const key = normalizeCollagePath(full).toLowerCase();
+      if(!key || seen.has(key)) continue;
+      seen.add(key);
+      out.push(full);
+    }
+    return out;
+  };
+
+  const pickUniqueCollagePaths = (preferred, fillerPool, count) => {
+    const out = [];
+    const used = new Set();
+    const push = path => {
+      if(out.length >= count) return;
+      const full = ensureCollagePath(path);
+      const key = normalizeCollagePath(full).toLowerCase();
+      if(!key || used.has(key)) return;
+      used.add(key);
+      out.push(full);
+    };
+    for(const path of preferred) push(path);
+    if(out.length < count){
+      for(const path of shuffleArray(fillerPool.slice())) push(path);
+    }
+    if(out.length < count){
+      for(const path of fillerPool) push(path);
+    }
+    while(out.length < count){
+      const before = out.length;
+      for(const path of fillerPool) push(path);
+      if(out.length === before) break;
+    }
+    return out.slice(0, count);
+  };
+
+  const buildSlideFromCard = card => ({
     src: card.dataset.video,
     title: card.dataset.videoTitle || '',
-    poster: card.dataset.poster || heroVideo.poster || '',
+    poster: card.dataset.poster || heroVideo?.poster || '',
     relatedPhotos: parseList(card.dataset.relatedPhotos),
     photoCaptions: parseList((card.dataset.photoCaptions || '').replace(/\|/g, ','))
-  }))];
+  });
+
+  const heroSlide = hero && heroVideo
+    ? {
+      src: hero.dataset.video || heroVideo.src,
+      title: hero.dataset.videoTitle || 'Video institucional de eki',
+      poster: hero.dataset.poster || heroVideo.poster || '',
+      relatedPhotos: parseList(hero.dataset.relatedPhotos),
+      photoCaptions: parseList((hero.dataset.photoCaptions || '').replace(/\|/g, ','))
+    }
+    : buildSlideFromCard(videoCards[0]);
 
   const startCardPreviews = () => {
     videoCards.forEach(card => {
@@ -869,42 +986,50 @@ const initExperienceAutoRotation = () => {
 
   const updateCollage = slide => {
     const collageItems = Array.from(document.querySelectorAll('.exp-photo[data-image]'));
+    const photos = (slide.relatedPhotos || []).filter(Boolean);
+    const captions = slide.photoCaptions || [];
+    const preferred = photos.length ? photos : [FALLBACK_COLLAGE_IMAGE];
+    const assigned = pickUniqueCollagePaths(preferred, DEFAULT_COLLAGE_POOL, collageItems.length);
     collageItems.forEach((item, idx) => {
-      const filename = slide.relatedPhotos[idx];
-      const captionText = slide.photoCaptions[idx];
-      if(!filename) return;
+      const rawPath = assigned[idx] || FALLBACK_COLLAGE_IMAGE;
+      const captionText = captions[idx] || '';
       const img = item.querySelector('img');
       const caption = item.querySelector('.expn');
-      const normalizedFilename = filename.replace(/^\/+/, '');
-      const fileName = normalizedFilename.split('/').pop();
-      if(!fileName) return;
-      const src = encodeURI(`experiencias/fotos/${fileName}`);
+      const src = photoPathToSrc(rawPath) || photoPathToSrc(FALLBACK_COLLAGE_IMAGE);
+      if(!src) return;
       item.dataset.image = src;
       if(img){
         applySafeImage(img, src);
-        img.alt = captionText || fileName;
+        const label = item.dataset.title || rawPath.split('/').pop() || 'Foto experiencia';
+        img.alt = captionText || label;
       }
       if(caption){
-        caption.textContent = captionText || fileName.replace(/[-_]/g,' ').replace(/\.(jpg|jpeg|png)$/i,'');
+        const label = (rawPath.split('/').pop() || '').replace(/[-_]/g,' ').replace(/\.(jpg|jpeg|png)$/i,'');
+        caption.textContent = captionText || label || 'Experiencia en territorio';
       }
     });
   };
 
   const getCollagePool = () => {
-    const pool = new Set();
+    const merged = [...DEFAULT_COLLAGE_POOL];
     document.querySelectorAll('.exp-photo[data-image]').forEach(item => {
-      const path = (item.dataset.image || '').replace(/^\/+/, '');
-      if(path) pool.add(path);
+      let path = (item.dataset.image || '').replace(/^\/+/, '');
+      try {
+        path = decodeURI(path);
+      } catch (error) {
+        /* ignore decode issues */
+      }
+      if(path) merged.push(path);
     });
     document.querySelectorAll('.ev[data-related-photos]').forEach(card => {
       parseList(card.dataset.relatedPhotos).forEach(photo => {
         const normalized = photo.replace(/^\/+/, '');
         if(!normalized) return;
         const fileName = normalized.split('/').pop();
-        if(fileName) pool.add(`experiencias/fotos/${fileName}`);
+        if(fileName) merged.push(`experiencias/fotos/${fileName}`);
       });
     });
-    return Array.from(pool);
+    return dedupeCollagePaths(merged);
   };
 
   const shuffleArray = array => array.slice().sort(() => Math.random() - 0.5);
@@ -914,27 +1039,40 @@ const initExperienceAutoRotation = () => {
     if(collageItems.length === 0) return;
     const pool = getCollagePool();
     if(pool.length === 0) return;
-    const selection = shuffleArray(pool);
-    while(selection.length < collageItems.length){
-      selection.push(...selection);
-    }
+    const selection = pickUniqueCollagePaths(shuffleArray(pool), DEFAULT_COLLAGE_POOL, collageItems.length);
     collageItems.forEach((item, idx) => {
       const img = item.querySelector('img');
       const nextSrc = selection[idx];
-      if(!img || !nextSrc || nextSrc === item.dataset.image) return;
+      if(!img || !nextSrc){
+        if(img) img.style.opacity = '1';
+        return;
+      }
+      const current = normalizeCollagePath(item.dataset.image);
+      const candidate = normalizeCollagePath(nextSrc);
+      if(candidate && current && candidate === current){
+        img.style.opacity = '1';
+        return;
+      }
       img.style.transition = 'opacity .4s ease';
       img.style.opacity = '0';
       setTimeout(() => {
-        item.dataset.image = nextSrc;
-        applySafeImage(img, nextSrc);
-        img.style.opacity = '1';
+        try {
+          const raw = normalizeCollagePath(nextSrc);
+          const encoded = encodeURI(raw);
+          item.dataset.image = encoded;
+          applySafeImage(img, encoded);
+        } finally {
+          img.style.opacity = '1';
+        }
       }, 320);
     });
   };
 
   startCardPreviews();
   updateCollage(heroSlide);
-  heroVideo.loop = false;
+  if(heroVideo){
+    heroVideo.loop = false;
+  }
   setInterval(rotateCollagePhotos, 7500);
 };
 

@@ -484,7 +484,7 @@ h2 em{font-style:normal;color:var(--p2);}
 .exp-label{position:absolute;left:20px;top:20px;z-index:3;font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.38);backdrop-filter:blur(4px);padding:10px 14px;border-radius:999px;}
 .exp-collage-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;margin-bottom:36px;align-items:stretch;}
 .exp-collage-right{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:16px;}
-.exp-photo{position:relative;overflow:hidden;border-radius:28px;box-shadow:0 24px 54px rgba(22,20,70,.1);cursor:pointer;border:1px solid rgba(255,255,255,.14);transition:transform .25s ease,box-shadow .25s ease;min-height:0;}
+.exp-photo{position:relative;overflow:hidden;border-radius:28px;box-shadow:0 24px 54px rgba(22,20,70,.1);cursor:pointer;border:1px solid rgba(255,255,255,.14);transition:transform .25s ease,box-shadow .25s ease;min-height:0;background:linear-gradient(145deg,rgba(232,218,239,.9),rgba(215,231,249,.85));}
 .exp-photo:hover{transform:translateY(-4px);box-shadow:0 32px 64px rgba(22,20,70,.14);}
 .exp-photo img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:opacity .45s ease,transform .45s ease;}
 .exp-photo:hover img{transform:scale(1.06);}
