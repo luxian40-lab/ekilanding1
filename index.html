@@ -8,10 +8,13 @@
 <meta property="og:title" content="eki - Educación con equidad">
 <meta property="og:description" content="Soluciones educativas rurales con IA, WhatsApp, LXP y proyectos a medida.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#ffffff">
 <title>eki - Educación con equidad</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/main.css?v=20260423a">
+<link rel="preload" as="image" href="assets/imageneki.png" fetchpriority="high">
+<link rel="stylesheet" href="css/main.css?v=20260426a">
+<link rel="stylesheet" href="css/mobile-enhancements.css?v=20260426a">
 </head>
 <body>
 <button id="demo-float-btn" type="button" data-modal="mHablemos" aria-label="Abrir chat Hablemos">
@@ -110,7 +113,7 @@
 <!-- NAV -->
 <header role="banner">
 <nav role="navigation" aria-label="Menú principal">
-  <a class="lt" href="#page-home" ><img class="lt-logo" src="assets/logo-eki-removebg-preview.png" alt="eki Educación con equidad" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';"><span class="lt-fallback">eki.</span></a>
+  <a class="lt" href="#page-home" ><img class="lt-logo" src="assets/logo-eki-removebg-preview.png" alt="eki Educación con equidad" loading="eager" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';"><span class="lt-fallback">eki.</span></a>
   <ul>
     <li><a href="#page-nosotros"  id="n-nosotros">Nosotros</a></li>
     <li><a href="#page-soluciones"  id="n-soluciones">Soluciones</a></li>
@@ -120,8 +123,31 @@
     <a class="bd" href="#" data-modal="mChat">Demo</a>
     <a class="bs" href="#page-contacto"  id="n-contacto">Contáctanos</a>
   </div>
+  <button class="nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNavPanel">
+    <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="nav-toggle-label">Menú</span>
+  </button>
 </nav>
 </header>
+<div class="mobile-nav-backdrop" id="mobileNavBackdrop" hidden>
+  <aside class="mobile-nav-panel" id="mobileNavPanel" role="dialog" aria-modal="true" aria-label="Menú principal móvil">
+    <div class="mobile-nav-head">
+      <strong>Menú</strong>
+      <button class="mobile-nav-close" id="mobileNavClose" type="button" aria-label="Cerrar menú">X</button>
+    </div>
+    <nav class="mobile-nav-links" aria-label="Navegación móvil">
+      <a href="#page-home" data-page="home">Inicio</a>
+      <a href="#page-nosotros" data-page="nosotros">Nosotros</a>
+      <a href="#page-soluciones" data-page="soluciones">Soluciones</a>
+      <a href="#page-experiencias" data-page="experiencias">Experiencias</a>
+      <a href="#page-contacto" data-page="contacto">Contacto</a>
+    </nav>
+    <div class="mobile-nav-actions">
+      <a class="bd" href="#" data-modal="mChat">Demo</a>
+      <a class="bs" href="#" data-modal="mHablemos">Hablemos</a>
+    </div>
+  </aside>
+</div>
 <main>
 
 <!-- HOME -->
@@ -240,7 +266,7 @@
     <div class="nosotros-hero">
       <div class="tg"><span class="ll"></span> <strong>Nosotros</strong></div>
       <div class="tw"><h2>¿Por qué <em>existimos?</em></h2><p class="hd">Sabemos que no todos partimos del mismo lugar. Nacimos para cerrar la brecha educativa en la ruralidad con herramientas reales.</p></div>
-      <div class="nv"><div class="nv-cover"><div class="nv-label">Video institucional</div><video class="nv-video" controls autoplay muted loop preload="auto" playsinline poster="experiencias/fotos/experiencia1.jpg" src="experiencias/videos/videoplayback.mp4"><source src="experiencias/videos/videoplayback.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div>
+      <div class="nv"><div class="nv-cover"><video class="nv-video" controls muted preload="metadata" playsinline poster="experiencias/fotos/experiencia1.jpg" src="experiencias/videos/videoplayback.mp4"><source src="experiencias/videos/videoplayback.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div>
     </div>
     <div class="np">
       <h2 class="npl">Nuestro propósito</h2>
@@ -480,6 +506,12 @@
 </div>
 </main>
 
+<div class="mobile-sticky-cta" aria-label="Acciones rápidas móvil">
+  <a href="#" data-modal="mChat">Demo</a>
+  <a href="#" data-modal="mHablemos">Hablemos</a>
+  <a href="#page-contacto" data-page="contacto">Contacto</a>
+</div>
+
 <footer>
   <div class="fg">
     <div class="fb">
@@ -498,6 +530,6 @@
   <div class="fbt"><p>2025 Smart Skills Factory SAS — eki. Educación con equidad para la ruralidad. www.eki.com.co</p><div class="footer-policy-links"><a data-modal="mH" href="#" role="button">Política de Privacidad</a><a data-modal="mH" href="#" role="button">Habeas Data</a></div></div>
 </footer>
 
-<script type="module" src="js/main.js?v=20260423b"></script>
+<script type="module" src="js/main.js?v=20260426a"></script>
 </body>
 </html>

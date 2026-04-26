@@ -720,6 +720,48 @@ window.oM = openModal;
 window.oR = updateModalImage;
 window.cM = closeModal;
 
+const initMobileNav = () => {
+  const body = document.body;
+  const toggle = document.getElementById('mobileNavToggle');
+  const closeBtn = document.getElementById('mobileNavClose');
+  const backdrop = document.getElementById('mobileNavBackdrop');
+  const panel = document.getElementById('mobileNavPanel');
+  if(!toggle || !backdrop || !panel) return;
+
+  const openNav = () => {
+    backdrop.hidden = false;
+    body.classList.add('mobile-nav-open');
+    toggle.setAttribute('aria-expanded', 'true');
+  };
+
+  const closeNav = () => {
+    body.classList.remove('mobile-nav-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    backdrop.hidden = true;
+  };
+
+  toggle.addEventListener('click', () => {
+    if(body.classList.contains('mobile-nav-open')){
+      closeNav();
+      return;
+    }
+    openNav();
+  });
+
+  closeBtn?.addEventListener('click', closeNav);
+  backdrop.addEventListener('click', event => {
+    if(event.target === backdrop) closeNav();
+  });
+
+  window.addEventListener('keydown', event => {
+    if(event.key === 'Escape' && body.classList.contains('mobile-nav-open')){
+      closeNav();
+    }
+  });
+
+  window.addEventListener('eki:pagechange', closeNav);
+};
+
 // Delegación de eventos para HTML más limpio
 window.addEventListener('click', event => {
   const closeTarget = event.target.closest('[data-close]');
@@ -743,6 +785,11 @@ window.addEventListener('click', event => {
   if(pageTarget){
     event.preventDefault();
     setActivePage(pageTarget.dataset.page);
+    document.body.classList.remove('mobile-nav-open');
+    const backdrop = document.getElementById('mobileNavBackdrop');
+    const toggle = document.getElementById('mobileNavToggle');
+    if(backdrop) backdrop.hidden = true;
+    if(toggle) toggle.setAttribute('aria-expanded', 'false');
     return;
   }
 
@@ -797,6 +844,19 @@ const initTeamCarousel = () => {
   const prev = slider.querySelector('.eq-prev');
   const next = slider.querySelector('.eq-next');
   const dots = Array.from(slider.querySelectorAll('.eq-dot'));
+  const isMobileScrollMode = window.matchMedia('(max-width: 700px)').matches;
+
+  if(isMobileScrollMode){
+    slider.classList.add('eq-mobile-scroll');
+    if(track){
+      track.style.transform = 'none';
+    }
+    prev?.setAttribute('hidden', '');
+    next?.setAttribute('hidden', '');
+    dots.forEach(dot => dot.setAttribute('hidden', ''));
+    return;
+  }
+
   let currentIndex = 0;
 
   const updateSlide = index => {
@@ -973,14 +1033,20 @@ const initExperienceAutoRotation = () => {
     : buildSlideFromCard(videoCards[0]);
 
   const startCardPreviews = () => {
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
     videoCards.forEach(card => {
       const previewVideo = card.querySelector('video');
       if(!previewVideo) return;
       previewVideo.muted = true;
-      previewVideo.autoplay = true;
+      previewVideo.preload = 'metadata';
+      previewVideo.autoplay = !isMobile;
       previewVideo.loop = true;
       previewVideo.playbackRate = 0.75;
-      previewVideo.play().catch(() => {});
+      if(!isMobile){
+        previewVideo.play().catch(() => {});
+      } else {
+        previewVideo.pause();
+      }
     });
   };
 
@@ -1073,7 +1139,46 @@ const initExperienceAutoRotation = () => {
   if(heroVideo){
     heroVideo.loop = false;
   }
-  setInterval(rotateCollagePhotos, 7500);
+  setInterval(() => {
+    if(document.hidden) return;
+    rotateCollagePhotos();
+  }, 7500);
+};
+
+const optimizeInitialMediaLoading = () => {
+  const isMobile = window.matchMedia('(max-width: 900px)').matches;
+  const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const images = Array.from(document.querySelectorAll('img'));
+  images.forEach((img, index) => {
+    if(!img.hasAttribute('loading') && index > 3){
+      img.loading = 'lazy';
+    }
+    if(!img.hasAttribute('decoding')){
+      img.decoding = 'async';
+    }
+  });
+
+  document.querySelectorAll('video').forEach(video => {
+    const inExperiencesGrid = video.closest('.exp-videos-grid .ev');
+    const inNosotros = video.classList.contains('nv-video');
+    const inModal = video.closest('.mo');
+
+    if(inModal){
+      video.preload = 'metadata';
+      return;
+    }
+
+    if(inExperiencesGrid || inNosotros){
+      video.preload = 'metadata';
+    }
+
+    if((isMobile || isReducedMotion) && video.hasAttribute('autoplay')){
+      video.removeAttribute('autoplay');
+      video.autoplay = false;
+      video.pause();
+    }
+  });
 };
 
 const initNosotrosVideoSound = () => {
@@ -1083,14 +1188,14 @@ const initNosotrosVideoSound = () => {
 
   video.defaultMuted = true;
   video.muted = true;
-  video.loop = true;
+  video.loop = false;
   video.playsInline = true;
-  video.preload = 'auto';
-  video.autoplay = true;
+  video.preload = 'metadata';
+  video.autoplay = false;
   video.setAttribute('playsinline', '');
   video.setAttribute('muted', '');
-  video.setAttribute('autoplay', '');
-  video.setAttribute('loop', '');
+  video.removeAttribute('autoplay');
+  video.removeAttribute('loop');
 
   const playSafely = () => {
     const playPromise = video.play();
@@ -1101,7 +1206,8 @@ const initNosotrosVideoSound = () => {
 
   const syncVideoPlayback = pageId => {
     const isNosotrosActive = pageId ? pageId === 'nosotros' : page.classList.contains('active');
-    if(isNosotrosActive){
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
+    if(isNosotrosActive && !isMobile){
       playSafely();
       return;
     }
@@ -1151,9 +1257,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  optimizeInitialMediaLoading();
   initTeamCarousel();
   initExperienceAutoRotation();
   initNosotrosVideoSound();
+  initMobileNav();
   initAsyncLeadForms();
   initImpactCounters();
   resetChatDemo();
