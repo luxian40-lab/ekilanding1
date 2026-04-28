@@ -1207,12 +1207,15 @@ const initNosotrosVideoSound = () => {
   const syncVideoPlayback = pageId => {
     const isNosotrosActive = pageId ? pageId === 'nosotros' : page.classList.contains('active');
     const isMobile = window.matchMedia('(max-width: 900px)').matches;
-    if(isNosotrosActive && !isMobile){
-      playSafely();
+    if(!isNosotrosActive){
+      video.pause();
+      video.currentTime = 0;
       return;
     }
-    video.pause();
-    video.currentTime = 0;
+    // En móvil no forzamos autoplay, pero sí permitimos reproducción manual.
+    if(!isMobile){
+      playSafely();
+    }
   };
 
   if(video.readyState >= 2){
