@@ -10,8 +10,10 @@ const excludedNames = new Set([
   '.git',
   '.github',
   'scripts',
+  'media-originals',
   'package.json',
-  'package-lock.json'
+  'package-lock.json',
+  'wrangler.jsonc'
 ]);
 
 const shouldSkip = name => {
