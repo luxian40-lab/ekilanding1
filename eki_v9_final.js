@@ -315,10 +315,16 @@ const HABLEMOS_FLOW = [
     placeholder: 'correo@organizacion.com'
   },
   {
+    key: 'telefono',
+    type: 'text',
+    text: '¿Y cuál es tu número de celular o WhatsApp?',
+    placeholder: 'Ej. 310 384 4274'
+  },
+  {
     key: 'necesidad',
     type: 'text',
-    text: 'Ahora sí, cuéntame brevemente tu necesidad para preparar una demo útil para tu equipo.',
-    placeholder: 'Describe tu objetivo o reto principal'
+    text: 'Cuéntame cuál es tu necesidad o el problema que tienes. Así podemos orientarte hacia la mejor solución posible.',
+    placeholder: 'Describe tu necesidad, reto o situación actual'
   }
 ];
 
@@ -352,6 +358,19 @@ const setHablemosInputState = (enabled, placeholder = 'Escribe aquí...') => {
 };
 
 const getCurrentHablemosStep = () => HABLEMOS_FLOW[hablemosStepIndex] || null;
+
+const validateHablemosValue = (step, value) => {
+  if(step.key === 'correo' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+    return 'Por favor escribe un correo válido, por ejemplo correo@organizacion.com.';
+  }
+  if(step.key === 'telefono') {
+    const digits = value.replace(/\D/g, '');
+    if(digits.length < 7) {
+      return 'Por favor escribe un número válido con al menos 7 dígitos.';
+    }
+  }
+  return '';
+};
 
 const clearHablemosOptions = () => {
   const { options } = getHablemosControls();
@@ -405,7 +424,7 @@ const finalizarHablemosFlujo = async token => {
   setHablemosInputState(false, 'Enviando...');
   await wait(HABLEMOS_DELAY);
   if(token !== hablemosExecutionToken) return;
-  pintarMensajeHablemos('Gracias. Ya tengo lo necesario. En breve un asesor de eki se contactará contigo.', 'incoming', 'eki');
+  pintarMensajeHablemos('Gracias. Ya tengo lo necesario. En breve un asesor de eki se contactará contigo para ayudarte a encontrar la mejor solución.', 'incoming', 'eki');
   scrollHablemosToBottom();
 
   const sent = await submitHablemosForm();
@@ -435,6 +454,7 @@ const resetHablemosChat = () => {
 
   setHablemosField('nombre-organizacion', '');
   setHablemosField('correo', '');
+  setHablemosField('telefono', '');
   setHablemosField('solucion', '');
   setHablemosField('necesidad', '');
 
@@ -463,6 +483,13 @@ const handleHablemosReply = async (message, source = 'input') => {
   if(!step) return;
   if(step.type === 'options' && source !== 'option') return;
   if(step.type === 'text' && input?.disabled) return;
+
+  const validationError = step.type === 'text' ? validateHablemosValue(step, value) : '';
+  if(validationError){
+    pintarMensajeHablemos(validationError, 'incoming', 'eki');
+    scrollHablemosToBottom();
+    return;
+  }
 
   pintarMensajeHablemos(value, 'outgoing', 'Tú');
   if(input && source === 'input') input.value = '';
