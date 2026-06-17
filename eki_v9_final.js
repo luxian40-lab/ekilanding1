@@ -1,18 +1,44 @@
 const selectAll = selector => Array.from(document.querySelectorAll(selector));
 
-const setActivePage = id => {
-  selectAll('.page').forEach(page => page.classList.toggle('active', page.id === `page-${id}`));
-  window.scrollTo(0, 0);
-  selectAll('nav a').forEach(link => link.classList.toggle('on', link.id === `n-${id}`));
+const PAGE_PATHS = {
+  'habeas-data': '/habeas-data'
+};
+
+const PATH_TO_PAGE = Object.fromEntries(
+  Object.entries(PAGE_PATHS).map(([id, pagePath]) => [pagePath, id])
+);
+
+const DEFAULT_TITLE = 'eki - Educación con equidad';
+const PAGE_TITLES = {
+  'habeas-data': 'Política de Habeas Data — eki'
+};
+
+const resolvePageFromLocation = () => {
+  const hash = window.location.hash || '';
+  if(hash.startsWith('#page-')) return hash.replace('#page-', '');
+  const path = window.location.pathname.replace(/\/$/, '') || '/';
+  return PATH_TO_PAGE[path] || null;
+};
+
+const updatePageUrl = id => {
   try {
     if(window.history && window.history.replaceState){
-      window.history.replaceState(null, '', `#page-${id}`);
+      const pagePath = PAGE_PATHS[id];
+      window.history.replaceState(null, '', pagePath || `#page-${id}`);
     } else {
       window.location.hash = `#page-${id}`;
     }
   } catch (error) {
     window.location.hash = `#page-${id}`;
   }
+};
+
+const setActivePage = id => {
+  selectAll('.page').forEach(page => page.classList.toggle('active', page.id === `page-${id}`));
+  window.scrollTo(0, 0);
+  selectAll('nav a').forEach(link => link.classList.toggle('on', link.id === `n-${id}`));
+  updatePageUrl(id);
+  document.title = PAGE_TITLES[id] || DEFAULT_TITLE;
   document.dispatchEvent(new CustomEvent('eki:pagechange', { detail: { id } }));
 };
 
@@ -643,6 +669,14 @@ selectAll('a[href^="#page-"]').forEach(link => {
   });
 });
 
+selectAll('a[href="/habeas-data"]').forEach(link => {
+  link.addEventListener('click', e => {
+    if(link.target === '_blank') return;
+    e.preventDefault();
+    setActivePage('habeas-data');
+  });
+});
+
 ['home','nosotros','soluciones','experiencias','demo','contacto'].forEach(id => {
   const el = document.getElementById(`n-${id}`);
   if(!el) return;
@@ -858,10 +892,14 @@ window.addEventListener('keydown', event => {
 });
 
 window.addEventListener('hashchange', () => {
-  const hash = window.location.hash || '';
-  if(hash.startsWith('#page-')){
-    setActivePage(hash.replace('#page-',''));
-  }
+  const pageId = resolvePageFromLocation();
+  if(pageId) setActivePage(pageId);
+});
+
+window.addEventListener('popstate', () => {
+  const pageId = resolvePageFromLocation();
+  if(pageId) setActivePage(pageId);
+  else setActivePage('home');
 });
 
 const initTeamCarousel = () => {
@@ -1263,12 +1301,9 @@ const initNosotrosVideoSound = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  const hash = window.location.hash || '';
-  if(hash.startsWith('#page-')){
-    setActivePage(hash.replace('#page-',''));
-  } else {
-    setActivePage('home');
-  }
+  const pageId = resolvePageFromLocation();
+  if(pageId) setActivePage(pageId);
+  else setActivePage('home');
 
   const areaInteraccion = document.getElementById('area-interaccion');
   if(areaInteraccion){
