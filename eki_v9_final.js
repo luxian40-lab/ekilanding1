@@ -770,6 +770,14 @@ const initImpactCounters = () => {
 
   const observer = new IntersectionObserver(onIntersect, { threshold: 0.35 });
   counters.forEach(state => {
+    const rendered = (state.el.textContent || '').trim();
+    const isPlaceholder = rendered === '+0' || rendered === '0' || rendered === '';
+    if(!isPlaceholder){
+      state.value = state.target;
+      state.finished = true;
+      observer.observe(state.el);
+      return;
+    }
     updateDisplay(state);
     observer.observe(state.el);
   });

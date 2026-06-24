@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eki.com.co/sitemap.xml
