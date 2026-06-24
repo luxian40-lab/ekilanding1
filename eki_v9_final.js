@@ -8,7 +8,7 @@ const PATH_TO_PAGE = Object.fromEntries(
   Object.entries(PAGE_PATHS).map(([id, pagePath]) => [pagePath, id])
 );
 
-const DEFAULT_TITLE = 'eki - Educación con equidad';
+const DEFAULT_TITLE = 'eki | Educación rural con IA y WhatsApp en Colombia';
 const PAGE_TITLES = {
   'habeas-data': 'Política de Habeas Data — eki'
 };
@@ -24,12 +24,20 @@ const updatePageUrl = id => {
   try {
     if(window.history && window.history.replaceState){
       const pagePath = PAGE_PATHS[id];
-      window.history.replaceState(null, '', pagePath || `#page-${id}`);
+      if(id === 'home'){
+        window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}` || '/');
+        return;
+      }
+      if(pagePath){
+        window.history.replaceState(null, '', pagePath);
+        return;
+      }
+      window.history.replaceState(null, '', `#page-${id}`);
     } else {
-      window.location.hash = `#page-${id}`;
+      window.location.hash = id === 'home' ? '' : `#page-${id}`;
     }
   } catch (error) {
-    window.location.hash = `#page-${id}`;
+    window.location.hash = id === 'home' ? '' : `#page-${id}`;
   }
 };
 
@@ -677,6 +685,14 @@ selectAll('a[href="/habeas-data"]').forEach(link => {
   });
 });
 
+selectAll('a[href="/"]').forEach(link => {
+  link.addEventListener('click', e => {
+    if(link.target === '_blank') return;
+    e.preventDefault();
+    setActivePage('home');
+  });
+});
+
 ['home','nosotros','soluciones','experiencias','demo','contacto'].forEach(id => {
   const el = document.getElementById(`n-${id}`);
   if(!el) return;
@@ -902,6 +918,7 @@ window.addEventListener('keydown', event => {
 window.addEventListener('hashchange', () => {
   const pageId = resolvePageFromLocation();
   if(pageId) setActivePage(pageId);
+  else setActivePage('home');
 });
 
 window.addEventListener('popstate', () => {
