@@ -613,7 +613,7 @@ const updateModalImage = (src, alt) => {
   if(!img) return;
   img.src = src;
   img.alt = alt || 'Recuerdo eki';
-  const teamImgs = ['andres.jpeg','rosmery.jpeg','julian.jpeg','luisa.jpeg','andre.jpeg','juliand.jpeg','juliana.jpeg','andres.jpg','rosmery.jpg','julian.jpg','luisa.jpg','andre.jpg','disenador.jpg','juliana.jpg'];
+  const teamImgs = ['andres.jpeg','rosmery.jpeg','julian.jpeg','luisa.jpeg','juliand.jpeg','juliana.jpeg','andres.jpg','rosmery.jpg','julian.jpg','luisa.jpg','disenador.jpg','juliana.jpg'];
   const isTeam = teamImgs.some(name => src.includes(name));
   if(label && title){
     label.textContent = isTeam ? 'El equipo' : 'Nuestros recuerdos';
