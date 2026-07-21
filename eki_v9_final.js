@@ -1122,20 +1122,51 @@ const initExperienceAutoRotation = () => {
     }
     : buildSlideFromCard(videoCards[0]);
 
+  const ensurePreviewSource = previewVideo => {
+    if(!previewVideo) return;
+    const dataSrc = previewVideo.dataset.src;
+    if(dataSrc && !previewVideo.getAttribute('src')){
+      previewVideo.src = dataSrc;
+      previewVideo.load();
+    }
+  };
+
   const startCardPreviews = () => {
     const isMobile = window.matchMedia('(max-width: 900px)').matches;
+    const isReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const onExperiencias = document.getElementById('page-experiencias')?.classList.contains('active');
+
     videoCards.forEach(card => {
       const previewVideo = card.querySelector('video');
       if(!previewVideo) return;
       previewVideo.muted = true;
-      previewVideo.preload = 'metadata';
-      previewVideo.autoplay = !isMobile;
+      previewVideo.preload = 'none';
       previewVideo.loop = true;
       previewVideo.playbackRate = 0.75;
-      if(!isMobile){
-        previewVideo.play().catch(() => {});
-      } else {
+      previewVideo.autoplay = false;
+      previewVideo.removeAttribute('autoplay');
+
+      // No descargar videos pesados hasta estar en Experiencias y visibles.
+      if(!onExperiencias || isMobile || isReducedMotion){
         previewVideo.pause();
+        return;
+      }
+
+      if('IntersectionObserver' in window){
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting){
+              ensurePreviewSource(previewVideo);
+              previewVideo.play().catch(() => {});
+            } else {
+              previewVideo.pause();
+            }
+          });
+        }, { rootMargin: '120px 0px', threshold: 0.2 });
+        observer.observe(card);
+      } else {
+        ensurePreviewSource(previewVideo);
+        previewVideo.play().catch(() => {});
       }
     });
   };
@@ -1225,14 +1256,26 @@ const initExperienceAutoRotation = () => {
   };
 
   startCardPreviews();
+  document.addEventListener('eki:pagechange', event => {
+    if(event.detail?.id === 'experiencias'){
+      startCardPreviews();
+    } else {
+      videoCards.forEach(card => {
+        const previewVideo = card.querySelector('video');
+        if(previewVideo) previewVideo.pause();
+      });
+    }
+  });
   updateCollage(heroSlide);
   if(heroVideo){
     heroVideo.loop = false;
   }
+  // Rotación más lenta para no saturar red con fotos.
   setInterval(() => {
     if(document.hidden) return;
+    if(!document.getElementById('page-experiencias')?.classList.contains('active')) return;
     rotateCollagePhotos();
-  }, 7500);
+  }, 12000);
 };
 
 const optimizeInitialMediaLoading = () => {
@@ -1241,8 +1284,9 @@ const optimizeInitialMediaLoading = () => {
 
   const images = Array.from(document.querySelectorAll('img'));
   images.forEach((img, index) => {
-    if(!img.hasAttribute('loading') && index > 3){
-      img.loading = 'lazy';
+    // Lazy agresivo: solo el logo/hero temprano carga eager.
+    if(!img.hasAttribute('loading')){
+      img.loading = index > 1 ? 'lazy' : 'eager';
     }
     if(!img.hasAttribute('decoding')){
       img.decoding = 'async';
@@ -1259,7 +1303,14 @@ const optimizeInitialMediaLoading = () => {
       return;
     }
 
-    if(inExperiencesGrid || inNosotros){
+    if(inExperiencesGrid){
+      video.preload = 'none';
+      video.removeAttribute('autoplay');
+      video.autoplay = false;
+      return;
+    }
+
+    if(inNosotros){
       video.preload = 'metadata';
     }
 
