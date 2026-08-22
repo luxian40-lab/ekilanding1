@@ -16,13 +16,14 @@ const PAGE_PATHS = {
   'programa-tome-las-riendas': '/programas/tome-las-riendas',
   noticias: '/noticias',
   'noticia-fao-agtech': '/noticias/fao-agtech-summit-2026',
-  'noticia-agrotech-mintic': '/noticias/agrotech-mintic-2026',
+  'noticia-agstar-2026': '/noticias/agstar-2026',
   'noticia-gofest-2026': '/noticias/gofest-2026-startup-showcase'
 };
 
 const PATH_TO_PAGE = Object.fromEntries(
   Object.entries(PAGE_PATHS).map(([id, pagePath]) => [pagePath, id])
 );
+PATH_TO_PAGE['/noticias/agrotech-mintic-2026'] = 'noticia-agstar-2026';
 
 const DEFAULT_TITLE = 'eki | Educación rural con IA y WhatsApp en Colombia';
 const DEFAULT_DESCRIPTION = 'eki transforma comunidades rurales en Colombia con educación digital, inteligencia artificial, formación por WhatsApp y plataforma LXP para el campo.';
@@ -42,7 +43,7 @@ const PAGE_TITLES = {
   'programa-tome-las-riendas': 'Tome las riendas de su dinero | Demo eki',
   noticias: 'Noticias — eki en el territorio',
   'noticia-fao-agtech': 'eki seleccionada en el Summit de Agricultura Digital de la FAO | Noticia',
-  'noticia-agrotech-mintic': 'Qué es Agrotech de MinTIC (no es la FAO) | eki',
+  'noticia-agstar-2026': 'eki seleccionada en la convocatoria AgStar 2026 | Noticia',
   'noticia-gofest-2026': 'eki en Go Fest 2026 Startup Showcase | Noticia'
 };
 const PAGE_DESCRIPTIONS = {
@@ -60,8 +61,8 @@ const PAGE_DESCRIPTIONS = {
   'programa-agricultura-digital-ia': 'Acerque datos, apps e IA al productor en lenguaje de finca: qué sí sirve en el celular y qué es humo.',
   'programa-tome-las-riendas': 'Programa corto de eki sobre la plata de la casa y del oficio. Demo pública: se aprende por WhatsApp, un paso a la vez, escribiendo listo para avanzar.',
   noticias: 'Noticias eki: reconocimientos, alianzas y lo que pasa cuando la formación llega al territorio.',
-  'noticia-fao-agtech': 'eki fue seleccionada por la FAO para un piloto de agricultura digital: agentes de IA y microaprendizaje por WhatsApp. No es el programa Agrotech de MinTIC.',
-  'noticia-agrotech-mintic': 'Agrotech es el programa del MinTIC de transformación digital del agro: herramientas, satélite y formación en 14 departamentos. Distinto de los pilotos de la FAO.',
+  'noticia-fao-agtech': 'eki fue seleccionada por la FAO para un piloto de agricultura digital: agentes de IA y microaprendizaje por WhatsApp.',
+  'noticia-agstar-2026': 'Smart Skills Factory (eki) quedó entre los ganadores de la convocatoria AgStar 2026. Evento AgriFoodTech del 21 al 23 de octubre en Corferias, Bogotá.',
   'noticia-gofest-2026': 'eki fue seleccionada para el Startup Showcase de Go Fest 2026 en Venture Valley, piso 4, Ágora Bogotá.'
 };
 
