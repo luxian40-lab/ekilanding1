@@ -761,9 +761,13 @@ footer{background:var(--pd);padding:44px 48px 26px;position:relative;overflow:hi
 .prog-cta{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:999px;font-weight:800;text-decoration:none;font-size:14px;}
 .prog-cta-primary{background:#25D366;color:#fff;}
 .prog-cta-secondary{background:#fff;color:var(--p2);border:1.5px solid rgba(154,108,172,.35);}
+.prog-visual{margin:6px 0 20px;border-radius:20px;overflow:hidden;background:#efe7f5;}
+.prog-visual img{width:100%;height:240px;object-fit:cover;display:block;}
 .prog-catalog{max-width:1080px;}
 .prog-list{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
-.prog-tile{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(154,108,172,.2);border-radius:20px;text-decoration:none;color:inherit;min-height:100%;padding:20px 22px;}
+.prog-tile{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(154,108,172,.2);border-radius:20px;overflow:hidden;text-decoration:none;color:inherit;min-height:100%;padding:0;}
+.prog-tile img{width:100%;height:150px;object-fit:cover;display:block;}
+.prog-tile div{padding:16px 18px 20px;}
 .prog-tile h3{font-size:18px;color:var(--pd);margin-bottom:8px;}
 .prog-tile p{font-size:14px;color:#555;line-height:1.65;}
 .prog-badge{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--p);margin-bottom:8px;}
