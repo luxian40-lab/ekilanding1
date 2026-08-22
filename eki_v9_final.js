@@ -419,7 +419,7 @@ const HABLEMOS_FLOW = [
     key: 'telefono',
     type: 'text',
     text: '¿Y cuál es tu número de celular o WhatsApp?',
-    placeholder: 'Ej. 310 384 4274'
+    placeholder: 'Ej. 302 648 0629'
   },
   {
     key: 'necesidad',
