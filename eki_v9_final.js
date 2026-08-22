@@ -1447,184 +1447,128 @@ const noteStevenClick = () => {
   }, 8000);
   if(stevenClicks <= 10) return false;
   stevenClicks = 0;
-  startStevenInbox();
+  startStevenTopo();
   return true;
 };
 
-const startStevenInbox = () => {
-  if(document.getElementById('eki-inbox')?.classList.contains('open')) return;
+const startStevenTopo = () => {
+  if(document.getElementById('eki-topo')?.classList.contains('open')) return;
   closeModal('mEkipo');
 
-  let overlay = document.getElementById('eki-inbox');
+  let overlay = document.getElementById('eki-topo');
   if(!overlay){
     overlay = document.createElement('div');
-    overlay.id = 'eki-inbox';
+    overlay.id = 'eki-topo';
     overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-label', 'Inbox cero del consultor');
+    overlay.setAttribute('aria-label', 'Topo consultor');
     overlay.innerHTML = `
       <div class="eki-snake-panel">
         <div class="eki-snake-bar">
           <div>
-            <strong>Inbox cero</strong>
-            <span>toca los correos antes de que lleguen al piso</span>
+            <strong>Topo consultor</strong>
+            <span>túmbale a lo que salga del hueco</span>
           </div>
-          <div class="eki-snake-score">Archivados: <span id="ekiInboxScore">0</span> · Vidas <span id="ekiInboxLives">3</span></div>
-          <button type="button" class="eki-snake-close" id="ekiInboxClose">Cerrar</button>
+          <div class="eki-snake-score">Golpes: <span id="ekiTopoScore">0</span> · <span id="ekiTopoTime">30</span>s</div>
+          <button type="button" class="eki-snake-close" id="ekiTopoClose">Cerrar</button>
         </div>
-        <canvas id="ekiInboxCanvas"></canvas>
-        <p class="eki-snake-msg" id="ekiInboxMsg" hidden></p>
+        <div class="topo-grid" id="ekiTopoGrid"></div>
+        <p class="eki-snake-msg" id="ekiTopoMsg" hidden></p>
       </div>`;
     document.body.appendChild(overlay);
   }
 
-  const canvas = document.getElementById('ekiInboxCanvas');
-  const scoreEl = document.getElementById('ekiInboxScore');
-  const livesEl = document.getElementById('ekiInboxLives');
-  const msgEl = document.getElementById('ekiInboxMsg');
-  const closeBtn = document.getElementById('ekiInboxClose');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  if(!ctx) return;
+  const grid = document.getElementById('ekiTopoGrid');
+  const scoreEl = document.getElementById('ekiTopoScore');
+  const timeEl = document.getElementById('ekiTopoTime');
+  const msgEl = document.getElementById('ekiTopoMsg');
+  const closeBtn = document.getElementById('ekiTopoClose');
+  if(!grid) return;
 
   overlay.classList.add('open');
   overlay.hidden = false;
   document.body.classList.add('snake-open');
+  grid.innerHTML = '';
+  const holes = [];
+  for(let i = 0; i < 9; i += 1){
+    const hole = document.createElement('button');
+    hole.type = 'button';
+    hole.className = 'topo-hole';
+    hole.innerHTML = '<span class="topo-mole"></span>';
+    grid.appendChild(hole);
+    holes.push(hole);
+  }
 
-  const labels = ['Reunión 8am', 'PPT final_v3', 'Excel del cliente', 'Urgente!!!', 'Copia oculta', 'OKRs', 'Zoom ahora', 'Firmas', 'Alcance', 'WhatsApp'];
-  const colors = ['#9A6CAC', '#3C7BBF', '#D4AF37', '#25D366', '#7A4E8E'];
-
-  const fit = () => {
-    const w = Math.min(window.innerWidth - 36, 560);
-    canvas.width = w;
-    canvas.height = Math.min(window.innerHeight * 0.62, 420);
-  };
-  fit();
-
-  let mails = [];
+  const labels = ['Reunión', 'Alcance', 'PPT', 'El cliente', 'Urgente', 'Zoom', 'OKR', 'WhatsApp'];
   let score = 0;
-  let lives = 3;
+  let left = 30;
   let running = true;
-  let spawnAcc = 0;
-  let last = 0;
-  let raf = 0;
+  let popTimer = 0;
+  let clockTimer = 0;
+  let active = -1;
 
-  const spawn = () => {
-    const w = 108 + Math.random() * 46;
-    mails.push({
-      x: 12 + Math.random() * Math.max(20, canvas.width - w - 24),
-      y: -36,
-      w,
-      h: 34,
-      vy: 1.35 + Math.random() * 1.4 + score * 0.04,
-      label: labels[Math.floor(Math.random() * labels.length)],
-      color: colors[Math.floor(Math.random() * colors.length)]
-    });
+  const hideAll = () => {
+    holes.forEach(h => h.classList.remove('up', 'hit'));
+    active = -1;
   };
 
-  const hit = (mx, my) => {
-    for(let i = mails.length - 1; i >= 0; i -= 1){
-      const m = mails[i];
-      if(mx >= m.x && mx <= m.x + m.w && my >= m.y && my <= m.y + m.h){
-        mails.splice(i, 1);
-        score += 1;
-        if(scoreEl) scoreEl.textContent = String(score);
-        return true;
-      }
-    }
-    return false;
-  };
-
-  const draw = () => {
-    ctx.fillStyle = '#1b0f28';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = 'rgba(212,175,55,.35)';
-    ctx.setLineDash([6, 8]);
-    ctx.beginPath();
-    ctx.moveTo(0, canvas.height - 18);
-    ctx.lineTo(canvas.width, canvas.height - 18);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    mails.forEach(m => {
-      ctx.fillStyle = m.color;
-      ctx.fillRect(m.x, m.y, m.w, m.h);
-      ctx.fillStyle = '#fff';
-      ctx.font = '700 11px sans-serif';
-      ctx.fillText(m.label, m.x + 8, m.y + 22);
-    });
-  };
-
-  const loop = ts => {
+  const pop = () => {
     if(!running) return;
-    if(!last) last = ts;
-    const dt = Math.min(40, ts - last);
-    last = ts;
-    spawnAcc += dt;
-    const gap = Math.max(420, 980 - score * 28);
-    if(spawnAcc > gap){
-      spawnAcc = 0;
-      spawn();
+    hideAll();
+    active = Math.floor(Math.random() * holes.length);
+    const mole = holes[active].querySelector('.topo-mole');
+    if(mole) mole.textContent = labels[Math.floor(Math.random() * labels.length)];
+    holes[active].classList.add('up');
+  };
+
+  const endRound = () => {
+    running = false;
+    window.clearInterval(popTimer);
+    window.clearInterval(clockTimer);
+    hideAll();
+    if(msgEl){
+      msgEl.hidden = false;
+      msgEl.textContent = score >= 18
+        ? `Consultor de élite. ${score} golpes. Clic en el tablero para otra ronda.`
+        : `${score} golpes. El alcance se escapó. Clic para reintentar.`;
     }
-    mails.forEach(m => {
-      m.y += m.vy * (dt / 16);
-    });
-    for(let i = mails.length - 1; i >= 0; i -= 1){
-      if(mails[i].y + mails[i].h >= canvas.height - 18){
-        mails.splice(i, 1);
-        lives -= 1;
-        if(livesEl) livesEl.textContent = String(Math.max(0, lives));
-      }
-    }
-    if(lives <= 0){
-      running = false;
-      if(msgEl){
-        msgEl.hidden = false;
-        msgEl.textContent = score >= 12
-          ? `Inbox en paz. ${score} archivados. Clic para otra ronda.`
-          : `Llegó el cc a todo el mundo. ${score} archivados. Clic para reintentar.`;
-      }
-      draw();
-      return;
-    }
-    draw();
-    raf = requestAnimationFrame(loop);
   };
 
   const restart = () => {
-    mails = [];
     score = 0;
-    lives = 3;
+    left = 30;
     running = true;
-    spawnAcc = 0;
-    last = 0;
     if(scoreEl) scoreEl.textContent = '0';
-    if(livesEl) livesEl.textContent = '3';
+    if(timeEl) timeEl.textContent = '30';
     if(msgEl){
       msgEl.hidden = true;
       msgEl.textContent = '';
     }
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(loop);
+    window.clearInterval(popTimer);
+    window.clearInterval(clockTimer);
+    pop();
+    popTimer = window.setInterval(pop, 780);
+    clockTimer = window.setInterval(() => {
+      left -= 1;
+      if(timeEl) timeEl.textContent = String(left);
+      if(left <= 0) endRound();
+    }, 1000);
   };
 
-  const canvasPoint = event => {
-    const rect = canvas.getBoundingClientRect();
-    const src = event.changedTouches ? event.changedTouches[0] : event;
-    if(!src) return null;
-    return {
-      x: (src.clientX - rect.left) * (canvas.width / rect.width),
-      y: (src.clientY - rect.top) * (canvas.height / rect.height)
-    };
-  };
-
-  const onPointer = event => {
-    event.preventDefault();
-    if(!running){
-      restart();
-      return;
-    }
-    const p = canvasPoint(event);
-    if(p) hit(p.x, p.y);
-  };
+  holes.forEach((hole, index) => {
+    hole.addEventListener('click', event => {
+      event.preventDefault();
+      if(!running){
+        restart();
+        return;
+      }
+      if(index !== active) return;
+      score += 1;
+      if(scoreEl) scoreEl.textContent = String(score);
+      hole.classList.add('hit');
+      hole.classList.remove('up');
+      active = -1;
+    });
+  });
 
   const onKey = event => {
     if(event.key === 'Escape'){
@@ -1633,18 +1577,11 @@ const startStevenInbox = () => {
     }
   };
 
-  const onResize = () => {
-    fit();
-    draw();
-  };
-
   const stop = () => {
     running = false;
-    cancelAnimationFrame(raf);
+    window.clearInterval(popTimer);
+    window.clearInterval(clockTimer);
     window.removeEventListener('keydown', onKey, true);
-    window.removeEventListener('resize', onResize);
-    canvas.removeEventListener('mousedown', onPointer);
-    canvas.removeEventListener('touchstart', onPointer);
     overlay.classList.remove('open');
     overlay.hidden = true;
     document.body.classList.remove('snake-open');
@@ -1652,10 +1589,26 @@ const startStevenInbox = () => {
 
   closeBtn?.addEventListener('click', stop, { once: true });
   window.addEventListener('keydown', onKey, true);
-  window.addEventListener('resize', onResize);
-  canvas.addEventListener('mousedown', onPointer);
-  canvas.addEventListener('touchstart', onPointer, { passive: false });
   restart();
+};
+
+const initEquidadEgg = () => {
+  const word = document.querySelector('.hl em');
+  if(!word) return;
+  word.classList.add('egg-equidad');
+  let taps = 0;
+  let timer = 0;
+  word.addEventListener('click', event => {
+    event.preventDefault();
+    taps += 1;
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => { taps = 0; }, 3500);
+    if(taps < 6) return;
+    taps = 0;
+    document.body.classList.add('eki-disco');
+    burstCelebrationConfetti();
+    window.setTimeout(() => document.body.classList.remove('eki-disco'), 7000);
+  });
 };
 
 const initEkipoProfiles = () => {
@@ -2160,6 +2113,7 @@ document.addEventListener('DOMContentLoaded', () => {
   optimizeInitialMediaLoading();
   initTeamCarousel();
   initEkipoProfiles();
+  initEquidadEgg();
   initExperienceAutoRotation();
   initNosotrosVideoSound();
   initMobileNav();
