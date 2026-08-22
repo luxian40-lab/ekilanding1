@@ -1114,6 +1114,8 @@ const initEkipoProfiles = () => {
     });
   });
 };
+
+const initTeamCarousel = () => {
   const slider = document.querySelector('.eq-slider');
   if(!slider) return;
   const track = slider.querySelector('.eq-track');
