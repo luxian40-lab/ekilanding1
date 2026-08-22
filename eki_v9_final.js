@@ -16,6 +16,7 @@ const PAGE_PATHS = {
   'programa-tome-las-riendas': '/programas/tome-las-riendas',
   noticias: '/noticias',
   'noticia-fao-agtech': '/noticias/fao-agtech-summit-2026',
+  'noticia-agrotech-mintic': '/noticias/agrotech-mintic-2026',
   'noticia-gofest-2026': '/noticias/gofest-2026-startup-showcase'
 };
 
@@ -40,8 +41,9 @@ const PAGE_TITLES = {
   'programa-agricultura-digital-ia': 'Agricultura digital e IA para el campo | Programa eki',
   'programa-tome-las-riendas': 'Tome las riendas de su dinero | Demo eki',
   noticias: 'Noticias — eki en el territorio',
-  'noticia-fao-agtech': 'eki invitada al AGTECH Summit FAO 2026 | Noticia',
-  'noticia-gofest-2026': 'eki en G FEST ’26 Startup Showcase | Noticia'
+  'noticia-fao-agtech': 'eki seleccionada en el Summit de Agricultura Digital de la FAO | Noticia',
+  'noticia-agrotech-mintic': 'Qué es Agrotech de MinTIC (no es la FAO) | eki',
+  'noticia-gofest-2026': 'eki en Go Fest 2026 Startup Showcase | Noticia'
 };
 const PAGE_DESCRIPTIONS = {
   home: DEFAULT_DESCRIPTION,
@@ -56,10 +58,11 @@ const PAGE_DESCRIPTIONS = {
   'programa-maquinaria-herramientas-agro': 'Use equipos y herramientas del agro con criterio: seguridad, mantenimiento y cuándo no vale la pena comprar.',
   'programa-comercializacion-ventas': 'Lleve su producto al mercado con más claridad: a quién vender, a qué precio, cómo cobrar y cómo cuidar el margen.',
   'programa-agricultura-digital-ia': 'Acerque datos, apps e IA al productor en lenguaje de finca: qué sí sirve en el celular y qué es humo.',
-  'programa-tome-las-riendas': 'Demo real de eki: ordene ingresos y gastos, decisiones simples de la semana y hábitos de plata por WhatsApp.',
+  'programa-tome-las-riendas': 'Programa corto de eki sobre la plata de la casa y del oficio. Demo pública: se aprende por WhatsApp, un paso a la vez, escribiendo listo para avanzar.',
   noticias: 'Noticias eki: reconocimientos, alianzas y lo que pasa cuando la formación llega al territorio.',
-  'noticia-fao-agtech': 'eki fue invitada y seleccionada en el AGTECH Summit FAO 2026 por su solución de agentes de IA y microaprendizaje por WhatsApp.',
-  'noticia-gofest-2026': 'eki fue seleccionada para el Startup Showcase de G FEST ’26 en Venture Valley, piso 4, Ágora Bogotá.'
+  'noticia-fao-agtech': 'eki fue seleccionada por la FAO para un piloto de agricultura digital: agentes de IA y microaprendizaje por WhatsApp. No es el programa Agrotech de MinTIC.',
+  'noticia-agrotech-mintic': 'Agrotech es el programa del MinTIC de transformación digital del agro: herramientas, satélite y formación en 14 departamentos. Distinto de los pilotos de la FAO.',
+  'noticia-gofest-2026': 'eki fue seleccionada para el Startup Showcase de Go Fest 2026 en Venture Valley, piso 4, Ágora Bogotá.'
 };
 
 const SITE_ORIGIN = 'https://eki.com.co';

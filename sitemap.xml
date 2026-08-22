@@ -13,6 +13,7 @@
   <url><loc>https://eki.com.co/noticias</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://eki.com.co/noticias/gofest-2026-startup-showcase</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://eki.com.co/noticias/fao-agtech-summit-2026</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://eki.com.co/noticias/agrotech-mintic-2026</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://eki.com.co/contacto</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://eki.com.co/demo</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://eki.com.co/habeas-data</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
