@@ -15,7 +15,8 @@ const PAGE_PATHS = {
   'programa-agricultura-digital-ia': '/programas/agricultura-digital-ia',
   'programa-tome-las-riendas': '/programas/tome-las-riendas',
   noticias: '/noticias',
-  'noticia-fao-agtech': '/noticias/fao-agtech-summit-2026'
+  'noticia-fao-agtech': '/noticias/fao-agtech-summit-2026',
+  'noticia-gofest-2026': '/noticias/gofest-2026-startup-showcase'
 };
 
 const PATH_TO_PAGE = Object.fromEntries(
@@ -39,7 +40,8 @@ const PAGE_TITLES = {
   'programa-agricultura-digital-ia': 'Agricultura digital e IA para el campo | Programa eki',
   'programa-tome-las-riendas': 'Tome las riendas de su dinero | Demo eki',
   noticias: 'Noticias — eki en el territorio',
-  'noticia-fao-agtech': 'eki en el AGTECH Summit FAO 2026 | Noticia'
+  'noticia-fao-agtech': 'eki invitada al AGTECH Summit FAO 2026 | Noticia',
+  'noticia-gofest-2026': 'eki en G FEST ’26 Startup Showcase | Noticia'
 };
 const PAGE_DESCRIPTIONS = {
   home: DEFAULT_DESCRIPTION,
@@ -56,7 +58,8 @@ const PAGE_DESCRIPTIONS = {
   'programa-agricultura-digital-ia': 'Acerque datos, apps e IA al productor en lenguaje de finca: qué sí sirve en el celular y qué es humo.',
   'programa-tome-las-riendas': 'Demo real de eki: ordene ingresos y gastos, decisiones simples de la semana y hábitos de plata por WhatsApp.',
   noticias: 'Noticias eki: reconocimientos, alianzas y lo que pasa cuando la formación llega al territorio.',
-  'noticia-fao-agtech': 'eki fue seleccionada en el AGTECH Summit FAO 2026 por su solución de agentes de IA y microaprendizaje por WhatsApp.'
+  'noticia-fao-agtech': 'eki fue invitada y seleccionada en el AGTECH Summit FAO 2026 por su solución de agentes de IA y microaprendizaje por WhatsApp.',
+  'noticia-gofest-2026': 'eki fue seleccionada para el Startup Showcase de G FEST ’26 en Venture Valley, piso 4, Ágora Bogotá.'
 };
 
 const SITE_ORIGIN = 'https://eki.com.co';
