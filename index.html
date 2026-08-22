@@ -32,8 +32,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="/assets/imageneki.jpg" fetchpriority="high">
-<link rel="stylesheet" href="/css/main.css?v=20260821i">
-<link rel="stylesheet" href="/css/mobile-enhancements.css?v=20260821i">
+<link rel="stylesheet" href="/css/main.css?v=20260821l">
+<link rel="stylesheet" href="/css/mobile-enhancements.css?v=20260821l">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -124,6 +124,24 @@
 <div class="mo" id="mVideo" role="dialog" aria-modal="true" aria-label="Video de experiencia"><div class="mod"><div class="mvid"><video id="mVideoPlayer" controls preload="metadata" playsinline poster="experiencias/fotos/experiencia1.jpg"><source id="mVideoSource" src="" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div><div class="mhd"><div><div class="mlb">Video de experiencia</div><h3 id="mVideoTitle">Video desde el territorio</h3></div><button class="mcl" type="button" data-close="mVideo" aria-label="Cerrar modal">X</button></div><div class="mfb"><button class="mbp" type="button" data-close="mVideo">Cerrar video</button></div></div></div>
 
 <div class="mo" id="mR" role="dialog" aria-modal="true" aria-label="Galería de recuerdos"><div class="mod modal-large"><div class="mhd"><div><div class="mlb" id="mRlabel">Nuestros recuerdos</div><h3 id="mRtitle">Galería de fotos</h3></div><button class="mcl" type="button" data-close="mR" aria-label="Cerrar modal">X</button></div><div class="mbd modal-image-wrap"><img id="mRimg" src="experiencias/fotos/Anuc.jpeg" alt="Recuerdo eki" class="modal-image"></div></div></div>
+
+<div class="mo" id="mEkipo" role="dialog" aria-modal="true" aria-label="Perfil del ekipo">
+  <div class="mod ekipo-mod">
+    <div class="mhd">
+      <div>
+        <div class="mlb">ekipo</div>
+        <h3 id="mEkipoName">Julian Ramirez</h3>
+      </div>
+      <button class="mcl" type="button" data-close="mEkipo" aria-label="Cerrar modal">X</button>
+    </div>
+    <div class="mbd ekipo-bio">
+      <img id="mEkipoImg" src="ekipo/julian.jpeg" alt="Julian Ramirez">
+      <p class="ekipo-role" id="mEkipoRole">CTO — Tecnología y sistemas</p>
+      <p id="mEkipoText"></p>
+    </div>
+    <div class="mfb"><button class="mbs" type="button" data-close="mEkipo">Cerrar</button></div>
+  </div>
+</div>
 
 <div class="mo" id="m1" role="dialog" aria-modal="true" aria-label="Solución 01: WhatsApp + Agentes de IA"><div class="mod"><div class="mvid yt"><video controls preload="metadata" playsinline poster="assets/miniatura-whatsapp.svg"><source src="experiencias/videos/Videoekiwhatsapp.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div><div class="mhd"><div><div class="mlb">Solución 01</div><h3>WhatsApp + Agentes de IA</h3></div><button class="mcl" type="button" data-close="m1" aria-label="Cerrar modal">X</button></div><div class="mbd"><div class="mst"><div class="ms"><div class="msn">92%</div><div class="msl">Reducción costos</div></div><div class="ms"><div class="msn">63%</div><div class="msl">Tasa culminación</div></div><div class="ms"><div class="msn">24/7</div><div class="msl">Disponibilidad IA</div></div></div><div class="mbls"><div class="mbl"><div class="mbd2"></div><span>Microcápsulas diseñadas para contextos rurales, desde el celular en cualquier momento</span></div><div class="mbl"><div class="mbd2"></div><span>Agentes de IA que responden, explican y acompañan el aprendizaje en tiempo real</span></div><div class="mbl"><div class="mbd2"></div><span>Gamificación, certificaciones e insignias digitales al completar los programas</span></div></div><div class="mpls"><span class="pi">Microcápsulas</span><span class="pi">Agentes IA</span><span class="pi">Gamificación</span><span class="pi">Certificados</span></div></div><div class="mfb"><button class="mbp" type="button" data-close="m1" data-modal="mChat">Solicitar demo</button><button class="mbs" type="button" data-close="m1">Cerrar</button></div></div></div>
 
@@ -422,7 +440,11 @@
           <div class="eqc"><div class="eqav"><img src="ekipo/rosmery.jpeg" alt="Rosemery Carrillo" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">RC</span></div><div class="eqnm">Rosemery Carrillo</div><div class="eqrl">Experiencia en finanzas</div></div>
         </div>
         <div class="eq-slide">
-          <div class="eqc"><div class="eqav"><img src="ekipo/julian.jpeg" alt="Julian Ramirez" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">JR</span></div><div class="eqnm">Julian Ramirez</div><div class="eqrl">CTO — Tecnología y sistemas</div></div>
+          <div class="eqc" data-ekipo="julian" role="button" tabindex="0" aria-label="Ver perfil de Julian Ramirez, CTO">
+            <div class="eqav"><img src="ekipo/julian.jpeg" alt="Julian Ramirez" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">JR</span></div>
+            <div class="eqnm">Julian Ramirez</div>
+            <div class="eqrl">CTO — Tecnología y sistemas</div>
+          </div>
           <div class="eqc"><div class="eqav"><img src="ekipo/luisa.jpeg" alt="Luisa Salazar" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">LS</span></div><div class="eqnm">Luisa Salazar</div><div class="eqrl">Gestión Comercial y administrativa</div></div>
         </div>
         <div class="eq-slide">
@@ -1037,6 +1059,6 @@
   <div class="fbt"><p>2025 Smart Skills Factory SAS — eki. Educación con equidad para la ruralidad. www.eki.com.co</p><div class="footer-policy-links"><a href="/habeas-data">Política de Privacidad</a><a href="/habeas-data">Habeas Data</a></div></div>
 </footer>
 
-<script type="module" src="/js/main.js?v=20260821k"></script>
+<script type="module" src="/js/main.js?v=20260821l"></script>
 </body>
 </html>

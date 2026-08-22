@@ -285,7 +285,18 @@ h2 em{font-style:normal;color:var(--p2);}
   .eq-slider{padding:0 18px;}
   .eq-nav{display:none;}
 }
-.eqc-placeholder .eqav{background:linear-gradient(135deg, rgba(154,108,172,.16), rgba(231,221,244,.9));color:var(--p);}
+.eqc[data-ekipo]{cursor:pointer;}
+.ekipo-mod{max-width:440px;}
+.ekipo-bio{text-align:center;padding:8px 8px 4px;}
+.ekipo-bio img{width:140px;height:140px;border-radius:50%;object-fit:cover;object-position:50% 24%;margin:0 auto 14px;display:block;border:3px solid rgba(212,175,55,.75);box-shadow:0 0 0 6px rgba(154,108,172,.18),0 12px 28px rgba(42,18,64,.16);}
+.ekipo-role{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--p);margin-bottom:10px;}
+.ekipo-bio p#mEkipoText{font-size:15px;line-height:1.7;color:#3a2a48;margin:0;}
+.ekipo-mod.ekipo-glory{animation:ekipoGlory .9s ease;}
+@keyframes ekipoGlory{
+  0%{box-shadow:0 0 0 0 rgba(212,175,55,.7);}
+  40%{box-shadow:0 0 40px 8px rgba(212,175,55,.45);}
+  100%{box-shadow:0 18px 50px rgba(42,18,64,.12);}
+}
 .eqc-placeholder .eqav span{font-size:24px;font-weight:900;}
 .eqc-placeholder .eqnm{color:var(--p2);}
 .eqc-placeholder .eqrl{color:var(--m);}

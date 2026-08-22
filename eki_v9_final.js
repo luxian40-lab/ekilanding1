@@ -1022,7 +1022,98 @@ window.addEventListener('popstate', () => {
   else setActivePage('home');
 });
 
-const initTeamCarousel = () => {
+const EKIPO_PROFILES = {
+  julian: {
+    name: 'Julian Ramirez',
+    role: 'CTO — Tecnología y sistemas',
+    image: 'ekipo/julian.jpeg',
+    text: 'Experto en IA, Python, CSS, HTML y Java. Manejo de frameworks FastAPI, Django y Flask, y creación de agentes de inteligencia artificial.',
+    fanfare: true
+  }
+};
+
+let gloryAudioCtx = null;
+
+const playGloriousFanfare = () => {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if(!AudioCtx) return;
+    if(!gloryAudioCtx) gloryAudioCtx = new AudioCtx();
+    const ctx = gloryAudioCtx;
+    if(ctx.state === 'suspended') ctx.resume();
+
+    const now = ctx.currentTime;
+    const master = ctx.createGain();
+    master.gain.setValueAtTime(0.0001, now);
+    master.gain.exponentialRampToValueAtTime(0.22, now + 0.04);
+    master.gain.exponentialRampToValueAtTime(0.12, now + 0.9);
+    master.gain.exponentialRampToValueAtTime(0.0001, now + 2.4);
+    master.connect(ctx.destination);
+
+    const playTone = (freq, start, dur, type = 'sawtooth') => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, now + start);
+      gain.gain.setValueAtTime(0.0001, now + start);
+      gain.gain.exponentialRampToValueAtTime(0.35, now + start + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + start + dur);
+      osc.connect(gain);
+      gain.connect(master);
+      osc.start(now + start);
+      osc.stop(now + start + dur + 0.05);
+    };
+
+    // Fanfarria: quintas y octava, estilo “entrada gloriosa”
+    [[392, 0, 0.28], [523.25, 0.12, 0.32], [659.25, 0.26, 0.36], [783.99, 0.42, 0.5], [1046.5, 0.62, 0.9]].forEach(([f, s, d]) => {
+      playTone(f, s, d, 'sawtooth');
+      playTone(f / 2, s, d + 0.1, 'triangle');
+    });
+    playTone(1318.5, 1.15, 0.7, 'triangle');
+  } catch (error) {
+    /* autoplay policies: si el navegador bloquea, igual se ve el perfil */
+  }
+};
+
+const openEkipoProfile = key => {
+  const profile = EKIPO_PROFILES[key];
+  if(!profile) return;
+  const nameEl = document.getElementById('mEkipoName');
+  const roleEl = document.getElementById('mEkipoRole');
+  const textEl = document.getElementById('mEkipoText');
+  const imgEl = document.getElementById('mEkipoImg');
+  if(nameEl) nameEl.textContent = profile.name;
+  if(roleEl) roleEl.textContent = profile.role;
+  if(textEl) textEl.textContent = profile.text;
+  if(imgEl){
+    imgEl.src = profile.image;
+    imgEl.alt = profile.name;
+  }
+  openModal('mEkipo');
+  const box = document.querySelector('#mEkipo .ekipo-mod');
+  if(box){
+    box.classList.remove('ekipo-glory');
+    void box.offsetWidth;
+    box.classList.add('ekipo-glory');
+  }
+  if(profile.fanfare) playGloriousFanfare();
+};
+
+const initEkipoProfiles = () => {
+  document.querySelectorAll('[data-ekipo]').forEach(card => {
+    const open = () => openEkipoProfile(card.getAttribute('data-ekipo'));
+    card.addEventListener('click', event => {
+      event.preventDefault();
+      open();
+    });
+    card.addEventListener('keydown', event => {
+      if(event.key === 'Enter' || event.key === ' '){
+        event.preventDefault();
+        open();
+      }
+    });
+  });
+};
   const slider = document.querySelector('.eq-slider');
   if(!slider) return;
   const track = slider.querySelector('.eq-track');
@@ -1495,6 +1586,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   optimizeInitialMediaLoading();
   initTeamCarousel();
+  initEkipoProfiles();
   initExperienceAutoRotation();
   initNosotrosVideoSound();
   initMobileNav();
