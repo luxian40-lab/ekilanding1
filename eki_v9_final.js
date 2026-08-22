@@ -433,6 +433,10 @@ const getHablemosField = key => document.getElementById(`hablemos-${key}`);
 const setHablemosField = (key, value) => {
   const field = getHablemosField(key);
   if(field) field.value = value;
+  if(key === 'correo'){
+    const emailField = document.getElementById('hablemos-email');
+    if(emailField) emailField.value = value;
+  }
 };
 
 const pintarMensajeHablemos = (text, type = 'incoming', author = 'eki') => {
