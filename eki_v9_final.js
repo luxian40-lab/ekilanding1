@@ -612,9 +612,27 @@ const handleHablemosReply = async (message, source = 'input') => {
   await preguntarPasoHablemos(token, true);
 };
 
+const formOpenedAt = new Map();
+
+const markFormOpened = form => {
+  if(form && !formOpenedAt.has(form)) formOpenedAt.set(form, Date.now());
+};
+
+const isSpamLead = form => {
+  if(!form) return true;
+  const honey = form.querySelector('[name="_honey"]');
+  if(honey && String(honey.value || '').trim()) return true;
+  if(form.id === 'hablemos-form') return false;
+  const opened = formOpenedAt.get(form) || 0;
+  if(opened && Date.now() - opened < 2500) return true;
+  return false;
+};
+
 const submitHablemosForm = async () => {
   const form = document.getElementById('hablemos-form');
   if(!form) return false;
+  markFormOpened(form);
+  if(isSpamLead(form)) return true;
   const payload = new FormData(form);
 
   try {
@@ -631,6 +649,8 @@ const submitHablemosForm = async () => {
 
 const submitExternalForm = async form => {
   if(!form) return false;
+  markFormOpened(form);
+  if(isSpamLead(form)) return true;
   try {
     await fetch(form.action, {
       method: (form.method || 'POST').toUpperCase(),
@@ -648,6 +668,7 @@ const initAsyncLeadForms = () => {
   forms.forEach(form => {
     if(form.dataset.asyncBound === 'true') return;
     form.dataset.asyncBound = 'true';
+    markFormOpened(form);
 
     form.addEventListener('submit', async event => {
       event.preventDefault();
