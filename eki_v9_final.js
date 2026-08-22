@@ -1204,8 +1204,8 @@ const noteJulianPhotoClick = () => {
   window.clearTimeout(julianPhotoClickTimer);
   julianPhotoClickTimer = window.setTimeout(() => {
     julianPhotoClicks = 0;
-  }, 14000);
-  if(julianPhotoClicks < 8) return false;
+  }, 20000);
+  if(julianPhotoClicks < 12) return false;
   julianPhotoClicks = 0;
   startJulianSnake();
   return true;
@@ -1467,8 +1467,8 @@ const noteStevenClick = () => {
   window.clearTimeout(stevenClickTimer);
   stevenClickTimer = window.setTimeout(() => {
     stevenClicks = 0;
-  }, 16000);
-  if(stevenClicks <= 10) return false;
+  }, 20000);
+  if(stevenClicks < 12) return false;
   stevenClicks = 0;
   startStevenTopo();
   return true;
