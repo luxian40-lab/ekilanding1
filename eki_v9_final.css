@@ -309,7 +309,12 @@ body.snake-open{overflow:hidden;}
 .eki-snake-close{background:#9A6CAC;color:#fff;border:0;padding:8px 12px;cursor:pointer;font-weight:800;}
 #ekiSnakeCanvas{display:block;width:100%;height:auto;background:#1b0f28;}
 .eki-snake-msg{margin:10px 0 0;text-align:center;color:#F2EBF7;font-weight:700;}
-.eqc-placeholder .eqav span{font-size:24px;font-weight:900;}
+.eqav-letter span{font-size:28px;font-weight:900;letter-spacing:.06em;color:var(--p);}
+.ekipo-initials{width:140px;height:140px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;letter-spacing:.08em;color:var(--p);background:linear-gradient(160deg,#E8DAEF 0%,#D7E7F9 100%);border:3px solid rgba(154,108,172,.45);cursor:pointer;}
+.ekipo-initials[hidden]{display:none;}
+#eki-inbox{display:none;position:fixed;inset:0;z-index:100001;background:rgba(18,8,28,.82);align-items:center;justify-content:center;padding:16px;}
+#eki-inbox.open{display:flex;}
+#ekiInboxCanvas{display:block;width:100%;height:auto;background:#1b0f28;touch-action:none;}
 .eqc-placeholder .eqnm{color:var(--p2);}
 .eqc-placeholder .eqrl{color:var(--m);}
 .eqc{flex:0 1 calc(25% - 11px);min-width:220px;background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(242,235,247,.78));border:1.5px solid rgba(154,108,172,.28);padding:16px 14px;transition:border-color .2s,transform .2s,box-shadow .2s;position:relative;overflow:hidden;isolation:isolate;text-align:center;}
