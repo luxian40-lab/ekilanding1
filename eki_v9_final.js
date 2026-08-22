@@ -1076,8 +1076,6 @@ const playGloriousFanfare = () => {
 };
 
 const burstCelebrationConfetti = () => {
-  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduceMotion) return;
   document.getElementById('eki-confetti')?.remove();
   const canvas = document.createElement('canvas');
   canvas.id = 'eki-confetti';
@@ -1171,6 +1169,247 @@ const openEkipoProfile = key => {
   }
 };
 
+let julianPhotoClicks = 0;
+let julianPhotoClickTimer = 0;
+let julianSnakeStop = null;
+
+const noteJulianPhotoClick = () => {
+  julianPhotoClicks += 1;
+  window.clearTimeout(julianPhotoClickTimer);
+  julianPhotoClickTimer = window.setTimeout(() => {
+    julianPhotoClicks = 0;
+  }, 4500);
+  if(julianPhotoClicks < 8) return false;
+  julianPhotoClicks = 0;
+  startJulianSnake();
+  return true;
+};
+
+const startJulianSnake = () => {
+  if(document.getElementById('eki-snake')?.classList.contains('open')) return;
+  closeModal('mEkipo');
+  document.getElementById('eki-confetti')?.remove();
+
+  let overlay = document.getElementById('eki-snake');
+  if(!overlay){
+    overlay = document.createElement('div');
+    overlay.id = 'eki-snake';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-label', 'Culebra de Julian');
+    overlay.innerHTML = `
+      <div class="eki-snake-panel">
+        <div class="eki-snake-bar">
+          <div>
+            <strong>Culebra CTO</strong>
+            <span>flechas o WASD · toca para girar</span>
+          </div>
+          <div class="eki-snake-score">Puntos: <span id="ekiSnakeScore">0</span></div>
+          <button type="button" class="eki-snake-close" id="ekiSnakeClose">Cerrar</button>
+        </div>
+        <canvas id="ekiSnakeCanvas"></canvas>
+        <p class="eki-snake-msg" id="ekiSnakeMsg" hidden></p>
+      </div>`;
+    document.body.appendChild(overlay);
+  }
+
+  const canvas = document.getElementById('ekiSnakeCanvas');
+  const scoreEl = document.getElementById('ekiSnakeScore');
+  const msgEl = document.getElementById('ekiSnakeMsg');
+  const closeBtn = document.getElementById('ekiSnakeClose');
+  if(!canvas || !scoreEl) return;
+  const ctx = canvas.getContext('2d');
+  if(!ctx) return;
+
+  overlay.classList.add('open');
+  overlay.hidden = false;
+  document.body.classList.add('snake-open');
+
+  const cols = 18;
+  const rows = 16;
+  const fit = () => {
+    const maxW = Math.min(window.innerWidth - 36, 560);
+    const cell = Math.floor(maxW / cols);
+    canvas.width = cell * cols;
+    canvas.height = cell * rows;
+    return cell;
+  };
+  let cell = fit();
+
+  const headImg = new Image();
+  headImg.src = 'ekipo/julian.jpeg';
+
+  let dir = { x: 1, y: 0 };
+  let pending = { x: 1, y: 0 };
+  let snake = [{ x: 4, y: 8 }, { x: 3, y: 8 }, { x: 2, y: 8 }];
+  let food = { x: 12, y: 8 };
+  let score = 0;
+  let alive = true;
+  let tickTimer = 0;
+
+  const placeFood = () => {
+    for(let i = 0; i < 80; i += 1){
+      const next = { x: Math.floor(Math.random() * cols), y: Math.floor(Math.random() * rows) };
+      if(!snake.some(p => p.x === next.x && p.y === next.y)){
+        food = next;
+        return;
+      }
+    }
+  };
+
+  const setDir = (x, y) => {
+    if(!alive) return;
+    if(dir.x + x === 0 && dir.y + y === 0) return;
+    pending = { x, y };
+  };
+
+  const draw = () => {
+    ctx.fillStyle = '#1b0f28';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    for(let y = 0; y < rows; y += 1){
+      for(let x = 0; x < cols; x += 1){
+        if((x + y) % 2 === 0){
+          ctx.fillStyle = 'rgba(154,108,172,.12)';
+          ctx.fillRect(x * cell, y * cell, cell, cell);
+        }
+      }
+    }
+    ctx.fillStyle = '#D4AF37';
+    ctx.beginPath();
+    ctx.arc(food.x * cell + cell / 2, food.y * cell + cell / 2, Math.max(5, cell * 0.28), 0, Math.PI * 2);
+    ctx.fill();
+    snake.forEach((p, i) => {
+      const px = p.x * cell;
+      const py = p.y * cell;
+      if(i === 0 && headImg.complete && headImg.naturalWidth){
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(px + cell / 2, py + cell / 2, cell / 2 - 1, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.drawImage(headImg, px, py, cell, cell);
+        ctx.restore();
+        ctx.strokeStyle = '#D4AF37';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(px + cell / 2, py + cell / 2, cell / 2 - 1, 0, Math.PI * 2);
+        ctx.stroke();
+        return;
+      }
+      ctx.fillStyle = i % 2 ? '#9A6CAC' : '#25D366';
+      ctx.fillRect(px + 2, py + 2, cell - 4, cell - 4);
+    });
+  };
+
+  const step = () => {
+    if(!alive) return;
+    dir = pending;
+    const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+    if(head.x < 0 || head.y < 0 || head.x >= cols || head.y >= rows || snake.some(p => p.x === head.x && p.y === head.y)){
+      alive = false;
+      if(msgEl){
+        msgEl.hidden = false;
+        msgEl.textContent = score >= 8
+          ? `Julian se comió el backlog. ${score} pts. Espacio para otra ronda.`
+          : `Game over — ${score} pts. Espacio para reintentar.`;
+      }
+      return;
+    }
+    snake.unshift(head);
+    if(head.x === food.x && head.y === food.y){
+      score += 1;
+      scoreEl.textContent = String(score);
+      placeFood();
+    } else {
+      snake.pop();
+    }
+    draw();
+  };
+
+  const restart = () => {
+    dir = { x: 1, y: 0 };
+    pending = { x: 1, y: 0 };
+    snake = [{ x: 4, y: 8 }, { x: 3, y: 8 }, { x: 2, y: 8 }];
+    score = 0;
+    scoreEl.textContent = '0';
+    alive = true;
+    if(msgEl){
+      msgEl.hidden = true;
+      msgEl.textContent = '';
+    }
+    placeFood();
+    draw();
+  };
+
+  const onKey = event => {
+    const key = event.key;
+    if(key === 'Escape'){
+      event.preventDefault();
+      stop();
+      return;
+    }
+    if(!overlay.classList.contains('open')) return;
+    const map = {
+      ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0],
+      w: [0, -1], a: [-1, 0], s: [0, 1], d: [1, 0],
+      W: [0, -1], A: [-1, 0], S: [0, 1], D: [1, 0]
+    };
+    if(key === ' ' && !alive){
+      event.preventDefault();
+      restart();
+      return;
+    }
+    if(map[key]){
+      event.preventDefault();
+      setDir(map[key][0], map[key][1]);
+    }
+  };
+
+  let touchStart = null;
+  const onTouchStart = event => {
+    const t = event.changedTouches[0];
+    if(!t) return;
+    touchStart = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = event => {
+    const t = event.changedTouches[0];
+    if(!t || !touchStart) return;
+    const dx = t.clientX - touchStart.x;
+    const dy = t.clientY - touchStart.y;
+    if(Math.abs(dx) + Math.abs(dy) < 24){
+      if(!alive) restart();
+      return;
+    }
+    if(Math.abs(dx) > Math.abs(dy)) setDir(dx > 0 ? 1 : -1, 0);
+    else setDir(0, dy > 0 ? 1 : -1);
+  };
+
+  const onResize = () => {
+    cell = fit();
+    draw();
+  };
+
+  const stop = () => {
+    alive = false;
+    window.clearInterval(tickTimer);
+    window.removeEventListener('keydown', onKey, true);
+    window.removeEventListener('resize', onResize);
+    overlay.removeEventListener('touchstart', onTouchStart);
+    overlay.removeEventListener('touchend', onTouchEnd);
+    overlay.classList.remove('open');
+    overlay.hidden = true;
+    document.body.classList.remove('snake-open');
+    julianSnakeStop = null;
+  };
+
+  julianSnakeStop = stop;
+  closeBtn?.addEventListener('click', stop, { once: true });
+  window.addEventListener('keydown', onKey, true);
+  window.addEventListener('resize', onResize);
+  overlay.addEventListener('touchstart', onTouchStart, { passive: true });
+  overlay.addEventListener('touchend', onTouchEnd, { passive: true });
+  restart();
+  tickTimer = window.setInterval(step, 120);
+};
+
 const initEkipoProfiles = () => {
   document.querySelectorAll('[data-ekipo]').forEach(card => {
     const open = () => openEkipoProfile(card.getAttribute('data-ekipo'));
@@ -1184,6 +1423,10 @@ const initEkipoProfiles = () => {
         open();
       }
     });
+  });
+  document.getElementById('mEkipoImg')?.addEventListener('click', event => {
+    event.stopPropagation();
+    noteJulianPhotoClick();
   });
 };
 
