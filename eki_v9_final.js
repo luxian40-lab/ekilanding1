@@ -536,7 +536,7 @@ const finalizarHablemosFlujo = async token => {
   if(token !== hablemosExecutionToken) return;
 
   if(sent){
-    showToast('Solicitud enviada. Gracias por escribirnos.', 'success');
+    showToast('Solicitud enviada. Le escribimos al correo; también puede agendar una reunión.', 'success');
   } else {
     showToast('No pudimos confirmar el envio. Revisaremos tu solicitud.', 'warning');
   }
