@@ -1075,6 +1075,75 @@ const playGloriousFanfare = () => {
   }
 };
 
+const burstCelebrationConfetti = () => {
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion) return;
+  document.getElementById('eki-confetti')?.remove();
+  const canvas = document.createElement('canvas');
+  canvas.id = 'eki-confetti';
+  canvas.setAttribute('aria-hidden', 'true');
+  canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:100000;pointer-events:none;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  if(!ctx){
+    canvas.remove();
+    return;
+  }
+  const resize = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  };
+  resize();
+  const colors = ['#9A6CAC', '#3C7BBF', '#D4AF37', '#25D366', '#F2EBF7', '#7A4E8E'];
+  const pieces = [];
+  const count = Math.min(140, Math.floor(window.innerWidth / 8));
+  for(let i = 0; i < count; i += 1){
+    const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+    const speed = 8 + Math.random() * 12;
+    pieces.push({
+      x: canvas.width / 2,
+      y: canvas.height * 0.38,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 8,
+      w: 6 + Math.random() * 7,
+      h: 8 + Math.random() * 10,
+      rot: Math.random() * Math.PI,
+      vr: (Math.random() - 0.5) * 0.4,
+      color: colors[i % colors.length],
+      life: 1
+    });
+  }
+  let frame = 0;
+  const tick = () => {
+    frame += 1;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    pieces.forEach(p => {
+      p.vy += 0.28;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= 0.99;
+      p.rot += p.vr;
+      p.life -= 0.008;
+      if(p.life <= 0 || p.y > canvas.height + 40) return;
+      alive = true;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    });
+    if(alive && frame < 220){
+      requestAnimationFrame(tick);
+      return;
+    }
+    canvas.remove();
+  };
+  requestAnimationFrame(tick);
+};
+
 const openEkipoProfile = key => {
   const profile = EKIPO_PROFILES[key];
   if(!profile) return;
@@ -1096,7 +1165,10 @@ const openEkipoProfile = key => {
     void box.offsetWidth;
     box.classList.add('ekipo-glory');
   }
-  if(profile.fanfare) playGloriousFanfare();
+  if(profile.fanfare){
+    playGloriousFanfare();
+    burstCelebrationConfetti();
+  }
 };
 
 const initEkipoProfiles = () => {
