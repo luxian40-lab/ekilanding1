@@ -31,22 +31,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/imageneki.jpg" fetchpriority="high">
-<link rel="stylesheet" href="css/main.css?v=20260721d">
-<link rel="stylesheet" href="css/mobile-enhancements.css?v=20260721d">
+<link rel="stylesheet" href="css/main.css?v=20260821a">
+<link rel="stylesheet" href="css/mobile-enhancements.css?v=20260821a">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
+      "@type": ["Organization", "EducationalOrganization", "LocalBusiness"],
       "@id": "https://eki.com.co/#organization",
       "name": "eki",
+      "legalName": "Smart Skills Factory SAS",
       "alternateName": "eki - Educación con equidad",
       "url": "https://eki.com.co/",
       "logo": "https://eki.com.co/favicon-512.png",
+      "image": "https://eki.com.co/assets/og-eki.jpg",
       "description": "eki impulsa educación rural en Colombia con IA, WhatsApp, formación territorial y plataforma LXP.",
       "email": "comunidad.educativa@eki.com.co",
-      "areaServed": "CO",
+      "telephone": "+57-310-3844274",
+      "areaServed": {"@type": "Country", "name": "Colombia"},
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CO"
+      },
       "sameAs": [
         "https://www.instagram.com/eki.educa/",
         "https://www.linkedin.com/company/eki.educa/"
@@ -57,8 +64,47 @@
       "@id": "https://eki.com.co/#website",
       "url": "https://eki.com.co/",
       "name": "eki",
-      "publisher": { "@id": "https://eki.com.co/#organization" },
-      "inLanguage": "es-CO"
+      "inLanguage": "es-CO",
+      "publisher": { "@id": "https://eki.com.co/#organization" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://eki.com.co/#servicio-formacion-whatsapp",
+      "name": "Formación rural por WhatsApp con agentes de IA",
+      "provider": { "@id": "https://eki.com.co/#organization" },
+      "areaServed": "CO",
+      "serviceType": "Educación rural y capacitación productiva",
+      "description": "Microcápsulas educativas por WhatsApp, tutores de IA 24/7, programas a medida y plataforma LXP con métricas de impacto."
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://eki.com.co/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo se estudia en eki?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por WhatsApp. Llegan lecciones cortas (microcápsulas) en video, audio o texto. Usted las ve cuando pueda, las aplica en la finca o en el oficio y avanza marcando listo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito un computador?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. El camino principal es el celular. Si hay señal y WhatsApp, puede estudiar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo probar eki hoy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. La demo que sí se puede probar hoy es Tome las riendas de su dinero. Los otros programas son vitrina de catálogo."
+          }
+        }
+      ]
     }
   ]
 }
@@ -162,13 +208,14 @@
 <nav role="navigation" aria-label="Menú principal">
   <a class="lt" href="/" ><img class="lt-logo" src="assets/logo-eki-removebg-preview.png" alt="eki Educación con equidad" loading="eager" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='inline';"><span class="lt-fallback">eki.</span></a>
   <ul>
-    <li><a href="#page-nosotros"  id="n-nosotros">Nosotros</a></li>
-    <li><a href="#page-soluciones"  id="n-soluciones">Soluciones</a></li>
-    <li><a href="#page-experiencias"  id="n-experiencias">Experiencias</a></li>
+    <li><a href="/nosotros" id="n-nosotros">Nosotros</a></li>
+    <li><a href="/soluciones" id="n-soluciones">Soluciones</a></li>
+    <li><a href="/programas" id="n-programas">Programas</a></li>
+    <li><a href="/experiencias" id="n-experiencias">Experiencias</a></li>
   </ul>
   <div class="nr">
     <a class="bd" href="#" data-modal="mChat">Demo</a>
-    <a class="bs" href="#page-contacto"  id="n-contacto">Contáctanos</a>
+    <a class="bs" href="/contacto" id="n-contacto">Contáctanos</a>
   </div>
   <button class="nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNavPanel">
     <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
@@ -184,10 +231,11 @@
     </div>
     <nav class="mobile-nav-links" aria-label="Navegación móvil">
       <a href="/" data-page="home">Inicio</a>
-      <a href="#page-nosotros" data-page="nosotros">Nosotros</a>
-      <a href="#page-soluciones" data-page="soluciones">Soluciones</a>
-      <a href="#page-experiencias" data-page="experiencias">Experiencias</a>
-      <a href="#page-contacto" data-page="contacto">Contacto</a>
+      <a href="/nosotros" data-page="nosotros">Nosotros</a>
+      <a href="/soluciones" data-page="soluciones">Soluciones</a>
+      <a href="/programas" data-page="programas">Programas</a>
+      <a href="/experiencias" data-page="experiencias">Experiencias</a>
+      <a href="/contacto" data-page="contacto">Contacto</a>
     </nav>
     <div class="mobile-nav-actions">
       <a class="bd" href="#" data-modal="mChat">Demo</a>
@@ -200,9 +248,9 @@
 <!-- HOME -->
 <div class="page active" id="page-home">
   <section class="hero">
-    <div class="hl"><h1>Educación con<br><em>equidad</em></h1><p class="heq"><strong>Impulsamos el desarrollo rural a través de educación.<br>Y tecnologías impulsadas por IA.</strong></p></div>
+    <div class="hl"><h1>Educación rural con<br><em>equidad</em></h1><p class="heq"><strong>Formación práctica por WhatsApp para el agro y las organizaciones.<br>Tecnología con IA al servicio de las personas en territorio.</strong></p></div>
   </section>
-  <div class="stats"><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="4200" data-count-prefix="+">+4.200</div><div class="sl">Personas impactadas</div></div><div class="si-icon si-icon-large"><img src="assets/personas.png" alt="Personas"></div></div><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="6" data-count-prefix="+">+6</div><div class="sl">Años de experiencia</div></div><div class="si-icon si-icon-large"><img src="assets/experiencias.png" alt="Experiencias"></div></div><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="8" data-count-prefix="+">+8</div><div class="sl">Alianzas activas</div></div><div class="si-icon si-icon-large si-icon-aliados"><img src="assets/aliados.png" alt="Aliados"></div></div><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="10" data-count-prefix="+">+10</div><div class="sl">Regiones Colombia</div></div><div class="si-icon si-icon-colombia"><img src="assets/colombia.png" alt="Colombia"></div></div></div>
+  <div class="stats"><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="4200" data-count-prefix="+">+4.200</div><div class="sl">Personas impactadas</div></div><div class="si-icon si-icon-large"><img src="assets/personas.png" alt="Personas impactadas por formación rural de eki"></div></div><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="6" data-count-prefix="+">+6</div><div class="sl">Años de experiencia</div></div><div class="si-icon si-icon-large"><img src="assets/experiencias.png" alt="Años de experiencia de eki en territorio"></div></div><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="8" data-count-prefix="+">+8</div><div class="sl">Alianzas activas</div></div><div class="si-icon si-icon-large si-icon-aliados"><img src="assets/aliados.png" alt="Aliados de eki en educación rural"></div></div><div class="si"><div class="si-text"><div class="sn js-count" data-count-target="10" data-count-prefix="+">+10</div><div class="sl">Regiones Colombia</div></div><div class="si-icon si-icon-colombia"><img src="assets/colombia.png" alt="Regiones de Colombia donde trabaja eki"></div></div></div>
 
   <section class="sec sec-transform">
     <div class="tg"><span class="ll"></span> Cómo lo hacemos</div>
@@ -243,7 +291,7 @@
             <span class="card-badge">Plataforma LXP</span>
           </div>
         </article>
-        <div class="exp-j exp-j-section2"><a href="#page-experiencias" >Leer más casos de éxito →</a></div>
+        <div class="exp-j exp-j-section2"><a href="/experiencias">Leer más casos de éxito →</a></div>
       </div>
       <div class="casos-hero-section section-3">
         <article class="caso-card card-3">
@@ -303,6 +351,30 @@
 
   <div class="lg-s"><div class="lg-l"><span class="ll"></span> Testimonios</div><div class="test-v"><div class="tv anim-in"><div class="tvh">Testimonio Cenipalma</div><div class="tvb"><div class="tv-copy"><p class="tvq">"Capacitarse es como actualizar el 'software' personal: te da herramientas para subir al siguiente nivel. Lo que más valoro es el enfoque humano y sensible; nos enseña a abordar las labores operativas desde la conciencia y la conexión con nuestros compañeros en el campo."</p><div class="tvn">Eidy Clavijo</div><div class="tvr">Directora Agronómica de Agropecuaria La Holanda · Alianza Cenipalma y eki</div></div><div class="tvp"><video controls preload="metadata" playsinline><source src="testimonioCenipalma.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div></div><div class="tv anim-in"><div class="tvh">Testimonio ANUC</div><div class="tvb"><div class="tv-copy"><p class="tvq">"Este aprendizaje fortalece nuestro sentido de pertenencia por la tierra. Poder conectarnos entre jóvenes de diferentes regiones nos permite compartir saberes y llevarnos esa 'semillita' de conocimiento para transformar y diseñar el futuro de nuestros propios territorios."</p><div class="tvn">Juan José Torres</div><div class="tvr">Joven Rural del Cauca / ANUC · Primer Encuentro Nacional de Jóvenes Campesinos</div></div><div class="tvp"><video controls preload="metadata" playsinline poster="experiencias/fotos/Anuc.jpeg"><source src="testimonioanuc.mp4#t=1.5" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div></div><div class="tv anim-in"><div class="tvh">Testimonio Néstor</div><div class="tvb"><div class="tv-copy"><p class="tvq">"Aprender por WhatsApp es fácil: recibo los módulos, veo los videos cuantas veces quiera y lo aplico de una vez en el campo."</p><div class="tvn">Néstor Buelvas</div><div class="tvr">Productor agrícola</div></div><div class="tvp"><video controls preload="metadata" playsinline><source src="experiencias/videos/testimonio1.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div></div></div></div>
 
+  <section class="sec">
+    <div class="tg"><span class="ll"></span> Programas</div>
+    <div class="tw"><h2>Formación que cabe en el <em>celular</em></h2><p class="hd">Lecciones cortas por WhatsApp. Usted avanza cuando marca <strong>listo</strong>. Esto es muestra de catálogo; la demo que sí se puede probar hoy es <a href="/programas/tome-las-riendas">Tome las riendas de su dinero</a>.</p></div>
+    <div class="prog-list" style="padding:0 8px 8px;">
+      <a class="prog-tile" href="/programas/emprendimiento-agro-rural"><img src="experiencias/fotos/empreexperiencia2.jpeg" alt="Personas rurales trabajando un negocio alrededor de lo que producen" loading="lazy" decoding="async"><div><span class="prog-badge">Vitrina</span><h3>Emprendimiento agro rural</h3><p>De producto en la finca a un negocio más ordenado.</p></div></a>
+      <a class="prog-tile" href="/programas/maquinaria-herramientas-agro"><img src="experiencias/fotos/experiencia1.jpg" alt="Trabajo de campo con herramientas y equipos agrícolas" loading="lazy" decoding="async"><div><span class="prog-badge">Vitrina</span><h3>Maquinaria y herramientas</h3><p>Uso con criterio, seguridad y mantenimiento básico.</p></div></a>
+      <a class="prog-tile" href="/programas/comercializacion-ventas"><img src="casosdeexito/cafe.jpg" alt="Comercialización de café y productos del campo" loading="lazy" decoding="async"><div><span class="prog-badge">Vitrina</span><h3>Comercialización y ventas</h3><p>A quién vender, a qué precio y cómo cuidar el margen.</p></div></a>
+      <a class="prog-tile" href="/programas/agricultura-digital-ia"><img src="experiencias/fotos/WhatsApp Image 2026-04-17 at 3.23.16 PM.jpeg" alt="Formación colectiva rural con apoyo digital" loading="lazy" decoding="async"><div><span class="prog-badge">Vitrina</span><h3>Agricultura digital e IA</h3><p>Qué sí sirve en el celular y qué es humo.</p></div></a>
+      <a class="prog-tile" href="/programas/tome-las-riendas"><img src="experiencias/fotos/Anuc.jpeg" alt="Productores rurales en un espacio de aprendizaje práctico" loading="lazy" decoding="async"><div><span class="prog-badge">Demo real</span><h3>Tome las riendas de su dinero</h3><p>La demo de eki que sí se puede probar hoy.</p></div></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="tg"><span class="ll"></span> Preguntas frecuentes</div>
+    <div class="tw"><h2>Cómo se estudia en <em>eki</em></h2></div>
+    <div class="faq-list">
+      <details open><summary>¿Cómo se estudia en eki?</summary><p>Por WhatsApp. Llegan lecciones cortas (microcápsulas) en video, audio o texto. Usted las ve cuando pueda, las aplica en la finca o en el oficio y avanza marcando <strong>listo</strong>.</p></details>
+      <details><summary>¿Necesito un computador?</summary><p>No. El camino principal es el celular. Si hay señal y WhatsApp, puede estudiar.</p></details>
+      <details><summary>¿eki vende maquinaria o un marketplace?</summary><p>No. Formamos criterio para producir, vender y decidir. No somos vitrina de equipos ni plataforma de logística nacional.</p></details>
+      <details><summary>¿La inteligencia artificial reemplaza al técnico o al agrónomo?</summary><p>No. La IA acompaña, explica y ayuda a ordenar preguntas. El criterio agronómico y las decisiones del territorio siguen siendo de las personas.</p></details>
+      <details><summary>¿Puedo probar eki hoy?</summary><p>Sí. La demo que sí se puede probar hoy es <a href="/programas/tome-las-riendas">Tome las riendas de su dinero</a>. Los otros programas son vitrina de catálogo: le contamos de qué se tratan y cómo se estudia.</p></details>
+    </div>
+  </section>
+
   <div class="cta"><div class="bq">¿Quieres ser parte de la revolución de la educación en la ruralidad con <span class="ek">ekidad?</span></div><div class="cbw"><a class="cw" href="#" data-modal="mChat">Demo</a></div></div>
 </section>
 </div>
@@ -312,7 +384,7 @@
   <section class="sec">
     <div class="nosotros-hero">
       <div class="tg"><span class="ll"></span> <strong>Nosotros</strong></div>
-      <div class="tw"><h2>¿Por qué <em>existimos?</em></h2><p class="hd">Sabemos que no todos partimos del mismo lugar. Nacimos para cerrar la brecha educativa en la ruralidad con herramientas reales.</p></div>
+      <div class="tw"><h1>¿Por qué <em>existimos?</em></h1><p class="hd">Sabemos que no todos partimos del mismo lugar. Nacimos para cerrar la brecha educativa en la ruralidad con herramientas reales.</p></div>
       <div class="nv"><div class="nv-cover"><video class="nv-video" controls muted preload="metadata" playsinline poster="experiencias/fotos/experiencia1.jpg" src="experiencias/videos/videoplayback-ios.mp4"><source src="experiencias/videos/videoplayback-ios.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div>
     </div>
     <div class="np">
@@ -371,7 +443,7 @@
   <section class="sec">
     <div class="sol-bg">
       <div class="tg"><span class="ll"></span> Soluciones</div>
-      <div class="tw"><h2>Cómo lo <em>hacemos</em></h2><p class="hd">Soluciones educativas para empresas, fundaciones, instituciones educativas y cooperación internacional.</p></div>
+      <div class="tw"><h1>Cómo lo <em>hacemos</em></h1><p class="hd">Soluciones educativas para empresas, fundaciones, instituciones educativas y cooperación internacional.</p></div>
     </div>
     <div class="tg" style="margin-bottom:16px;"><span class="ll"></span> A quiénes nos dirigimos</div>
     <div class="ar"><div class="ac"><div class="at2"><div class="atp">Sector privado</div><div class="att">Fundaciones y empresas</div></div><div class="ab"><p>Diseñamos programas de impacto social rural a la medida con medición rigurosa del retorno formativo.</p></div></div><div class="ac"><div class="at2"><div class="atp">Sector público</div><div class="att">Instituciones y sector público</div></div><div class="ab"><p>Capacitación docente, formación técnica y programas territoriales para comunidades rurales.</p></div></div><div class="ac"><div class="at2"><div class="atp">Internacional</div><div class="att">Cooperación internacional</div></div><div class="ab"><p>Alianzas globales para implementar soluciones educativas con impacto territorial medible.</p></div></div></div>
@@ -417,7 +489,7 @@
       <div class="sc" data-modal="m3"><div class="sh"><span class="st">Contenidos</span><span class="sn3">03</span></div><div class="sb"><h4>Generación de contenido rural</h4><p>Producción de contenido a la medida para tu escuela de formación interna, con expertos del sector.</p><div class="pills" style="margin-top:9px;padding-top:9px;border-top:1px solid var(--lt);"><span class="pi">A medida</span><span class="pi">Expertos</span><span class="pi">Curaduría</span></div><div class="sc-cta">Ver más →</div></div></div>
       <div class="sc" data-modal="m4"><div class="sh"><span class="st">Plataforma</span><span class="sn3">04</span></div><div class="sb"><h4>LXP + Métricas</h4><p>Gestión del conocimiento a través de indicadores de medición de impacto de la formación.</p><div class="pills" style="margin-top:9px;padding-top:9px;border-top:1px solid var(--lt);"><span class="pi">LXP</span><span class="pi">Métricas</span><span class="pi">IA</span></div><div class="sc-cta">Ver más →</div></div></div>
     </div>
-    <div style="text-align:center;"><a class="mbp" href="#page-contacto" data-page="contacto">Solicitar demo gratuito</a></div>
+    <div style="text-align:center;"><a class="mbp" href="/contacto" data-page="contacto">Solicitar demo gratuito</a></div>
   </section>
 </div>
 
@@ -425,7 +497,7 @@
 <div class="page" id="page-experiencias">
   <section class="sec">
     <div class="tg"><span class="ll"></span> Experiencias</div>
-    <div class="tw"><h2>Lo que <em>vivimos</em> en el campo</h2><p class="hd">Mostramos cómo eki acompaña procesos formativos rurales con tecnología, seguimiento y resultados reales en territorio.</p></div>
+    <div class="tw"><h1>Lo que <em>vivimos</em> en el campo</h1><p class="hd">Mostramos cómo eki acompaña procesos formativos rurales con tecnología, seguimiento y resultados reales en territorio.</p></div>
     <div class="exp-collage-grid">
       <div class="exp-photo exp-photo-1" data-image="experiencias/fotos/experiencia1.jpg" data-title="Formación rural en territorio">
         <img loading="eager" decoding="async" src="experiencias/fotos/experiencia1.jpg" alt="Formación rural en territorio">
@@ -567,7 +639,7 @@
     <div class="tg"><span class="ll"></span> Contacto</div>
     <div class="cg">
       <div>
-        <h2>Hablemos<br><em>de tu proyecto</em></h2>
+        <h1>Hablemos<br><em>de tu proyecto</em></h1>
         <p style="font-size:14px;color:var(--m);line-height:1.75;margin-bottom:0;">Empresas, organizaciones o entidades públicas: diseñamos la solución educativa que tu comunidad necesita.</p>
         <div class="contact-cta">
           <a class="contact-btn" href="https://wa.me/573103844274?text=Hola%20eki%2C%20quiero%20más%20información%20sobre%20una%20solución%20educativa" target="_blank" rel="noopener noreferrer">WhatsApp</a>
@@ -589,6 +661,256 @@
 </div>
 
 <!-- HABEAS DATA -->
+<!-- PROGRAMAS -->
+<div class="page" id="page-programas">
+  <section class="sec prog-wrap">
+    <p class="prog-kicker">Catálogo eki</p>
+    <h1>Programas de formación <em>para el campo</em></h1>
+    <p class="prog-lead">Lecciones cortas por WhatsApp. Usted avanza cuando marca <strong>listo</strong>. Esto es muestra de catálogo; la demo que sí se puede probar hoy es Tome las riendas de su dinero.</p>
+    <div class="prog-list" style="margin-top:28px;">
+      <a class="prog-tile" href="/programas/emprendimiento-agro-rural"><img src="experiencias/fotos/empreexperiencia2.jpeg" alt="Emprendimiento agro rural" loading="lazy"><div><span class="prog-badge">Vitrina</span><h3>Emprendimiento agro rural</h3><p>Ordenar la idea, la oferta y los números básicos del negocio rural.</p></div></a>
+      <a class="prog-tile" href="/programas/maquinaria-herramientas-agro"><img src="experiencias/fotos/experiencia1.jpg" alt="Maquinaria y herramientas para el agro" loading="lazy"><div><span class="prog-badge">Vitrina</span><h3>Maquinaria y herramientas</h3><p>Usar equipos con criterio, seguridad y mantenimiento simple.</p></div></a>
+      <a class="prog-tile" href="/programas/comercializacion-ventas"><img src="casosdeexito/cafe.jpg" alt="Comercialización y ventas rurales" loading="lazy"><div><span class="prog-badge">Vitrina</span><h3>Comercialización y ventas</h3><p>A quién vender, a qué precio y cómo no regalar margen.</p></div></a>
+      <a class="prog-tile" href="/programas/agricultura-digital-ia"><img src="experiencias/fotos/WhatsApp Image 2026-04-17 at 3.23.16 PM.jpeg" alt="Agricultura digital e IA para el campo" loading="lazy"><div><span class="prog-badge">Vitrina</span><h3>Agricultura digital e IA</h3><p>Datos, apps e IA en lenguaje de finca.</p></div></a>
+      <a class="prog-tile" href="/programas/tome-las-riendas"><img src="experiencias/fotos/Anuc.jpeg" alt="Tome las riendas de su dinero" loading="lazy"><div><span class="prog-badge">Demo real</span><h3>Tome las riendas de su dinero</h3><p>La demo de eki para ordenar ingresos, gastos y hábitos de plata.</p></div></a>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-programa-emprendimiento-agro-rural">
+  <article class="sec prog-wrap">
+    <div class="prog-hero">
+      <div>
+        <p class="prog-kicker">Programa vitrina</p>
+        <h1>Emprendimiento <em>agro rural</em></h1>
+        <p class="prog-lead">Pasar de “tengo producto en la finca” a un negocio rural más ordenado: idea, oferta, costos básicos y próximos pasos.</p>
+      </div>
+      <div class="prog-hero-img"><img src="experiencias/fotos/empreexperiencia2.jpeg" alt="Productoras y productores rurales conversando sobre su negocio"></div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <h2>Para quién es</h2>
+        <p>Productoras y productores, asociaciones y jóvenes rurales que quieren un negocio alrededor de lo que ya producen.</p>
+        <p class="prog-noes"><strong>No es</strong> un MBA, ni créditos bancarios, ni un curso de “hágase millonario”.</p>
+      </div>
+      <div class="prog-card">
+        <h2>Qué se lleva</h2>
+        <ul>
+          <li>Definir su oferta con claridad: qué vende y a quién le sirve.</li>
+          <li>Separar la plata de la casa y la del negocio.</li>
+          <li>Identificar clientes cercanos, no un mercado imaginario.</li>
+          <li>Armar un plan simple de 30 días.</li>
+          <li>Reconocer errores típicos de emprender sin números.</li>
+        </ul>
+      </div>
+    </div>
+    <h2>Cómo funciona eki</h2>
+    <div class="prog-steps">
+      <div class="prog-step"><strong>1. Mensaje</strong>Le llega una lección corta por WhatsApp: video, audio o texto que se entiende en el celular.</div>
+      <div class="prog-step"><strong>2. Práctica</strong>Lo aplica en la finca, la asociación o el negocio. Sin teoría suelta.</div>
+      <div class="prog-step"><strong>3. Siguiente</strong>Marca <em>listo</em> y avanza. El tutor de IA acompaña cuando tenga una duda.</div>
+    </div>
+    <div class="prog-cta-row">
+      <a class="prog-cta prog-cta-primary" href="https://wa.me/573103844274?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20programa%20Emprendimiento%20Agro%20Rural%20(info_emprendimiento)" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+      <a class="prog-cta prog-cta-secondary" href="/programas">Ver otros programas</a>
+    </div>
+    <p class="prog-note">Esto es muestra de catálogo; no inscribe sola. La demo que sí se puede probar hoy es <a href="/programas/tome-las-riendas">Tome las riendas de su dinero</a>.</p>
+  </article>
+</div>
+
+<div class="page" id="page-programa-maquinaria-herramientas-agro">
+  <article class="sec prog-wrap">
+    <div class="prog-hero">
+      <div>
+        <p class="prog-kicker">Programa vitrina</p>
+        <h1>Maquinaria y herramientas <em>para el agro</em></h1>
+        <p class="prog-lead">Usar equipos y herramientas con criterio: para qué sirve, seguridad, mantenimiento básico y cuándo no vale la pena comprar.</p>
+      </div>
+      <div class="prog-hero-img"><img src="experiencias/fotos/experiencia1.jpg" alt="Trabajo en campo con herramientas agrícolas"></div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <h2>Para quién es</h2>
+        <p>Fincas familiares, operarios y técnicos de campo que conviven con equipos todos los días.</p>
+        <p class="prog-noes"><strong>No es</strong> un catálogo de ventas de maquinaria ni una certificación de operador.</p>
+      </div>
+      <div class="prog-card">
+        <h2>Qué se lleva</h2>
+        <ul>
+          <li>Un checklist de seguridad antes de prender o usar el equipo.</li>
+          <li>Diferenciar uso de abuso: qué desgasta más de la cuenta.</li>
+          <li>Costos reales de mantenimiento, no solo el precio de compra.</li>
+          <li>Criterio para alquilar o comprar.</li>
+          <li>Un registro simple de fallas para no repetir el mismo gasto.</li>
+        </ul>
+      </div>
+    </div>
+    <h2>Cómo funciona eki</h2>
+    <div class="prog-steps">
+      <div class="prog-step"><strong>1. Mensaje</strong>Lección corta al WhatsApp, pensada para verse en el descanso o al final de la jornada.</div>
+      <div class="prog-step"><strong>2. Práctica</strong>Revisa el equipo, anota una falla o aplica el checklist en campo.</div>
+      <div class="prog-step"><strong>3. Siguiente</strong>Marca <em>listo</em> y sigue. Si hay duda, pregunta al tutor de IA.</div>
+    </div>
+    <div class="prog-cta-row">
+      <a class="prog-cta prog-cta-primary" href="https://wa.me/573103844274?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20programa%20Maquinaria%20y%20herramientas%20para%20el%20agro%20(info_maquinaria)" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+      <a class="prog-cta prog-cta-secondary" href="/programas">Ver otros programas</a>
+    </div>
+    <p class="prog-note">Esto es muestra de catálogo. La demo que sí se puede probar hoy es <a href="/programas/tome-las-riendas">Tome las riendas de su dinero</a>.</p>
+  </article>
+</div>
+
+<div class="page" id="page-programa-comercializacion-ventas">
+  <article class="sec prog-wrap">
+    <div class="prog-hero">
+      <div>
+        <p class="prog-kicker">Programa vitrina</p>
+        <h1>Comercialización y <em>ventas</em></h1>
+        <p class="prog-lead">Llevar el producto al mercado con más claridad: a quién vender, a qué precio, cómo cobrar y cómo no regalar margen.</p>
+      </div>
+      <div class="prog-hero-img"><img src="casosdeexito/cafe.jpg" alt="Comercialización de productos del agro en Colombia"></div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <h2>Para quién es</h2>
+        <p>Quienes ya producen y se traban en la venta: plaza, cliente fijo o intermediario.</p>
+        <p class="prog-noes"><strong>No es</strong> un marketplace de eki ni logística nacional.</p>
+      </div>
+      <div class="prog-card">
+        <h2>Qué se lleva</h2>
+        <ul>
+          <li>Un perfil de cliente realista, cercano a su territorio.</li>
+          <li>Separar precio de costo para no vender a pérdida.</li>
+          <li>Canales que sí puede sostener (no todos a la vez).</li>
+          <li>Un pitch corto: cómo presentar el producto en dos frases.</li>
+          <li>Seguimiento simple de pedidos y cobros.</li>
+        </ul>
+      </div>
+    </div>
+    <h2>Cómo funciona eki</h2>
+    <div class="prog-steps">
+      <div class="prog-step"><strong>1. Mensaje</strong>Microcápsula por WhatsApp con un ejemplo del día a día de la venta rural.</div>
+      <div class="prog-step"><strong>2. Práctica</strong>Prueba el precio, el pitch o el seguimiento con un cliente real.</div>
+      <div class="prog-step"><strong>3. Siguiente</strong>Marca <em>listo</em> y pasa a la siguiente lección, con acompañamiento 24/7.</div>
+    </div>
+    <div class="prog-cta-row">
+      <a class="prog-cta prog-cta-primary" href="https://wa.me/573103844274?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20programa%20Comercializaci%C3%B3n%20y%20ventas%20(info_comercializacion)" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+      <a class="prog-cta prog-cta-secondary" href="/programas">Ver otros programas</a>
+    </div>
+    <p class="prog-note">Esto es muestra de catálogo. La demo que sí se puede probar hoy es <a href="/programas/tome-las-riendas">Tome las riendas de su dinero</a>.</p>
+  </article>
+</div>
+
+<div class="page" id="page-programa-agricultura-digital-ia">
+  <article class="sec prog-wrap">
+    <div class="prog-hero">
+      <div>
+        <p class="prog-kicker">Programa vitrina</p>
+        <h1>Agricultura digital e <em>IA para el campo</em></h1>
+        <p class="prog-lead">Acercar datos, apps e IA al productor en lenguaje de finca: qué sí sirve en el celular, qué es humo y cómo pedir ayuda a un asistente sin perder el criterio agronómico.</p>
+      </div>
+      <div class="prog-hero-img"><img src="experiencias/fotos/WhatsApp Image 2026-04-17 at 3.23.16 PM.jpeg" alt="Aprendizaje colectivo rural con apoyo de tecnología"></div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <h2>Para quién es</h2>
+        <p>Productores curiosos, técnicos y organizaciones que digitalizan la extensión rural.</p>
+        <p class="prog-noes"><strong>No es</strong> software de precisión de decenas de miles de dólares ni la promesa de que “la IA siembra sola”.</p>
+      </div>
+      <div class="prog-card">
+        <h2>Qué se lleva</h2>
+        <ul>
+          <li>Usar fotos y un registro simple para no perder lo que pasa en la finca.</li>
+          <li>Saber cuándo usar IA y cuándo no.</li>
+          <li>Cuidar la privacidad de los datos de la finca.</li>
+          <li>Pedir ayuda a un asistente (como Nat/eki, agrónomo de bolsillo) sin mezclarlo con la plataforma LXP.</li>
+          <li>Filtrar herramientas: si no cabe en el celular de todos los días, no es para este programa.</li>
+        </ul>
+      </div>
+    </div>
+    <h2>Cómo funciona eki</h2>
+    <div class="prog-steps">
+      <div class="prog-step"><strong>1. Mensaje</strong>Una cápsula clara por WhatsApp, sin jerga de Silicon Valley.</div>
+      <div class="prog-step"><strong>2. Práctica</strong>Prueba una foto, una pregunta al asistente o un registro en el celular.</div>
+      <div class="prog-step"><strong>3. Siguiente</strong>Marca <em>listo</em> y sigue, conservando el criterio de quien conoce el lote.</div>
+    </div>
+    <div class="prog-cta-row">
+      <a class="prog-cta prog-cta-primary" href="https://wa.me/573103844274?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20programa%20Agricultura%20digital%20e%20IA%20(info_agrodigital)" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+      <a class="prog-cta prog-cta-secondary" href="/programas">Ver otros programas</a>
+    </div>
+    <p class="prog-note">Esto es muestra de catálogo. La demo que sí se puede probar hoy es <a href="/programas/tome-las-riendas">Tome las riendas de su dinero</a>.</p>
+  </article>
+</div>
+
+<div class="page" id="page-programa-tome-las-riendas">
+  <article class="sec prog-wrap">
+    <div class="prog-hero">
+      <div>
+        <p class="prog-kicker">Demo real de eki</p>
+        <h1>Tome las riendas <em>de su dinero</em></h1>
+        <p class="prog-lead">Ordenar ingresos y gastos, decisiones simples de la semana y hábitos de plata. No es un curso de trading.</p>
+      </div>
+      <div class="prog-hero-img"><img src="experiencias/fotos/Anuc.jpeg" alt="Personas rurales en un espacio de formación práctica"></div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <h2>Para quién es</h2>
+        <p>Cualquier persona que quiera probar eki de verdad. También sirve a compradores de organizaciones que necesitan ver el formato antes de un programa mayor.</p>
+      </div>
+      <div class="prog-card">
+        <h2>Qué se lleva</h2>
+        <ul>
+          <li>Registrar la plata que entra y la que sale, sin Excel eterno.</li>
+          <li>Diferenciar gasto de inversión en decisiones de la semana.</li>
+          <li>Una meta corta, posible de cumplir.</li>
+          <li>Conversar el módulo por WhatsApp, como se estudia en eki: lección, práctica y <em>listo</em>.</li>
+        </ul>
+      </div>
+    </div>
+    <h2>Cómo funciona eki</h2>
+    <div class="prog-steps">
+      <div class="prog-step"><strong>1. Mensaje</strong>Le llega la microcápsula al WhatsApp. La ve las veces que necesite.</div>
+      <div class="prog-step"><strong>2. Práctica</strong>Anota un ingreso, un gasto o una decisión de la semana.</div>
+      <div class="prog-step"><strong>3. Siguiente</strong>Marca <em>listo</em> y sigue. El tutor acompaña en el chat.</div>
+    </div>
+    <div class="prog-cta-row">
+      <a class="prog-cta prog-cta-primary" href="https://wa.me/573103844274?text=Hola%2C%20quiero%20hablar%20de%20la%20demo%20Tome%20las%20riendas%20de%20su%20dinero%20(desc_riendas)" target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+      <a class="prog-cta prog-cta-primary" href="https://wa.me/573103844274?text=Quiero%20la%20demo%20Tome%20las%20riendas%20de%20su%20dinero%20(in_riendas)" target="_blank" rel="noopener noreferrer">Quiero la demo</a>
+      <a class="prog-cta prog-cta-secondary" href="/programas">Ver otros programas</a>
+    </div>
+    <p class="prog-note">Esta es la demo que sí se puede probar hoy. El resto del catálogo es vitrina: le contamos de qué se trata cada programa.</p>
+  </article>
+</div>
+
+<div class="page" id="page-noticias">
+  <section class="sec prog-wrap">
+    <p class="prog-kicker">Noticias</p>
+    <h1>Lo que pasa cuando la formación <em>llega al territorio</em></h1>
+    <div class="news-list" style="margin-top:24px;">
+      <a href="/noticias/fao-agtech-summit-2026">
+        <span class="prog-badge">FAO · 2026</span>
+        <h3>eki seleccionada en el AGTECH Summit FAO 2026</h3>
+        <p>Pilotos de agricultura digital en Colombia: agentes de IA y microaprendizaje por WhatsApp para productores y asociaciones rurales.</p>
+      </a>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-noticia-fao-agtech">
+  <article class="news-article">
+    <p class="prog-kicker">Noticia</p>
+    <h1>eki en el AGTECH Summit FAO 2026</h1>
+    <p class="news-meta">Colombia · Reconocimiento · Agricultura digital</p>
+    <p>La FAO impulsó en Colombia pilotos tecnológicos con emprendimientos nacionales. eki fue seleccionada por una solución basada en agentes de inteligencia artificial y herramientas de microaprendizaje a través de WhatsApp, orientada a fortalecer la alfabetización digital, la adopción de tecnologías y el acompañamiento práctico a productores y asociaciones rurales.</p>
+    <p>El proceso reunió emprendimientos de los Bootcamps Regionales de Agricultura Digital. La apuesta de eki no es “la IA siembra sola”: es que la tecnología quepa en el celular y sirva en el día a día del campo.</p>
+    <p>Andrés Rubiano, CEO y cofundador de eki, lo dijo así: la tecnología solo transforma el campo cuando los productores pueden adoptarla. En eki creemos que esa transformación solo es posible cuando la tecnología también significa equidad para quienes producen nuestros alimentos.</p>
+    <p>Fuente: <a href="https://www.fao.org/colombia/noticias/detail/la-fao-impulsa-la-innovaci%C3%B3n-del-agro-colombiano-con-pilotos-tecnol%C3%B3gicos-desarrollados-por-emprendimientos-nacionales/es" target="_blank" rel="noopener noreferrer">noticia de la FAO en Colombia</a>.</p>
+    <div class="prog-cta-row">
+      <a class="prog-cta prog-cta-secondary" href="/experiencias">Ver experiencias</a>
+      <a class="prog-cta prog-cta-primary" href="/programas">Ver programas</a>
+    </div>
+  </article>
+</div>
+
 <div class="page" id="page-habeas-data">
   <section class="legal-page">
     <div class="legal-page-inner">
@@ -643,7 +965,7 @@
 <div class="mobile-sticky-cta" aria-label="Acciones rápidas móvil">
   <a href="#" data-modal="mChat">Demo</a>
   <a href="#" data-modal="mHablemos">Hablemos</a>
-  <a href="#page-contacto" data-page="contacto">Contacto</a>
+  <a href="/contacto" data-page="contacto">Contacto</a>
 </div>
 
 <footer>
@@ -657,13 +979,13 @@
         <a class="fsi" href="https://wa.me/573103844274" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><img src="logos/whatsapp.png" alt="WhatsApp" onerror="this.style.display='none';this.parentNode.textContent='WA';"></a>
       </div>
     </div>
-    <div class="fc"><h5>Páginas</h5><ul><li><a href="/" >Inicio</a></li><li><a href="#page-nosotros" >Nosotros</a></li><li><a href="#page-soluciones" >Soluciones</a></li><li><a href="#page-experiencias" >Experiencias</a></li><li><a href="#" data-modal="mChat">Demo</a></li></ul></div>
-    <div class="fc"><h5>Soluciones</h5><ul><li><a href="#" data-modal="m1" role="button">WhatsApp + IA</a></li><li><a href="#" data-modal="m2" role="button">Proyectos</a></li><li><a href="#" data-modal="m3" role="button">Contenidos</a></li><li><a href="#" data-modal="m4" role="button">Plataforma LXP</a></li></ul></div>
+    <div class="fc"><h5>Páginas</h5><ul><li><a href="/">Inicio</a></li><li><a href="/nosotros">Nosotros</a></li><li><a href="/soluciones">Soluciones</a></li><li><a href="/programas">Programas</a></li><li><a href="/experiencias">Experiencias</a></li><li><a href="/noticias">Noticias</a></li><li><a href="#" data-modal="mChat">Demo</a></li></ul></div>
+    <div class="fc"><h5>Soluciones</h5><ul><li><a href="/programas">Programas</a></li><li><a href="#" data-modal="m1" role="button">WhatsApp + IA</a></li><li><a href="#" data-modal="m2" role="button">Proyectos</a></li><li><a href="#" data-modal="m3" role="button">Contenidos</a></li><li><a href="#" data-modal="m4" role="button">Plataforma LXP</a></li></ul></div>
     <div class="fc"><h5>Contacto</h5><ul><li><a href="mailto:comunidad.educativa@eki.com.co">comunidad.educativa@eki.com.co</a></li><li><a href="https://wa.me/573103844274" target="_blank" rel="noopener noreferrer">WhatsApp: 310 3844274</a></li><li><a href="/habeas-data">Habeas Data</a></li></ul></div>
   </div>
   <div class="fbt"><p>2025 Smart Skills Factory SAS — eki. Educación con equidad para la ruralidad. www.eki.com.co</p><div class="footer-policy-links"><a href="/habeas-data">Política de Privacidad</a><a href="/habeas-data">Habeas Data</a></div></div>
 </footer>
 
-<script type="module" src="js/main.js?v=20260721d"></script>
+<script type="module" src="js/main.js?v=20260821a"></script>
 </body>
 </html>

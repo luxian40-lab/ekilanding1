@@ -1,7 +1,21 @@
 const selectAll = selector => Array.from(document.querySelectorAll(selector));
 
 const PAGE_PATHS = {
-  'habeas-data': '/habeas-data'
+  home: '/',
+  nosotros: '/nosotros',
+  soluciones: '/soluciones',
+  experiencias: '/experiencias',
+  contacto: '/contacto',
+  demo: '/demo',
+  'habeas-data': '/habeas-data',
+  programas: '/programas',
+  'programa-emprendimiento-agro-rural': '/programas/emprendimiento-agro-rural',
+  'programa-maquinaria-herramientas-agro': '/programas/maquinaria-herramientas-agro',
+  'programa-comercializacion-ventas': '/programas/comercializacion-ventas',
+  'programa-agricultura-digital-ia': '/programas/agricultura-digital-ia',
+  'programa-tome-las-riendas': '/programas/tome-las-riendas',
+  noticias: '/noticias',
+  'noticia-fao-agtech': '/noticias/fao-agtech-summit-2026'
 };
 
 const PATH_TO_PAGE = Object.fromEntries(
@@ -9,9 +23,43 @@ const PATH_TO_PAGE = Object.fromEntries(
 );
 
 const DEFAULT_TITLE = 'eki | Educación rural con IA y WhatsApp en Colombia';
+const DEFAULT_DESCRIPTION = 'eki transforma comunidades rurales en Colombia con educación digital, inteligencia artificial, formación por WhatsApp y plataforma LXP para el campo.';
 const PAGE_TITLES = {
-  'habeas-data': 'Política de Habeas Data — eki'
+  home: DEFAULT_TITLE,
+  nosotros: 'Nosotros — eki | Educación rural con equidad',
+  soluciones: 'Soluciones — WhatsApp, IA y LXP para el campo | eki',
+  experiencias: 'Experiencias y casos de éxito en territorio | eki',
+  contacto: 'Contacto — Hablemos de su proyecto rural | eki',
+  demo: 'Solicitar demo de eki | Formación rural con IA',
+  'habeas-data': 'Política de Habeas Data — eki',
+  programas: 'Programas de formación rural por WhatsApp | eki',
+  'programa-emprendimiento-agro-rural': 'Emprendimiento agro rural | Programa eki',
+  'programa-maquinaria-herramientas-agro': 'Maquinaria y herramientas para el agro | Programa eki',
+  'programa-comercializacion-ventas': 'Comercialización y ventas rurales | Programa eki',
+  'programa-agricultura-digital-ia': 'Agricultura digital e IA para el campo | Programa eki',
+  'programa-tome-las-riendas': 'Tome las riendas de su dinero | Demo eki',
+  noticias: 'Noticias — eki en el territorio',
+  'noticia-fao-agtech': 'eki en el AGTECH Summit FAO 2026 | Noticia'
 };
+const PAGE_DESCRIPTIONS = {
+  home: DEFAULT_DESCRIPTION,
+  nosotros: 'eki nació para cerrar la brecha educativa en la ruralidad colombiana con formación práctica, liderazgo e innovación al servicio de las personas.',
+  soluciones: 'Formación rural por WhatsApp con tutores de IA, programas a medida, contenido contextual y plataforma LXP con métricas de impacto.',
+  experiencias: 'Casos reales de eki con caficultores, palma, avicultura, docentes rurales y el reconocimiento de la FAO en agricultura digital.',
+  contacto: 'Empresas, fundaciones y entidades públicas: diseñamos la solución educativa que su comunidad rural necesita.',
+  demo: 'Vea cómo funcionan las microcápsulas por WhatsApp, los agentes de IA y la plataforma LXP de eki.',
+  'habeas-data': 'Política de tratamiento de datos personales de eki, conforme a la Ley 1581 de 2012.',
+  programas: 'Catálogo de programas eki: emprendimiento rural, maquinaria, ventas, agricultura digital y la demo Tome las riendas de su dinero.',
+  'programa-emprendimiento-agro-rural': 'Pase de tener producto en la finca a un negocio rural más ordenado: oferta, costos básicos y un plan de 30 días, por WhatsApp.',
+  'programa-maquinaria-herramientas-agro': 'Use equipos y herramientas del agro con criterio: seguridad, mantenimiento y cuándo no vale la pena comprar.',
+  'programa-comercializacion-ventas': 'Lleve su producto al mercado con más claridad: a quién vender, a qué precio, cómo cobrar y cómo cuidar el margen.',
+  'programa-agricultura-digital-ia': 'Acerque datos, apps e IA al productor en lenguaje de finca: qué sí sirve en el celular y qué es humo.',
+  'programa-tome-las-riendas': 'Demo real de eki: ordene ingresos y gastos, decisiones simples de la semana y hábitos de plata por WhatsApp.',
+  noticias: 'Noticias eki: reconocimientos, alianzas y lo que pasa cuando la formación llega al territorio.',
+  'noticia-fao-agtech': 'eki fue seleccionada en el AGTECH Summit FAO 2026 por su solución de agentes de IA y microaprendizaje por WhatsApp.'
+};
+
+const SITE_ORIGIN = 'https://eki.com.co';
 
 const resolvePageFromLocation = () => {
   const hash = window.location.hash || '';
@@ -21,24 +69,36 @@ const resolvePageFromLocation = () => {
 };
 
 const updatePageUrl = id => {
+  const pagePath = PAGE_PATHS[id] || '/';
+  const next = `${pagePath}${window.location.search || ''}`;
   try {
     if(window.history && window.history.replaceState){
-      const pagePath = PAGE_PATHS[id];
-      if(id === 'home'){
-        window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}` || '/');
-        return;
-      }
-      if(pagePath){
-        window.history.replaceState(null, '', pagePath);
-        return;
-      }
-      window.history.replaceState(null, '', `#page-${id}`);
+      window.history.replaceState(null, '', next);
+    } else if(id === 'home'){
+      window.location.hash = '';
     } else {
-      window.location.hash = id === 'home' ? '' : `#page-${id}`;
+      window.location.hash = `#page-${id}`;
     }
   } catch (error) {
     window.location.hash = id === 'home' ? '' : `#page-${id}`;
   }
+};
+
+const setPageMeta = id => {
+  document.title = PAGE_TITLES[id] || DEFAULT_TITLE;
+  const description = PAGE_DESCRIPTIONS[id] || DEFAULT_DESCRIPTION;
+  const descTag = document.querySelector('meta[name="description"]');
+  if(descTag) descTag.setAttribute('content', description);
+  const path = PAGE_PATHS[id] || '/';
+  const url = `${SITE_ORIGIN}${path}`;
+  const canonical = document.querySelector('link[rel="canonical"]');
+  if(canonical) canonical.setAttribute('href', url);
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if(ogUrl) ogUrl.setAttribute('content', url);
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if(ogTitle) ogTitle.setAttribute('content', PAGE_TITLES[id] || DEFAULT_TITLE);
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if(ogDesc) ogDesc.setAttribute('content', description);
 };
 
 const setActivePage = id => {
@@ -46,7 +106,7 @@ const setActivePage = id => {
   window.scrollTo(0, 0);
   selectAll('nav a').forEach(link => link.classList.toggle('on', link.id === `n-${id}`));
   updatePageUrl(id);
-  document.title = PAGE_TITLES[id] || DEFAULT_TITLE;
+  setPageMeta(id);
   document.dispatchEvent(new CustomEvent('eki:pagechange', { detail: { id } }));
 };
 
@@ -677,23 +737,26 @@ selectAll('a[href^="#page-"]').forEach(link => {
   });
 });
 
-selectAll('a[href="/habeas-data"]').forEach(link => {
-  link.addEventListener('click', e => {
-    if(link.target === '_blank') return;
-    e.preventDefault();
-    setActivePage('habeas-data');
-  });
+document.addEventListener('click', e => {
+  const link = e.target.closest('a[href]');
+  if(!link || link.target === '_blank' || link.hasAttribute('data-modal')) return;
+  const href = link.getAttribute('href') || '';
+  if(!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#') || href.startsWith('javascript:')) return;
+  let url;
+  try {
+    url = new URL(href, window.location.origin);
+  } catch (error) {
+    return;
+  }
+  if(url.origin !== window.location.origin) return;
+  const path = url.pathname.replace(/\/$/, '') || '/';
+  const pageId = PATH_TO_PAGE[path];
+  if(!pageId) return;
+  e.preventDefault();
+  setActivePage(pageId);
 });
 
-selectAll('a[href="/"]').forEach(link => {
-  link.addEventListener('click', e => {
-    if(link.target === '_blank') return;
-    e.preventDefault();
-    setActivePage('home');
-  });
-});
-
-['home','nosotros','soluciones','experiencias','demo','contacto'].forEach(id => {
+['home','nosotros','soluciones','experiencias','demo','contacto','programas'].forEach(id => {
   const el = document.getElementById(`n-${id}`);
   if(!el) return;
   el.addEventListener('click', e => {
