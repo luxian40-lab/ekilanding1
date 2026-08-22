@@ -1204,7 +1204,7 @@ const noteJulianPhotoClick = () => {
   window.clearTimeout(julianPhotoClickTimer);
   julianPhotoClickTimer = window.setTimeout(() => {
     julianPhotoClicks = 0;
-  }, 4500);
+  }, 14000);
   if(julianPhotoClicks < 8) return false;
   julianPhotoClicks = 0;
   startJulianSnake();
@@ -1227,12 +1227,18 @@ const startJulianSnake = () => {
         <div class="eki-snake-bar">
           <div>
             <strong>Culebra CTO</strong>
-            <span>flechas o WASD · toca para girar</span>
+            <span>botones o desliza el dedo</span>
           </div>
           <div class="eki-snake-score">Puntos: <span id="ekiSnakeScore">0</span></div>
           <button type="button" class="eki-snake-close" id="ekiSnakeClose">Cerrar</button>
         </div>
         <canvas id="ekiSnakeCanvas"></canvas>
+        <div class="snake-pad" id="ekiSnakePad">
+          <button type="button" data-dx="0" data-dy="-1" aria-label="Arriba">▲</button>
+          <button type="button" data-dx="-1" data-dy="0" aria-label="Izquierda">◀</button>
+          <button type="button" data-dx="1" data-dy="0" aria-label="Derecha">▶</button>
+          <button type="button" data-dx="0" data-dy="1" aria-label="Abajo">▼</button>
+        </div>
         <p class="eki-snake-msg" id="ekiSnakeMsg" hidden></p>
       </div>`;
     document.body.appendChild(overlay);
@@ -1250,11 +1256,12 @@ const startJulianSnake = () => {
   overlay.hidden = false;
   document.body.classList.add('snake-open');
 
-  const cols = 18;
-  const rows = 16;
+  const mobilePlay = window.matchMedia('(max-width: 700px), (pointer: coarse)').matches;
+  const cols = mobilePlay ? 12 : 18;
+  const rows = mobilePlay ? 12 : 16;
   const fit = () => {
-    const maxW = Math.min(window.innerWidth - 36, 560);
-    const cell = Math.floor(maxW / cols);
+    const maxW = Math.min(window.innerWidth - 24, mobilePlay ? window.innerWidth - 20 : 560);
+    const cell = Math.max(18, Math.floor(maxW / cols));
     canvas.width = cell * cols;
     canvas.height = cell * rows;
     return cell;
@@ -1266,8 +1273,8 @@ const startJulianSnake = () => {
 
   let dir = { x: 1, y: 0 };
   let pending = { x: 1, y: 0 };
-  let snake = [{ x: 4, y: 8 }, { x: 3, y: 8 }, { x: 2, y: 8 }];
-  let food = { x: 12, y: 8 };
+  let snake = [{ x: 3, y: 5 }, { x: 2, y: 5 }, { x: 1, y: 5 }];
+  let food = { x: 8, y: 5 };
   let score = 0;
   let alive = true;
   let tickTimer = 0;
@@ -1334,8 +1341,8 @@ const startJulianSnake = () => {
       if(msgEl){
         msgEl.hidden = false;
         msgEl.textContent = score >= 8
-          ? `Julian se comió el backlog. ${score} pts. Espacio para otra ronda.`
-          : `Game over — ${score} pts. Espacio para reintentar.`;
+          ? `Julian se comió el backlog. ${score} pts. Toca para otra ronda.`
+          : `Game over — ${score} pts. Toca para reintentar.`;
       }
       return;
     }
@@ -1353,7 +1360,7 @@ const startJulianSnake = () => {
   const restart = () => {
     dir = { x: 1, y: 0 };
     pending = { x: 1, y: 0 };
-    snake = [{ x: 4, y: 8 }, { x: 3, y: 8 }, { x: 2, y: 8 }];
+    snake = [{ x: 3, y: 5 }, { x: 2, y: 5 }, { x: 1, y: 5 }];
     score = 0;
     scoreEl.textContent = '0';
     alive = true;
@@ -1393,20 +1400,36 @@ const startJulianSnake = () => {
   const onTouchStart = event => {
     const t = event.changedTouches[0];
     if(!t) return;
+    if(event.target.closest('.snake-pad, .eki-snake-close')) return;
     touchStart = { x: t.clientX, y: t.clientY };
   };
   const onTouchEnd = event => {
     const t = event.changedTouches[0];
     if(!t || !touchStart) return;
+    if(event.target.closest('.snake-pad, .eki-snake-close')) return;
     const dx = t.clientX - touchStart.x;
     const dy = t.clientY - touchStart.y;
-    if(Math.abs(dx) + Math.abs(dy) < 24){
+    if(Math.abs(dx) + Math.abs(dy) < 18){
       if(!alive) restart();
       return;
     }
+    event.preventDefault();
     if(Math.abs(dx) > Math.abs(dy)) setDir(dx > 0 ? 1 : -1, 0);
     else setDir(0, dy > 0 ? 1 : -1);
   };
+
+  document.getElementById('ekiSnakePad')?.querySelectorAll('button').forEach(btn => {
+    const press = event => {
+      event.preventDefault();
+      event.stopPropagation();
+      if(!alive){
+        restart();
+        return;
+      }
+      setDir(Number(btn.dataset.dx), Number(btn.dataset.dy));
+    };
+    btn.addEventListener('pointerdown', press);
+  });
 
   const onResize = () => {
     cell = fit();
@@ -1431,9 +1454,9 @@ const startJulianSnake = () => {
   window.addEventListener('keydown', onKey, true);
   window.addEventListener('resize', onResize);
   overlay.addEventListener('touchstart', onTouchStart, { passive: true });
-  overlay.addEventListener('touchend', onTouchEnd, { passive: true });
+  overlay.addEventListener('touchend', onTouchEnd, { passive: false });
   restart();
-  tickTimer = window.setInterval(step, 120);
+  tickTimer = window.setInterval(step, mobilePlay ? 200 : 120);
 };
 
 let stevenClicks = 0;
@@ -1444,7 +1467,7 @@ const noteStevenClick = () => {
   window.clearTimeout(stevenClickTimer);
   stevenClickTimer = window.setTimeout(() => {
     stevenClicks = 0;
-  }, 8000);
+  }, 16000);
   if(stevenClicks <= 10) return false;
   stevenClicks = 0;
   startStevenTopo();
@@ -1487,9 +1510,11 @@ const startStevenTopo = () => {
   overlay.classList.add('open');
   overlay.hidden = false;
   document.body.classList.add('snake-open');
+  const mobilePlay = window.matchMedia('(max-width: 700px), (pointer: coarse)').matches;
+  const holeCount = mobilePlay ? 6 : 9;
   grid.innerHTML = '';
   const holes = [];
-  for(let i = 0; i < 9; i += 1){
+  for(let i = 0; i < holeCount; i += 1){
     const hole = document.createElement('button');
     hole.type = 'button';
     hole.className = 'topo-hole';
@@ -1497,6 +1522,7 @@ const startStevenTopo = () => {
     grid.appendChild(hole);
     holes.push(hole);
   }
+  grid.classList.toggle('topo-grid-mobile', mobilePlay);
 
   const labels = ['Reunión', 'Alcance', 'PPT', 'El cliente', 'Urgente', 'Zoom', 'OKR', 'WhatsApp'];
   let score = 0;
@@ -1546,7 +1572,7 @@ const startStevenTopo = () => {
     window.clearInterval(popTimer);
     window.clearInterval(clockTimer);
     pop();
-    popTimer = window.setInterval(pop, 780);
+    popTimer = window.setInterval(pop, mobilePlay ? 1250 : 900);
     clockTimer = window.setInterval(() => {
       left -= 1;
       if(timeEl) timeEl.textContent = String(left);
@@ -1555,7 +1581,7 @@ const startStevenTopo = () => {
   };
 
   holes.forEach((hole, index) => {
-    hole.addEventListener('click', event => {
+    const smash = event => {
       event.preventDefault();
       if(!running){
         restart();
@@ -1567,7 +1593,8 @@ const startStevenTopo = () => {
       hole.classList.add('hit');
       hole.classList.remove('up');
       active = -1;
-    });
+    };
+    hole.addEventListener('pointerdown', smash);
   });
 
   const onKey = event => {
@@ -1593,7 +1620,7 @@ const startStevenTopo = () => {
 };
 
 const initEquidadEgg = () => {
-  const word = document.querySelector('.hl em');
+  const word = document.getElementById('egg-equidad') || document.querySelector('.hl em');
   if(!word) return;
   word.classList.add('egg-equidad');
   let taps = 0;
@@ -1602,8 +1629,8 @@ const initEquidadEgg = () => {
     event.preventDefault();
     taps += 1;
     window.clearTimeout(timer);
-    timer = window.setTimeout(() => { taps = 0; }, 3500);
-    if(taps < 6) return;
+    timer = window.setTimeout(() => { taps = 0; }, 25000);
+    if(taps <= 20) return;
     taps = 0;
     document.body.classList.add('eki-disco');
     burstCelebrationConfetti();
@@ -1617,6 +1644,10 @@ const initEkipoProfiles = () => {
     card.addEventListener('click', event => {
       event.preventDefault();
       const key = card.getAttribute('data-ekipo');
+      if(key === 'julian'){
+        const onPhoto = event.target.closest('.eqav');
+        if(onPhoto && noteJulianPhotoClick()) return;
+      }
       if(key === 'steven' && noteStevenClick()) return;
       open();
     });
