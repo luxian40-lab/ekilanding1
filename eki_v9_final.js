@@ -1621,21 +1621,29 @@ const startStevenTopo = () => {
 
 const initEquidadEgg = () => {
   const word = document.getElementById('egg-equidad') || document.querySelector('.hl em');
-  if(!word) return;
-  word.classList.add('egg-equidad');
+  if(!word || word.dataset.eggBound === '1') return;
+  word.dataset.eggBound = '1';
   let taps = 0;
-  let timer = 0;
-  word.addEventListener('click', event => {
-    event.preventDefault();
+  let lastTap = 0;
+  let locked = false;
+  const onTap = () => {
+    if(locked || document.body.classList.contains('eki-disco')) return;
+    const now = Date.now();
+    if(now - lastTap < 140) return;
+    lastTap = now;
     taps += 1;
-    window.clearTimeout(timer);
-    timer = window.setTimeout(() => { taps = 0; }, 25000);
-    if(taps <= 20) return;
+    if(taps < 21) return;
     taps = 0;
+    locked = true;
     document.body.classList.add('eki-disco');
     burstCelebrationConfetti();
-    window.setTimeout(() => document.body.classList.remove('eki-disco'), 7000);
-  });
+    window.setTimeout(() => {
+      document.body.classList.remove('eki-disco');
+      taps = 0;
+      locked = false;
+    }, 7000);
+  };
+  word.addEventListener('pointerup', onTap);
 };
 
 const initEkipoProfiles = () => {
