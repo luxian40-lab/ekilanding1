@@ -14,6 +14,9 @@ const PAGE_PATHS = {
   'programa-comercializacion-ventas': '/programas/comercializacion-ventas',
   'programa-agricultura-digital-ia': '/programas/agricultura-digital-ia',
   'programa-tome-las-riendas': '/programas/tome-las-riendas',
+  cursos: '/cursos',
+  'curso-capital-humano-10x': '/cursos/capital-humano-10x',
+  'curso-coaching-productividad-liderazgo-campo': '/cursos/coaching-productividad-liderazgo-campo',
   noticias: '/noticias',
   'noticia-fao-agtech': '/noticias/fao-agtech-summit-2026',
   'noticia-agstar-2026': '/noticias/agstar-2026',
@@ -41,6 +44,9 @@ const PAGE_TITLES = {
   'programa-comercializacion-ventas': 'Comercialización y ventas rurales | Programa eki',
   'programa-agricultura-digital-ia': 'Agricultura digital e IA para el campo | Programa eki',
   'programa-tome-las-riendas': 'Tome las riendas de su dinero | Demo eki',
+  cursos: 'Cursos y próximas fechas | eki',
+  'curso-capital-humano-10x': 'Programa Capital Humano 10X | Curso eki',
+  'curso-coaching-productividad-liderazgo-campo': 'Coaching, Productividad y Liderazgo para el Campo | Curso eki',
   noticias: 'Noticias — eki en el territorio',
   'noticia-fao-agtech': 'eki seleccionada en el Summit de Agricultura Digital de la FAO | Noticia',
   'noticia-agstar-2026': 'eki seleccionada en la convocatoria AgStar 2026 | Noticia',
@@ -60,6 +66,9 @@ const PAGE_DESCRIPTIONS = {
   'programa-comercializacion-ventas': 'Lleve su producto al mercado con más claridad: a quién vender, a qué precio, cómo cobrar y cómo cuidar el margen.',
   'programa-agricultura-digital-ia': 'Acerque datos, apps e IA al productor en lenguaje de finca: qué sí sirve en el celular y qué es humo.',
   'programa-tome-las-riendas': 'Programa corto de eki sobre la plata de la casa y del oficio. Demo pública: se aprende por WhatsApp, un paso a la vez, escribiendo listo para avanzar.',
+  cursos: 'Próximas fechas y cursos intensivos de eki para el agro: capital humano, IA e innovación en territorio.',
+  'curso-capital-humano-10x': 'Programa intensivo de 32 horas para evolucionar la gestión humana en el sector agrícola y palmero con IA, empatía rural e innovación.',
+  'curso-coaching-productividad-liderazgo-campo': 'Curso online de 16 horas: coaching ágil para productividad, liderazgo y soluciones en equipos agro-rurales.',
   noticias: 'Noticias eki: reconocimientos, alianzas y lo que pasa cuando la formación llega al territorio.',
   'noticia-fao-agtech': 'eki fue seleccionada por la FAO para un piloto de agricultura digital: agentes de IA y microaprendizaje por WhatsApp.',
   'noticia-agstar-2026': 'Smart Skills Factory (eki) quedó entre los ganadores de la convocatoria AgStar 2026. Evento AgriFoodTech del 21 al 23 de octubre en Corferias, Bogotá.',
@@ -91,9 +100,12 @@ const updatePageUrl = id => {
   }
 };
 
+const i18nText = value => (typeof window !== 'undefined' && window.ekiI18n?.t ? window.ekiI18n.t(value) : value);
+
 const setPageMeta = id => {
-  document.title = PAGE_TITLES[id] || DEFAULT_TITLE;
-  const description = PAGE_DESCRIPTIONS[id] || DEFAULT_DESCRIPTION;
+  const title = i18nText(PAGE_TITLES[id] || DEFAULT_TITLE);
+  const description = i18nText(PAGE_DESCRIPTIONS[id] || DEFAULT_DESCRIPTION);
+  document.title = title;
   const descTag = document.querySelector('meta[name="description"]');
   if(descTag) descTag.setAttribute('content', description);
   const path = PAGE_PATHS[id] || '/';
@@ -103,9 +115,13 @@ const setPageMeta = id => {
   const ogUrl = document.querySelector('meta[property="og:url"]');
   if(ogUrl) ogUrl.setAttribute('content', url);
   const ogTitle = document.querySelector('meta[property="og:title"]');
-  if(ogTitle) ogTitle.setAttribute('content', PAGE_TITLES[id] || DEFAULT_TITLE);
+  if(ogTitle) ogTitle.setAttribute('content', title);
   const ogDesc = document.querySelector('meta[property="og:description"]');
   if(ogDesc) ogDesc.setAttribute('content', description);
+  const twTitle = document.querySelector('meta[name="twitter:title"]');
+  if(twTitle) twTitle.setAttribute('content', title);
+  const twDesc = document.querySelector('meta[name="twitter:description"]');
+  if(twDesc) twDesc.setAttribute('content', description);
 };
 
 const setActivePage = id => {
@@ -829,7 +845,8 @@ const initImpactCounters = () => {
   if(counters.length === 0) return;
 
   const updateDisplay = state => {
-    const formatted = Math.floor(state.value).toLocaleString('es-CO');
+    const locale = (window.ekiI18n?.getLang?.() === 'en') ? 'en-US' : 'es-CO';
+    const formatted = Math.floor(state.value).toLocaleString(locale);
     state.el.textContent = `${state.prefix}${formatted}${state.suffix}`;
   };
 
@@ -2131,6 +2148,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const pageId = resolvePageFromLocation();
   if(pageId) setActivePage(pageId);
   else setActivePage('home');
+
+  document.addEventListener('eki:langchange', () => {
+    const id = resolvePageFromLocation() || document.querySelector('.page.active')?.id?.replace(/^page-/, '') || 'home';
+    setPageMeta(id);
+    if(window.ekiI18n?.applyDomTranslations) window.ekiI18n.applyDomTranslations();
+  });
 
   const areaInteraccion = document.getElementById('area-interaccion');
   if(areaInteraccion){

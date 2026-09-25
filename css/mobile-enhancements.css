@@ -201,6 +201,10 @@ html, body{
     flex-direction:column;
     gap:10px;
   }
+  .mobile-nav-actions .lang-switch{
+    order:-1;
+    width:100%;
+  }
   .mobile-nav-actions .bd,
   .mobile-nav-actions .bs{
     display:flex;

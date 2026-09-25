@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-lang="es" data-available-langs="es en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +17,10 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="eki — Educación con equidad">
 <meta property="og:locale" content="es_CO">
+<meta property="og:locale:alternate" content="en_US">
+<link rel="alternate" hreflang="es" href="https://eki.com.co/">
+<link rel="alternate" hreflang="en" href="https://eki.com.co/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://eki.com.co/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="eki | Educación rural con IA y WhatsApp en Colombia">
 <meta name="twitter:description" content="Transformamos comunidades rurales mediante educación digital, inteligencia artificial y formación por WhatsApp.">
@@ -32,8 +36,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="/assets/imageneki.jpg" fetchpriority="high">
-<link rel="stylesheet" href="/css/main.css?v=20260821v">
-<link rel="stylesheet" href="/css/mobile-enhancements.css?v=20260821v">
+<link rel="stylesheet" href="/css/main.css?v=20260925b">
+<link rel="stylesheet" href="/css/mobile-enhancements.css?v=20260925b">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -65,7 +69,7 @@
       "@id": "https://eki.com.co/#website",
       "url": "https://eki.com.co/",
       "name": "eki",
-      "inLanguage": "es-CO",
+      "inLanguage": ["es-CO", "en"],
       "publisher": { "@id": "https://eki.com.co/#organization" }
     },
     {
@@ -235,9 +239,14 @@
     <li><a href="/nosotros" id="n-nosotros">Nosotros</a></li>
     <li><a href="/soluciones" id="n-soluciones">Soluciones</a></li>
     <li><a href="/programas" id="n-programas">Programas</a></li>
+    <li><a href="/cursos" id="n-cursos">Cursos</a></li>
     <li><a href="/experiencias" id="n-experiencias">Experiencias</a></li>
   </ul>
   <div class="nr">
+    <div class="lang-switch" role="group" aria-label="Idioma / Language">
+      <button type="button" class="lang-btn is-active" data-set-lang="es" aria-pressed="true" lang="es" title="Español">ES</button>
+      <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false" lang="en" title="English">EN</button>
+    </div>
     <a class="bd" href="#" data-modal="mChat">Demo</a>
     <a class="bs" href="/contacto" id="n-contacto">Contáctanos</a>
   </div>
@@ -258,10 +267,15 @@
       <a href="/nosotros" data-page="nosotros">Nosotros</a>
       <a href="/soluciones" data-page="soluciones">Soluciones</a>
       <a href="/programas" data-page="programas">Programas</a>
+      <a href="/cursos" data-page="cursos">Cursos</a>
       <a href="/experiencias" data-page="experiencias">Experiencias</a>
       <a href="/contacto" data-page="contacto">Contacto</a>
     </nav>
     <div class="mobile-nav-actions">
+      <div class="lang-switch lang-switch--mobile" role="group" aria-label="Idioma / Language">
+        <button type="button" class="lang-btn is-active" data-set-lang="es" aria-pressed="true" lang="es" title="Español">ES</button>
+        <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false" lang="en" title="English">EN</button>
+      </div>
       <a class="bd" href="#" data-modal="mChat">Demo</a>
       <a class="bs" href="#" data-modal="mHablemos">Hablemos</a>
     </div>
@@ -283,6 +297,54 @@
       <div class="cc"><div class="ch"><span class="ctg">WhatsApp + IA</span><span class="cn">01</span></div><div class="cb2"><h4>WhatsApp y Agentes de IA</h4><p>Microcápsulas por WhatsApp con tutores de IA que acompañan 24/7. 92% reducción en costos.</p><div class="pills"><span class="pi">Microcápsulas</span><span class="pi">Agentes IA</span><span class="pi">24/7</span></div><button class="vm" data-page="soluciones" type="button">Ver más →</button></div></div>
       <div class="cc"><div class="ch"><span class="ctg">Proyectos</span><span class="cn">02</span></div><div class="cb2"><h4>Programas a medida</h4><p>Experiencias presenciales, virtuales e híbridas con impacto social y de negocios. Metodología 20/80 y Lego Serious Play.</p><div class="pills"><span class="pi">Presencial</span><span class="pi">Virtual</span><span class="pi">Lego SP</span></div><button class="vm" data-page="soluciones" type="button">Ver más →</button></div></div>
       <div class="cc"><div class="ch"><span class="ctg">Contenidos + LXP</span><span class="cn">03</span></div><div class="cb2"><h4>Generación de contenido + plataforma LXP</h4><p>Producimos contenido educativo rural a la medida y lo gestionamos en nuestra plataforma LXP con indicadores de medición de impacto.</p><div class="pills"><span class="pi">Contenidos</span><span class="pi">LXP</span><span class="pi">Métricas</span></div><button class="vm" data-page="soluciones" type="button">Ver más →</button></div></div>
+    </div>
+  </section>
+
+  <section class="sec fechas-sec">
+    <div class="fechas-layout">
+      <div class="fechas-intro">
+        <h2>Próximas fechas</h2>
+        <p>Mantente al tanto de los próximos cursos y cohortes de eki.</p>
+        <a class="fechas-all" href="/cursos">Ver todos los cursos →</a>
+      </div>
+      <div class="fechas-list">
+        <article class="fecha-row">
+          <div class="fecha-card fecha-card-pending">
+            <div class="fecha-card-top">Por confirmar</div>
+            <div class="fecha-card-day">—</div>
+            <div class="fecha-card-month">Próx.</div>
+          </div>
+          <div class="fecha-body">
+            <span class="fecha-pill">Online / híbrido</span>
+            <div class="fecha-type">Programa</div>
+            <h3>Programa Capital Humano 10X</h3>
+            <p>Evoluciona la gestión humana en el agro: de lo operativo a lo estratégico, con IA, empatía rural e innovación.</p>
+            <div class="fecha-meta">
+              <span>Sector agrícola / palmero</span>
+              <span>32 horas · 16 sesiones</span>
+            </div>
+          </div>
+          <a class="fecha-cta" href="/cursos/capital-humano-10x">Ver contenido</a>
+        </article>
+        <article class="fecha-row">
+          <div class="fecha-card fecha-card-pending">
+            <div class="fecha-card-top">Por confirmar</div>
+            <div class="fecha-card-day">—</div>
+            <div class="fecha-card-month">Próx.</div>
+          </div>
+          <div class="fecha-body">
+            <span class="fecha-pill">Online</span>
+            <div class="fecha-type">Curso</div>
+            <h3>Coaching, Productividad y Liderazgo para el Campo</h3>
+            <p>Coaching ágil para equipos agro-rurales: tiempo, recursos, comunicación y soluciones desde el puesto de trabajo.</p>
+            <div class="fecha-meta">
+              <span>Todos los niveles · agro-rural</span>
+              <span>16 horas · 8 sesiones</span>
+            </div>
+          </div>
+          <a class="fecha-cta" href="/cursos/coaching-productividad-liderazgo-campo">Ver contenido</a>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -372,8 +434,6 @@
   </div>
 
   <section class="sec sec-final"><div class="lg-s"><div class="lg-l"><span class="ll"></span> Reconocimientos</div><div class="lg-c"><div class="lg-g"><div class="lbox"><div class="lr2"><img src="assets/logos/bancolombia.png" alt="Bancolombia"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/emprelatam.png" alt="Emprelatam"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/innvalab.png" alt="InnovaLab"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/nogalesplus_logo.jpg" alt="Nogales Plus"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/technoserve.png" alt="TechnoServe"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/tecprize-removebg-preview.png" alt="TecPrize"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/fao.png" alt="FAO"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/miller-center.png" alt="Santa Clara Miller Center for Social Entrepreneurship"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/bancolombia.png" alt="Bancolombia"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/emprelatam.png" alt="Emprelatam"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/innvalab.png" alt="InnovaLab"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/nogalesplus_logo.jpg" alt="Nogales Plus"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/technoserve.png" alt="TechnoServe"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/tecprize-removebg-preview.png" alt="TecPrize"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/fao.png" alt="FAO"></div></div><div class="lbox"><div class="lr2"><img src="assets/logos/miller-center.png" alt="Santa Clara Miller Center for Social Entrepreneurship"></div></div></div></div></div></section>
-
-  <div class="lg-s"><div class="lg-l"><span class="ll"></span> Testimonios</div><div class="test-v"><div class="tv anim-in"><div class="tvh">Testimonio Cenipalma</div><div class="tvb"><div class="tv-copy"><p class="tvq">"Capacitarse es como actualizar el 'software' personal: te da herramientas para subir al siguiente nivel. Lo que más valoro es el enfoque humano y sensible; nos enseña a abordar las labores operativas desde la conciencia y la conexión con nuestros compañeros en el campo."</p><div class="tvn">Eidy Clavijo</div><div class="tvr">Directora Agronómica de Agropecuaria La Holanda · Alianza Cenipalma y eki</div></div><div class="tvp"><video controls preload="metadata" playsinline><source src="testimonioCenipalma.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div></div><div class="tv anim-in"><div class="tvh">Testimonio ANUC</div><div class="tvb"><div class="tv-copy"><p class="tvq">"Este aprendizaje fortalece nuestro sentido de pertenencia por la tierra. Poder conectarnos entre jóvenes de diferentes regiones nos permite compartir saberes y llevarnos esa 'semillita' de conocimiento para transformar y diseñar el futuro de nuestros propios territorios."</p><div class="tvn">Juan José Torres</div><div class="tvr">Joven Rural del Cauca / ANUC · Primer Encuentro Nacional de Jóvenes Campesinos</div></div><div class="tvp"><video controls preload="metadata" playsinline poster="experiencias/fotos/Anuc.jpeg"><source src="testimonioanuc.mp4#t=1.5" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div></div><div class="tv anim-in"><div class="tvh">Testimonio Néstor</div><div class="tvb"><div class="tv-copy"><p class="tvq">"Aprender por WhatsApp es fácil: recibo los módulos, veo los videos cuantas veces quiera y lo aplico de una vez en el campo."</p><div class="tvn">Néstor Buelvas</div><div class="tvr">Productor agrícola</div></div><div class="tvp"><video controls preload="metadata" playsinline><source src="experiencias/videos/testimonio1.mp4" type="video/mp4">Tu navegador no soporta reproducción de video.</video></div></div></div></div></div>
 
   <section class="sec">
     <div class="tg"><span class="ll"></span> Preguntas frecuentes</div>
@@ -681,6 +741,406 @@
       </form>
     </div>
   </section>
+</div>
+
+<!-- CURSOS -->
+<div class="page" id="page-cursos">
+  <section class="sec fechas-sec fechas-page">
+    <div class="fechas-layout">
+      <div class="fechas-intro">
+        <p class="prog-kicker">Formación eki</p>
+        <h1>Cursos y <em>próximas fechas</em></h1>
+        <p>Programas intensivos para organizaciones del agro. Misma claridad de siempre: método, territorio e IA útil.</p>
+      </div>
+      <div class="fechas-list">
+        <article class="fecha-row">
+          <div class="fecha-card fecha-card-pending">
+            <div class="fecha-card-top">Por confirmar</div>
+            <div class="fecha-card-day">—</div>
+            <div class="fecha-card-month">Próx.</div>
+          </div>
+          <div class="fecha-body">
+            <span class="fecha-pill">Online / híbrido</span>
+            <div class="fecha-type">Programa</div>
+            <h3>Programa Capital Humano 10X</h3>
+            <p>Evoluciona la gestión humana en el agro: de lo operativo a lo estratégico, con IA, empatía rural e innovación.</p>
+            <div class="fecha-meta">
+              <span>Sector agrícola / palmero</span>
+              <span>32 horas · 16 sesiones</span>
+            </div>
+          </div>
+          <a class="fecha-cta" href="/cursos/capital-humano-10x">Ver contenido</a>
+        </article>
+        <article class="fecha-row">
+          <div class="fecha-card fecha-card-pending">
+            <div class="fecha-card-top">Por confirmar</div>
+            <div class="fecha-card-day">—</div>
+            <div class="fecha-card-month">Próx.</div>
+          </div>
+          <div class="fecha-body">
+            <span class="fecha-pill">Online</span>
+            <div class="fecha-type">Curso</div>
+            <h3>Coaching, Productividad y Liderazgo para el Campo</h3>
+            <p>Coaching ágil para equipos agro-rurales: tiempo, recursos, comunicación y soluciones desde el puesto de trabajo.</p>
+            <div class="fecha-meta">
+              <span>Todos los niveles · agro-rural</span>
+              <span>16 horas · 8 sesiones</span>
+            </div>
+          </div>
+          <a class="fecha-cta" href="/cursos/coaching-productividad-liderazgo-campo">Ver contenido</a>
+        </article>
+      </div>
+    </div>
+    <p class="fechas-note">También puede explorar el <a href="/programas">catálogo de programas por WhatsApp</a> (vitrina y demo).</p>
+  </section>
+</div>
+
+<div class="page" id="page-curso-capital-humano-10x">
+  <div class="curso-shell">
+    <div class="curso-topband curso-topband--ch10x">
+      <div class="curso-topband-inner">
+        <a class="curso-back" href="/cursos">← Cursos</a>
+        <p class="curso-kicker">Programa · Capital humano agro</p>
+        <h1>Programa Capital Humano 10X</h1>
+        <p class="curso-tagline">De la gestión operativa a una gestión humana estratégica en el agro</p>
+        <div class="curso-hero-meta">
+          <span class="fecha-pill">Online / híbrido</span>
+          <span>32 horas</span>
+          <span>16 sesiones de 2 horas</span>
+          <span>Fecha por confirmar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="curso-layout">
+      <div class="curso-main">
+        <div class="curso-stats">
+          <div><strong>32 horas</strong><span>16 sesiones de 2 horas</span></div>
+          <div><strong>5 módulos</strong><span>Del alistamiento al pitch</span></div>
+          <div><strong>Agro / palma</strong><span>Colaborador rural</span></div>
+          <div><strong>Por confirmar</strong><span>Próxima cohorte</span></div>
+        </div>
+
+        <section class="curso-block">
+          <h2>Descripción</h2>
+          <p>Este programa es un ecosistema de aprendizaje intensivo diseñado para evolucionar la gestión humana en el sector agrícola, pasando de un enfoque operativo a uno altamente estratégico. Integra el entendimiento profundo del colaborador rural, metodologías de innovación y el uso de inteligencia artificial para diseñar soluciones que fidelizan el talento, aumentan la productividad y aseguran la sostenibilidad en el entorno actual.</p>
+        </section>
+
+        <section class="curso-block">
+          <h2>En este curso aprenderás</h2>
+          <ul class="curso-bullets curso-bullets-check">
+            <li>Analizar el impacto del entorno VICA en el sector palmero y la gestión humana.</li>
+            <li>Construir mapas de empatía y el Employee Journey del colaborador rural.</li>
+            <li>Aplicar IA para atracción, formación, retención y entregables estratégicos.</li>
+            <li>Innovar en compensación, beneficios y experiencia del empleado (EX) con SCAMPER e ideación.</li>
+            <li>Medir con NPS y OKRs, y diseñar un roadmap de implementación accionable.</li>
+          </ul>
+        </section>
+
+        <section class="curso-block">
+          <h2>Módulos del programa</h2>
+          <div class="curso-mods">
+            <div class="curso-mod"><span>Módulo 0</span><h3>Alistamiento</h3><p>Contexto, entorno VICA en el sector palmero, introducción a la IA y evolución estratégica de la gestión humana.</p></div>
+            <div class="curso-mod"><span>Módulo 1</span><h3>Empatía</h3><p>Liderazgo, causas de rotación, planes de carrera, mapa de empatía del colaborador rural y Employee Journey.</p></div>
+            <div class="curso-mod"><span>Módulo 2</span><h3>Divergencia</h3><p>Creatividad, pensamiento lateral, SCAMPER, compensación, beneficios e IA en atracción y retención.</p></div>
+            <div class="curso-mod"><span>Módulo 3</span><h3>Convergencia</h3><p>Diseño de soluciones, prototipado, iteración con IA y Experiencia del Empleado (EX).</p></div>
+            <div class="curso-mod"><span>Módulo 4</span><h3>Implementación</h3><p>NPS, OKRs, roadmap (quick wins), storytelling, entregable con IA y pitch final.</p></div>
+          </div>
+        </section>
+
+        <section class="curso-block">
+          <h2>Incluye</h2>
+          <ul class="curso-bullets curso-bullets-check">
+            <li>Sesiones guiadas (online / híbrido) con ejercicios aplicables a su organización.</li>
+            <li>Plantillas de mapa de empatía y Employee Journey del colaborador rural.</li>
+            <li>Herramientas de ideación (SCAMPER) y criterios para compensación y beneficios.</li>
+            <li>Uso práctico de IA en atracción, formación y retención.</li>
+            <li>Actividad final: entregable + pitch y roadmap de implementación.</li>
+          </ul>
+        </section>
+
+        <section class="curso-block">
+          <h2>Temas relacionados</h2>
+          <div class="curso-tags">
+            <span>Talento Humano</span><span>Inteligencia Artificial</span><span>Innovación</span><span>Liderazgo</span>
+          </div>
+        </section>
+
+        <section class="curso-split">
+          <div class="curso-card">
+            <h2>¿Por qué elegir este curso?</h2>
+            <ul class="curso-bullets">
+              <li><strong>Contexto real:</strong> aterriza RR. HH. a la realidad del trabajador en el campo, con énfasis palmero.</li>
+              <li><strong>Aplicación práctica:</strong> cada módulo exige prototipar e iterar soluciones tangibles.</li>
+              <li><strong>IA útil:</strong> se integra en procesos de talento, no como moda.</li>
+              <li><strong>Cierre accionable:</strong> pitch y plan de ruta listos para llevar a la organización.</li>
+            </ul>
+          </div>
+          <div class="curso-card">
+            <h2>¿A quién está dirigido?</h2>
+            <ul class="curso-bullets">
+              <li>Directivos y gerentes de RR. HH. en agro, agroindustria o palma.</li>
+              <li>Líderes de operaciones en plantaciones que buscan bajar rotación en campo.</li>
+              <li>Equipos de desarrollo y bienestar del talento rural.</li>
+              <li>Consultores de capital humano que quieran IA e innovación en entornos productivos.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="curso-block">
+          <h2>Requerimientos</h2>
+          <ul class="curso-bullets">
+            <li>Computador o tablet con acceso a internet para las sesiones.</li>
+            <li>Interés real en aplicar lo aprendido en un equipo o plantación.</li>
+            <li>No se requiere experiencia previa en programación.</li>
+          </ul>
+        </section>
+
+        <section class="curso-block">
+          <h2>Facilitación eki</h2>
+          <div class="curso-fac">
+            <div class="curso-fac-card">
+              <div class="curso-fac-av"><img src="ekipo/andres.jpeg" alt="Andrés Rubiano"></div>
+              <div>
+                <h3>Andrés Rubiano</h3>
+                <p class="curso-fac-role">Director del programa · CEO</p>
+                <p>Dirige Capital Humano 10X: estrategia, territorio y el puente entre gestión humana e impacto en el agro.</p>
+              </div>
+            </div>
+            <div class="curso-fac-card">
+              <div class="curso-fac-av curso-fac-logo"><img src="favicon-512.png" alt="Logo eki"></div>
+              <div>
+                <h3>Equipo eki</h3>
+                <p class="curso-fac-role">Metodología, IA y acompañamiento</p>
+                <p>Diseño de experiencias, herramientas de ideación y uso práctico de IA en talento humano.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="curso-block curso-cta-final">
+          <h2>¿Tienes dudas?</h2>
+          <p>Escríbenos por WhatsApp. Queremos que tomes una decisión con claridad y sin presión.</p>
+          <div class="curso-hero-actions">
+            <a class="curso-btn-primary" href="https://wa.me/573026480629?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Programa%20Capital%20Humano%2010X" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+            <a class="curso-btn-ghost" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3eovVMkn9wK5aXUAztO2V13MJzu8_4BxIPor0VFv2Wa_xxbB5IAT6a-wKcbZ1iO0uVwZKntl71" target="_blank" rel="noopener noreferrer">Agendar reunión</a>
+          </div>
+        </section>
+      </div>
+
+      <aside class="curso-side" aria-label="Inscripción e información">
+        <div class="curso-side-card">
+          <div class="curso-side-price">Consultar</div>
+          <p class="curso-side-price-note">Inversión según cohorte y modalidad. Te contamos sin compromiso.</p>
+          <a class="curso-btn-primary curso-btn-block" href="https://wa.me/573026480629?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20Programa%20Capital%20Humano%2010X" target="_blank" rel="noopener noreferrer">Quiero información</a>
+          <a class="curso-btn-ghost curso-btn-block" href="#curso-form">Déjanos tus datos</a>
+          <ul class="curso-side-list">
+            <li>32 horas · 16 sesiones</li>
+            <li>Online / híbrido</li>
+            <li>Enfoque agro y palma</li>
+            <li>Pitch + roadmap final</li>
+          </ul>
+        </div>
+
+        <div class="curso-side-card" id="curso-form">
+          <h3>¿Quieres más información?</h3>
+          <p class="curso-side-lead">Déjanos tus datos y te acompañamos.</p>
+          <form class="curso-form" action="https://formsubmit.co/epikeducacion@gmail.com" method="POST" data-async-form="true" data-success-message="Mensaje enviado. Le escribimos al correo; si prefiere, escriba por WhatsApp.">
+            <input type="hidden" name="_subject" value="Interés: Programa Capital Humano 10X — eki">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_autoresponse" value="Hola, acá eki. Recibimos su interés en el Programa Capital Humano 10X. Le escribimos a este correo. WhatsApp: 302 648 0629.">
+            <input type="hidden" name="fuente" value="Curso Capital Humano 10X">
+            <input type="hidden" name="curso" value="Programa Capital Humano 10X">
+            <label class="cfl" for="ch10x-nombre">Nombre *</label>
+            <div class="cfi"><input id="ch10x-nombre" type="text" name="nombre" placeholder="Tu nombre" required></div>
+            <label class="cfl" for="ch10x-email">Correo *</label>
+            <div class="cfi"><input id="ch10x-email" type="email" name="email" placeholder="correo@organizacion.com" required></div>
+            <label class="cfl" for="ch10x-tel">Teléfono *</label>
+            <div class="cfi"><input id="ch10x-tel" type="tel" name="telefono" placeholder="302 648 0629" required></div>
+            <label class="cfl" for="ch10x-msg">Mensaje *</label>
+            <div class="cft"><textarea id="ch10x-msg" name="mensaje" placeholder="Organización e interés..." required></textarea></div>
+            <div class="habeas-consent"><input id="ch10x-habeas" type="checkbox" name="acepta-habeas" required class="checkbox-input"><label for="ch10x-habeas" style="font-size:11px;color:var(--m);">Acepto el tratamiento de datos (<a class="link-action" href="/habeas-data" target="_blank" rel="noopener noreferrer">Habeas Data</a>)</label></div>
+            <button class="cfs curso-btn-block" type="submit">Enviar</button>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-curso-coaching-productividad-liderazgo-campo">
+  <div class="curso-shell">
+    <div class="curso-topband curso-topband--campo">
+      <div class="curso-topband-inner">
+        <a class="curso-back" href="/cursos">← Cursos</a>
+        <p class="curso-kicker">Curso · Coaching agro-rural</p>
+        <h1>Coaching, Productividad y Liderazgo para el Campo</h1>
+        <p class="curso-tagline">Herramientas de coaching humano para organizar el tiempo, cuidar recursos y proponer soluciones en el día a día rural</p>
+        <div class="curso-hero-meta">
+          <span class="fecha-pill">Online</span>
+          <span>16 horas sincrónicas</span>
+          <span>8 sesiones en vivo de 2 horas</span>
+          <span>Fecha por confirmar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="curso-layout">
+      <div class="curso-main">
+        <div class="curso-stats">
+          <div><strong>16 horas</strong><span>8 sesiones de 2 horas</span></div>
+          <div><strong>4 módulos</strong><span>Tiempo, recursos, resiliencia, liderazgo</span></div>
+          <div><strong>Online</strong><span>100% coaching y realidad</span></div>
+          <div><strong>Por confirmar</strong><span>Próxima cohorte</span></div>
+        </div>
+
+        <section class="curso-block">
+          <h2>Descripción</h2>
+          <p>Un programa de coaching ágil y práctico diseñado para todos los niveles de las empresas agro-rurales. Dejamos atrás la teoría tradicional para enfocarnos en resolver problemas del día a día mediante herramientas de coaching humano. Los equipos aprenderán a organizar su tiempo, optimizar los recursos de la empresa, comunicarse asertivamente y proponer soluciones rápidas frente a los cambios del clima y el mercado.</p>
+        </section>
+
+        <section class="curso-block">
+          <h2>En este curso aprenderás</h2>
+          <ul class="curso-bullets curso-bullets-check">
+            <li>Organizar el tiempo y los procesos de la finca, separando urgencias diarias de lo que sí impacta resultados.</li>
+            <li>Desarrollar sentido de pertenencia y optimizar insumos, maquinaria y recursos para evitar desperdicios invisibles.</li>
+            <li>Aplicar escucha activa para mejorar la comunicación, resolver conflictos y fortalecer el trabajo en equipo.</li>
+            <li>Diseñar planes de contingencia reales frente a riesgos operativos.</li>
+            <li>Pasar de “reportar problemas” a “proponer soluciones” desde cualquier puesto de trabajo.</li>
+          </ul>
+        </section>
+
+        <section class="curso-block">
+          <h2>Módulos del programa</h2>
+          <div class="curso-mods">
+            <div class="curso-mod"><span>Módulo 1</span><h3>El Reloj y la Brújula</h3><p>Tiempo, datos y productividad: ladrones de tiempo y cuellos de botella, decisiones con datos vs. “a ojo”, y la Matriz de Prioridades Rural (urgente vs. importante).</p></div>
+            <div class="curso-mod"><span>Módulo 2</span><h3>Cuidar lo Nuestro y Buscar Soluciones</h3><p>Optimización y mejora continua: pertenencia, desperdicios en el puesto (movimientos, esperas, materiales) y el Círculo de Influencia.</p></div>
+            <div class="curso-mod"><span>Módulo 3</span><h3>Aguante y Eficiencia</h3><p>Resiliencia y calidad: hacer las cosas bien a la primera y el Modelo GROW (Meta, Realidad, Opciones, Voluntad) aplicado a contingencias.</p></div>
+            <div class="curso-mod"><span>Módulo 4</span><h3>Fuerza Rural</h3><p>Liderazgo, equipo y relevo generacional: retroalimentación, retención de talento, transferencia de conocimiento, escucha activa y la Rueda de la Empresa Rural.</p></div>
+          </div>
+        </section>
+
+        <section class="curso-block">
+          <h2>Incluye</h2>
+          <ul class="curso-bullets curso-bullets-check">
+            <li>8 sesiones en vivo (online) con retos aplicables esa misma semana.</li>
+            <li>Herramientas de coaching: Matriz de Prioridades Rural, Círculo de Influencia, GROW y Escucha Activa.</li>
+            <li>Enfoque 100% en metodologías de coaching y aprendizaje basado en la realidad.</li>
+            <li>Lenguaje del campo: pensado para operario, supervisor y gerente.</li>
+          </ul>
+        </section>
+
+        <section class="curso-block">
+          <h2>Temas relacionados</h2>
+          <div class="curso-tags">
+            <span>Liderazgo rural</span><span>Productividad</span><span>Mejora continua</span><span>Resiliencia operativa</span><span>Coaching de equipos</span>
+          </div>
+        </section>
+
+        <section class="curso-split">
+          <div class="curso-card">
+            <h2>¿Por qué elegir este curso?</h2>
+            <ul class="curso-bullets">
+              <li><strong>100% aplicable:</strong> retos prácticos que se ejecutan en el puesto esa misma semana.</li>
+              <li><strong>Diseñado para todos:</strong> habla el lenguaje del campo, del operario al gerente.</li>
+              <li><strong>Enfoque humano:</strong> conversaciones guiadas, no clases magistrales.</li>
+              <li><strong>Talento interno:</strong> fomenta roles activos y propositivos ante imprevistos.</li>
+            </ul>
+          </div>
+          <div class="curso-card">
+            <h2>¿A quién está dirigido?</h2>
+            <ul class="curso-bullets">
+              <li>Supervisores o encargados de producción.</li>
+              <li>Líderes, equipos operativos o comerciales del sector agrícola.</li>
+              <li>Administradores y gerentes agro-rurales.</li>
+              <li>Colaboradores rurales que buscan productividad, soluciones y liderazgo.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="curso-block">
+          <h2>Requerimientos</h2>
+          <ul class="curso-bullets">
+            <li>Conexión a internet para las 8 sesiones en vivo.</li>
+            <li>Ganas de aplicar lo aprendido en el puesto de trabajo.</li>
+            <li>No se requiere experiencia previa en coaching formal.</li>
+          </ul>
+        </section>
+
+        <section class="curso-block">
+          <h2>Facilitación eki</h2>
+          <div class="curso-fac">
+            <div class="curso-fac-card">
+              <div class="curso-fac-av"><img src="ekipo/luisa.jpeg" alt="Luisa Salazar"></div>
+              <div>
+                <h3>Luisa Salazar</h3>
+                <p class="curso-fac-role">Facilitadora del curso · Gestión comercial y administrativa</p>
+                <p>Dirige este programa de coaching: acompañamiento cercano a equipos, conversación práctica y seguimiento a la aplicación en campo.</p>
+              </div>
+            </div>
+            <div class="curso-fac-card">
+              <div class="curso-fac-av curso-fac-logo"><img src="favicon-512.png" alt="Logo eki"></div>
+              <div>
+                <h3>Equipo eki</h3>
+                <p class="curso-fac-role">Metodología y acompañamiento</p>
+                <p>Diseño de la experiencia formativa y soporte para que lo aprendido se quede en el territorio.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="curso-block curso-cta-final">
+          <h2>¿Tienes dudas?</h2>
+          <p>Escríbenos por WhatsApp. Queremos que tomes una decisión con claridad y sin presión.</p>
+          <div class="curso-hero-actions">
+            <a class="curso-btn-primary" href="https://wa.me/573026480629?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20curso%20Coaching%2C%20Productividad%20y%20Liderazgo%20para%20el%20Campo" target="_blank" rel="noopener noreferrer">Contáctanos por WhatsApp</a>
+            <a class="curso-btn-ghost" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3eovVMkn9wK5aXUAztO2V13MJzu8_4BxIPor0VFv2Wa_xxbB5IAT6a-wKcbZ1iO0uVwZKntl71" target="_blank" rel="noopener noreferrer">Agendar reunión</a>
+          </div>
+        </section>
+      </div>
+
+      <aside class="curso-side" aria-label="Inscripción e información">
+        <div class="curso-side-card">
+          <div class="curso-side-price">Consultar</div>
+          <p class="curso-side-price-note">Inversión según cohorte. Te contamos sin compromiso.</p>
+          <a class="curso-btn-primary curso-btn-block" href="https://wa.me/573026480629?text=Hola%2C%20quiero%20informaci%C3%B3n%20del%20curso%20Coaching%2C%20Productividad%20y%20Liderazgo%20para%20el%20Campo" target="_blank" rel="noopener noreferrer">Quiero información</a>
+          <a class="curso-btn-ghost curso-btn-block" href="#curso-form-coach">Déjanos tus datos</a>
+          <ul class="curso-side-list">
+            <li>16 horas · 8 sesiones en vivo</li>
+            <li>Modalidad online</li>
+            <li>Coaching 100% aplicable</li>
+            <li>Para todos los niveles</li>
+          </ul>
+        </div>
+
+        <div class="curso-side-card" id="curso-form-coach">
+          <h3>¿Quieres más información?</h3>
+          <p class="curso-side-lead">Déjanos tus datos y te acompañamos.</p>
+          <form class="curso-form" action="https://formsubmit.co/epikeducacion@gmail.com" method="POST" data-async-form="true" data-success-message="Mensaje enviado. Le escribimos al correo; si prefiere, escriba por WhatsApp.">
+            <input type="hidden" name="_subject" value="Interés: Coaching Productividad y Liderazgo para el Campo — eki">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_autoresponse" value="Hola, acá eki. Recibimos su interés en Coaching, Productividad y Liderazgo para el Campo. Le escribimos a este correo. WhatsApp: 302 648 0629.">
+            <input type="hidden" name="fuente" value="Curso Coaching Productividad Liderazgo Campo">
+            <input type="hidden" name="curso" value="Coaching, Productividad y Liderazgo para el Campo">
+            <label class="cfl" for="coach-nombre">Nombre *</label>
+            <div class="cfi"><input id="coach-nombre" type="text" name="nombre" placeholder="Tu nombre" required></div>
+            <label class="cfl" for="coach-email">Correo *</label>
+            <div class="cfi"><input id="coach-email" type="email" name="email" placeholder="correo@organizacion.com" required></div>
+            <label class="cfl" for="coach-tel">Teléfono *</label>
+            <div class="cfi"><input id="coach-tel" type="tel" name="telefono" placeholder="302 648 0629" required></div>
+            <label class="cfl" for="coach-msg">Mensaje *</label>
+            <div class="cft"><textarea id="coach-msg" name="mensaje" placeholder="Organización e interés..." required></textarea></div>
+            <div class="habeas-consent"><input id="coach-habeas" type="checkbox" name="acepta-habeas" required class="checkbox-input"><label for="coach-habeas" style="font-size:11px;color:var(--m);">Acepto el tratamiento de datos (<a class="link-action" href="/habeas-data" target="_blank" rel="noopener noreferrer">Habeas Data</a>)</label></div>
+            <button class="cfs curso-btn-block" type="submit">Enviar</button>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
 </div>
 
 <!-- HABEAS DATA -->
@@ -1045,13 +1505,13 @@
         <a class="fsi" href="https://wa.me/573026480629" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><img src="logos/whatsapp.png" alt="WhatsApp" onerror="this.style.display='none';this.parentNode.textContent='WA';"></a>
       </div>
     </div>
-    <div class="fc"><h5>Páginas</h5><ul><li><a href="/">Inicio</a></li><li><a href="/nosotros">Nosotros</a></li><li><a href="/soluciones">Soluciones</a></li><li><a href="/programas">Programas</a></li><li><a href="/experiencias">Experiencias</a></li><li><a href="/noticias">Noticias</a></li><li><a href="#" data-modal="mChat">Demo</a></li></ul></div>
-    <div class="fc"><h5>Soluciones</h5><ul><li><a href="/programas">Programas</a></li><li><a href="#" data-modal="m1" role="button">WhatsApp + IA</a></li><li><a href="#" data-modal="m2" role="button">Proyectos</a></li><li><a href="#" data-modal="m3" role="button">Contenidos</a></li><li><a href="#" data-modal="m4" role="button">Plataforma LXP</a></li></ul></div>
+    <div class="fc"><h5>Páginas</h5><ul><li><a href="/">Inicio</a></li><li><a href="/nosotros">Nosotros</a></li><li><a href="/soluciones">Soluciones</a></li><li><a href="/programas">Programas</a></li><li><a href="/cursos">Cursos</a></li><li><a href="/experiencias">Experiencias</a></li><li><a href="/noticias">Noticias</a></li><li><a href="#" data-modal="mChat">Demo</a></li></ul></div>
+    <div class="fc"><h5>Soluciones</h5><ul><li><a href="/cursos">Cursos</a></li><li><a href="/programas">Programas</a></li><li><a href="#" data-modal="m1" role="button">WhatsApp + IA</a></li><li><a href="#" data-modal="m2" role="button">Proyectos</a></li><li><a href="#" data-modal="m3" role="button">Contenidos</a></li><li><a href="#" data-modal="m4" role="button">Plataforma LXP</a></li></ul></div>
     <div class="fc"><h5>Contacto</h5><ul><li><a href="mailto:comunidad.educativa@eki.com.co">comunidad.educativa@eki.com.co</a></li><li><a href="https://wa.me/573026480629" target="_blank" rel="noopener noreferrer">WhatsApp: 302 648 0629</a></li><li><a href="/habeas-data">Habeas Data</a></li></ul></div>
   </div>
   <div class="fbt"><p>2025 Smart Skills Factory SAS — eki. Educación con equidad para la ruralidad. www.eki.com.co</p><div class="footer-policy-links"><a href="/habeas-data">Política de Privacidad</a><a href="/habeas-data">Habeas Data</a></div></div>
 </footer>
 
-<script type="module" src="/js/main.js?v=20260821v"></script>
+<script type="module" src="/js/main.js?v=20260925a"></script>
 </body>
 </html>
