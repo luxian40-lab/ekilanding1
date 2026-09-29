@@ -813,7 +813,6 @@ footer{background:var(--pd);padding:44px 48px 26px;position:relative;overflow:hi
 .prog-wrap h2{font-size:18px;text-transform:none;letter-spacing:0;color:var(--pd);margin:28px 0 12px;}
 .prog-who{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 8px;}
 .prog-card{background:#fff;border:1px solid rgba(154,108,172,.2);border-radius:18px;padding:20px;}
-.prog-wrap .prog-card + .prog-card{margin-top:14px;}
 .prog-card h2{font-size:16px;color:var(--pd);margin:0 0 10px;text-transform:none;letter-spacing:0;}
 .prog-card p,.prog-card li{font-size:14px;line-height:1.7;color:#4a3a58;}
 .prog-card ul{margin:0;padding-left:18px;}
