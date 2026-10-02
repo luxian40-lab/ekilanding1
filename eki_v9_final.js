@@ -8,6 +8,7 @@ const PAGE_PATHS = {
   contacto: '/contacto',
   demo: '/demo',
   'habeas-data': '/habeas-data',
+  'uso-de-ia': '/uso-de-ia',
   programas: '/programas',
   'programa-emprendimiento-agro-rural': '/programas/emprendimiento-agro-rural',
   'programa-maquinaria-herramientas-agro': '/programas/maquinaria-herramientas-agro',
@@ -38,6 +39,7 @@ const PAGE_TITLES = {
   contacto: 'Contacto — Hablemos de su proyecto rural | eki',
   demo: 'Solicitar demo de eki | Formación rural con IA',
   'habeas-data': 'Política de Habeas Data — eki',
+  'uso-de-ia': 'Cómo usamos la inteligencia artificial | eki',
   programas: 'Programas de formación rural por WhatsApp | eki',
   'programa-emprendimiento-agro-rural': 'Innovación e IA para nuevos emprendedores | Programa eki',
   'programa-maquinaria-herramientas-agro': 'Maquinaria y herramientas para el agro | Programa eki',
@@ -60,6 +62,7 @@ const PAGE_DESCRIPTIONS = {
   contacto: 'Empresas, fundaciones y entidades públicas: diseñamos la solución educativa que su comunidad rural necesita.',
   demo: 'Vea cómo funcionan las microcápsulas por WhatsApp, los agentes de IA y la plataforma LXP de eki.',
   'habeas-data': 'Política de tratamiento de datos personales de eki, conforme a la Ley 1581 de 2012.',
+  'uso-de-ia': 'eki usa inteligencia artificial para mejorar la formación y agentes de IA para conversar. No reemplazan a una persona.',
   programas: 'Catálogo de programas eki: emprendimiento rural, maquinaria, ventas, agricultura digital y la demo Tome las riendas de su dinero.',
   'programa-emprendimiento-agro-rural': 'Un camino sencillo para innovar con propósito: escuchar al cliente, ir a la causa del problema y probar en chiquito, con apoyo de inteligencia artificial, por WhatsApp.',
   'programa-maquinaria-herramientas-agro': 'Use equipos y herramientas del agro con criterio: seguridad, mantenimiento y cuándo no vale la pena comprar.',
@@ -802,6 +805,13 @@ document.addEventListener('click', e => {
   if(!pageId) return;
   e.preventDefault();
   setActivePage(pageId);
+  if(url.hash.length > 1){
+    const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if(target){
+      try { window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`); } catch (error) { /* ignore */ }
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 });
 
 ['home','nosotros','soluciones','experiencias','demo','contacto','programas'].forEach(id => {

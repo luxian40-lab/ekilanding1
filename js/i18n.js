@@ -123,8 +123,7 @@ function resolveInitialLang() {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === 'en' || stored === 'es') return stored;
   } catch (_) { /* ignore */ }
-  const nav = (navigator.language || '').toLowerCase();
-  return nav.startsWith('en') ? 'en' : 'es';
+  return 'es';
 }
 
 export function initI18n() {

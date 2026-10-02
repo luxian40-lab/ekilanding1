@@ -20,4 +20,5 @@
   <url><loc>https://eki.com.co/contacto</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://eki.com.co/demo</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://eki.com.co/habeas-data</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://eki.com.co/uso-de-ia</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>
