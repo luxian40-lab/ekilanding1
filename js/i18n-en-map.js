@@ -898,6 +898,7 @@ export default {
   "El navegador no dejó usar el micrófono.": "The browser did not allow the microphone.",
   "Ya estás al aire.": "You are on air.",
   "No se pudo abrir el en vivo.": "The live segment could not start.",
+  "Ya hay un en vivo abierto en otra ventana.": "A live segment is already open in another window.",
   "Elige un audio y confirma que eki puede emitirlo.": "Choose an audio file and confirm eki may broadcast it.",
   "Ese audio no se pudo leer.": "That audio could not be read.",
   "No se pudo subir el audio.": "The audio could not be uploaded.",

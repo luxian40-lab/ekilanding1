@@ -12,10 +12,10 @@
   background:#fff;
   color:var(--p3);
   font-family:var(--f);
-  font-size:10px;
+  font-size:12px;
   font-weight:800;
-  letter-spacing:.08em;
-  text-transform:uppercase;
+  letter-spacing:.02em;
+  text-transform:none;
   cursor:pointer;
   box-shadow:0 10px 24px rgba(42,18,64,.18);
 }
@@ -49,7 +49,7 @@
 }
 .radio-dock[hidden]{display:none !important;}
 .radio-dock-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
-.radio-kicker{margin:0;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--p2);}
+.radio-kicker{margin:0;font-size:13px;font-weight:800;letter-spacing:.02em;text-transform:none;color:var(--p2);}
 .radio-dock.is-live .radio-kicker{color:#d23b4a;}
 .radio-title{margin:8px 0 0;font-size:18px;line-height:1.25;color:var(--pd);}
 .radio-meta{margin:4px 0 0;font-size:13px;color:var(--m);}
@@ -80,6 +80,7 @@
   cursor:pointer;
 }
 .radio-studio .tw{max-width:720px;}
+.radio-studio .tw h1{text-transform:none;letter-spacing:-.04em;}
 .estudio-card{
   max-width:720px;
   margin:18px 0;

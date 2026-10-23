@@ -13,6 +13,7 @@ let liveSocket = null;
 let liveCtx = null;
 let liveNode = null;
 let hostGear = null;
+let hostStarting = false;
 let apiMode = 'sin-api';
 
 const bogotaSeconds = () => {
@@ -412,20 +413,26 @@ const stopHost = async () => {
 };
 
 const startHost = async () => {
+  if (hostGear || hostStarting) return;
   if (!navigator.mediaDevices?.getUserMedia) {
     studioMsg('Este navegador no puede usar el micrófono.');
     return;
   }
+  hostStarting = true;
+  const ctx = new AudioContext();
+  const resume = ctx.resume();
   let stream;
   try {
     stream = await navigator.mediaDevices.getUserMedia({
       audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1 }
     });
+    await resume;
   } catch (_error) {
+    ctx.close().catch(() => {});
+    hostStarting = false;
     studioMsg('El navegador no dejó usar el micrófono.');
     return;
   }
-  const ctx = new AudioContext();
   const source = ctx.createMediaStreamSource(stream);
   const processor = ctx.createScriptProcessor(4096, 1, 1);
   const mute = ctx.createGain();
@@ -436,22 +443,30 @@ const startHost = async () => {
   const socket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/api/radio/live?role=host&token=${encodeURIComponent(token())}`);
   socket.binaryType = 'arraybuffer';
   hostGear = { processor, source, stream, ctx, socket };
+  hostStarting = false;
+  let opened = false;
   socket.onopen = () => {
+    opened = true;
     air.enVivo = true;
     if (draft) draft.enVivo = true;
     renderDraft();
     studioMsg('Ya estás al aire.');
     tick();
   };
-  socket.onclose = () => {
-    if (!releaseHost()) return;
+  socket.onclose = event => {
+    if (!hostGear || hostGear.socket !== socket) return;
+    releaseHost();
     air.enVivo = false;
     if (draft) draft.enVivo = false;
     renderDraft();
-    studioMsg('Terminó el en vivo. La programación sigue.');
+    if (!opened) studioMsg('No se pudo abrir el en vivo.');
+    else if (event.code === 4001) studioMsg('Ya hay un en vivo abierto en otra ventana.');
+    else studioMsg('Terminó el en vivo. La programación sigue.');
     tick();
   };
-  socket.onerror = () => studioMsg('No se pudo abrir el en vivo.');
+  socket.onerror = () => {
+    if (!opened) studioMsg('No se pudo abrir el en vivo.');
+  };
   processor.onaudioprocess = event => {
     if (socket.readyState !== 1) return;
     const input = new Float32Array(event.inputBuffer.getChannelData(0));

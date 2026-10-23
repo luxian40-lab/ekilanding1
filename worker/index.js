@@ -104,49 +104,52 @@ const escapeXml = value => String(value)
   .replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
 
+const liveSockets = (state, tag) => state.getWebSockets(tag).filter(ws => ws.readyState === 1);
+
 export class RadioRoom {
   constructor(state, env) {
     this.state = state;
     this.env = env;
-    this.host = null;
-    this.listeners = new Set();
   }
 
   async fetch(request) {
     if (request.headers.get('Upgrade') !== 'websocket') return new Response('esperado websocket', { status: 426 });
     const url = new URL(request.url);
+    const role = url.searchParams.get('role') === 'host' ? 'host' : 'listener';
     const pair = new WebSocketPair();
     const client = pair[0];
     const server = pair[1];
-    server.accept();
-    if (url.searchParams.get('role') === 'host') {
-      if (this.host && this.host.readyState === 1) {
-        server.close(4001, 'ocupado');
-        return new Response(null, { status: 101, webSocket: client });
-      }
-      this.host = server;
-      await this.markLive(true);
-      server.addEventListener('message', async event => {
-        let data = event.data;
-        if (typeof Blob !== 'undefined' && data instanceof Blob) data = await data.arrayBuffer();
-        for (const listener of this.listeners) {
-          if (listener.readyState === 1) listener.send(data);
-        }
-      });
-      server.addEventListener('close', () => {
-        if (this.host !== server) return;
-        this.host = null;
-        this.markLive(false);
-      });
-    } else {
-      if (this.listeners.size >= 40) server.close(4003, 'lleno');
-      else {
-        this.listeners.add(server);
-        server.send(JSON.stringify({ type: 'live', on: Boolean(this.host && this.host.readyState === 1) }));
-        server.addEventListener('close', () => this.listeners.delete(server));
-      }
+    if (role === 'host' && liveSockets(this.state, 'host').length) {
+      this.state.acceptWebSocket(server, ['rechazado']);
+      server.close(4001, 'ocupado');
+      return new Response(null, { status: 101, webSocket: client });
     }
+    if (role === 'listener' && liveSockets(this.state, 'listener').length >= 40) {
+      this.state.acceptWebSocket(server, ['rechazado']);
+      server.close(4003, 'lleno');
+      return new Response(null, { status: 101, webSocket: client });
+    }
+    this.state.acceptWebSocket(server, [role]);
+    if (role === 'host') await this.markLive(true);
+    else server.send(JSON.stringify({ type: 'live', on: liveSockets(this.state, 'host').length > 0 }));
     return new Response(null, { status: 101, webSocket: client });
+  }
+
+  async webSocketMessage(ws, message) {
+    if (!this.state.getTags(ws).includes('host')) return;
+    let data = message;
+    if (typeof Blob !== 'undefined' && data instanceof Blob) data = await data.arrayBuffer();
+    for (const listener of liveSockets(this.state, 'listener')) {
+      try { listener.send(data); } catch (_error) { /* el oyente ya se fue */ }
+    }
+  }
+
+  async webSocketClose(ws) {
+    if (this.state.getTags(ws).includes('host')) await this.markLive(false);
+  }
+
+  async webSocketError(ws) {
+    if (this.state.getTags(ws).includes('host')) await this.markLive(false);
   }
 
   async markLive(on) {
@@ -155,8 +158,8 @@ export class RadioRoom {
     data.enVivo = on;
     await saveState(this.env, data);
     const note = JSON.stringify({ type: 'live', on });
-    for (const listener of this.listeners) {
-      if (listener.readyState === 1) listener.send(note);
+    for (const listener of liveSockets(this.state, 'listener')) {
+      try { listener.send(note); } catch (_error) { /* el oyente ya se fue */ }
     }
   }
 }
