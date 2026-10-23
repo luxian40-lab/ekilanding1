@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>eki radio</title>
+    <link>https://eki.com.co/</link>
+    <description>Cápsulas de eki radio, conducidas por Yineth Ortiz.</description>
+    <language>es-co</language>
+    <item>
+      <title>Identificación eki</title>
+      <guid isPermaLink="false">ident-eki</guid>
+      <enclosure url="https://eki.com.co/radio/audio/ident-eki.wav" length="361664" type="audio/wav"/>
+    </item>
+  </channel>
+</rss>

@@ -9,6 +9,7 @@ const PAGE_PATHS = {
   demo: '/demo',
   'habeas-data': '/habeas-data',
   'uso-de-ia': '/uso-de-ia',
+  estudio: '/estudio',
   programas: '/programas',
   'programa-emprendimiento-agro-rural': '/programas/emprendimiento-agro-rural',
   'programa-maquinaria-herramientas-agro': '/programas/maquinaria-herramientas-agro',
@@ -40,6 +41,7 @@ const PAGE_TITLES = {
   demo: 'Solicitar demo de eki | Formación rural con IA',
   'habeas-data': 'Política de Habeas Data — eki',
   'uso-de-ia': 'Cómo usamos la inteligencia artificial | eki',
+  estudio: 'Estudio de eki radio',
   programas: 'Programas de formación rural por WhatsApp | eki',
   'programa-emprendimiento-agro-rural': 'Innovación e IA para nuevos emprendedores | Programa eki',
   'programa-maquinaria-herramientas-agro': 'Maquinaria y herramientas para el agro | Programa eki',
@@ -63,6 +65,7 @@ const PAGE_DESCRIPTIONS = {
   demo: 'Vea cómo funcionan las microcápsulas por WhatsApp, los agentes de IA y la plataforma LXP de eki.',
   'habeas-data': 'Política de tratamiento de datos personales de eki, conforme a la Ley 1581 de 2012.',
   'uso-de-ia': 'eki usa inteligencia artificial para mejorar la formación y agentes de IA para conversar. No reemplazan a una persona.',
+  estudio: 'Estudio de eki radio. Yineth publica la programación y sale en vivo.',
   programas: 'Catálogo de programas eki: emprendimiento rural, maquinaria, ventas, agricultura digital y la demo Tome las riendas de su dinero.',
   'programa-emprendimiento-agro-rural': 'Un camino sencillo para innovar con propósito: escuchar al cliente, ir a la causa del problema y probar en chiquito, con apoyo de inteligencia artificial, por WhatsApp.',
   'programa-maquinaria-herramientas-agro': 'Use equipos y herramientas del agro con criterio: seguridad, mantenimiento y cuándo no vale la pena comprar.',
@@ -113,6 +116,13 @@ const setPageMeta = id => {
   if(descTag) descTag.setAttribute('content', description);
   const path = PAGE_PATHS[id] || '/';
   const url = `${SITE_ORIGIN}${path}`;
+  let robots = document.querySelector('meta[name="robots"]');
+  if (!robots) {
+    robots = document.createElement('meta');
+    robots.setAttribute('name', 'robots');
+    document.head.appendChild(robots);
+  }
+  robots.setAttribute('content', id === 'estudio' ? 'noindex, nofollow' : 'index, follow');
   const canonical = document.querySelector('link[rel="canonical"]');
   if(canonical) canonical.setAttribute('href', url);
   const ogUrl = document.querySelector('meta[property="og:url"]');

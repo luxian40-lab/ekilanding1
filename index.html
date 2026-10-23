@@ -38,6 +38,7 @@
 <link rel="preload" as="image" href="/assets/imageneki.jpg" fetchpriority="high">
 <link rel="stylesheet" href="/css/main.css?v=20261002a">
 <link rel="stylesheet" href="/css/mobile-enhancements.css?v=20261002a">
+<link rel="stylesheet" href="/css/radio.css?v=20261023c">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -250,6 +251,10 @@
     <a class="bd" href="#" data-modal="mChat">Demo</a>
     <a class="bs" href="/contacto" id="n-contacto">Contáctanos</a>
   </div>
+  <button class="radio-launch" id="radioLaunch" type="button" aria-pressed="false" aria-label="Abrir eki radio">
+    <span class="radio-launch-dot" aria-hidden="true"></span>
+    <span>eki radio</span>
+  </button>
   <button class="nav-toggle" id="mobileNavToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileNavPanel">
     <span class="nav-toggle-bars" aria-hidden="true"><span></span><span></span><span></span></span>
     <span class="nav-toggle-label">Menú</span>
@@ -493,10 +498,10 @@
             <div class="eqnm">Julian Ramirez</div>
             <div class="eqrl">CTO — Tecnología y sistemas</div>
           </div>
-          <div class="eqc"><div class="eqav"><img src="ekipo/luisa.jpeg" alt="Luisa Salazar" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">LS</span></div><div class="eqnm">Luisa Salazar</div><div class="eqrl">Gestión Comercial y administrativa</div></div>
+          <div class="eqc"><div class="eqav"><img src="ekipo/luisa.jpeg?v=20261023a" alt="Luisa Salazar" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">LS</span></div><div class="eqnm">Luisa Salazar</div><div class="eqrl">Gestión Comercial y administrativa</div></div>
         </div>
         <div class="eq-slide">
-          <div class="eqc"><div class="eqav"><img src="ekipo/yineth.jpeg" alt="Yineth Ortiz" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">YO</span></div><div class="eqnm">Yineth Ortiz</div><div class="eqrl">CM — Community Manager</div></div>
+          <div class="eqc"><div class="eqav"><img src="ekipo/yineth.jpeg?v=20261023a" alt="Yineth Ortiz" onerror="this.style.display='none';this.nextElementSibling.style.display='block';"><span style="display:none;">YO</span></div><div class="eqnm">Yineth Ortiz</div><div class="eqrl">CM — Community Manager</div></div>
           <div class="eqc" data-ekipo="steven" role="button" tabindex="0" aria-label="Ver perfil de Steven Oviedo, consultor">
             <div class="eqav eqav-letter"><span>SO</span></div>
             <div class="eqnm">Steven Oviedo</div>
@@ -1073,7 +1078,7 @@
           <h2>Facilitación eki</h2>
           <div class="curso-fac">
             <div class="curso-fac-card">
-              <div class="curso-fac-av"><img src="ekipo/luisa.jpeg" alt="Luisa Salazar"></div>
+              <div class="curso-fac-av"><img src="ekipo/luisa.jpeg?v=20261023a" alt="Luisa Salazar"></div>
               <div>
                 <h3>Luisa Salazar</h3>
                 <p class="curso-fac-role">Facilitadora del curso · Gestión comercial y administrativa</p>
@@ -1512,8 +1517,75 @@
     </div>
   </section>
 </div>
+<div class="page" id="page-estudio">
+  <section class="sec radio-studio">
+    <div class="tg"><span class="ll"></span> Estudio</div>
+    <div class="tw">
+      <h1>eki radio</h1>
+      <p class="hd">La página suena sola con la lista, en hora de Colombia. Cuando Yineth sale en vivo, la música se aparta y el botón pasa a su micrófono.</p>
+    </div>
+    <p id="estudioNota" class="estudio-msg" data-i18n-skip></p>
+    <div id="estudioGate" class="estudio-card">
+      <h2>Entrada</h2>
+      <label for="estudioClave">Clave del estudio</label>
+      <input id="estudioClave" type="password" autocomplete="current-password">
+      <div class="estudio-actions">
+        <button type="button" id="estudioEntrar">Entrar al estudio</button>
+      </div>
+    </div>
+    <div id="estudioApp" hidden>
+      <div class="estudio-card">
+        <h2>Programación</h2>
+        <p>La lista se repite durante el día. Arriba va primero. Las cápsulas entran en el mismo orden, entre la música.</p>
+        <label for="estudioConductora">Quién conduce</label>
+        <input id="estudioConductora" type="text" value="Yineth Ortiz" autocomplete="name">
+        <div id="estudioLista" data-i18n-skip></div>
+        <div class="estudio-actions">
+          <button type="button" id="estudioGuardar">Guardar programación</button>
+          <button type="button" id="estudioLive" data-i18n-skip>Salir en vivo</button>
+          <button type="button" id="estudioSalir" class="is-quiet">Cerrar sesión</button>
+        </div>
+      </div>
+      <div class="estudio-card">
+        <h2>Subir audio</h2>
+        <p>Música propia o con permiso para emitirla en la web. Una lista de Spotify no se puede montar aquí.</p>
+        <label for="estudioTitulo">Nombre</label>
+        <input id="estudioTitulo" type="text" placeholder="Nombre de la pieza">
+        <label for="estudioTipo">Tipo</label>
+        <select id="estudioTipo">
+          <option value="musica">Música</option>
+          <option value="capsula">Cápsula</option>
+        </select>
+        <label for="estudioArchivo">Archivo de audio</label>
+        <input id="estudioArchivo" type="file" accept="audio/*">
+        <label class="estudio-check" for="estudioDerechos"><input id="estudioDerechos" type="checkbox"> Confirmo que eki puede emitir este audio en la página.</label>
+        <div class="estudio-actions">
+          <button type="button" id="estudioSubir">Publicar audio</button>
+        </div>
+      </div>
+      <div class="estudio-card">
+        <h2>Spotify for Creators</h2>
+        <p>Sirve para que las cápsulas también existan como pódcast. La música de esta lista no entra ahí. En Spotify for Creators elige agregar un pódcast con RSS y pega esta dirección. Spotify solo la lee cuando el sitio está publicado en internet, no desde este computador.</p>
+        <code id="estudioRss" class="estudio-rss" data-i18n-skip></code>
+      </div>
+    </div>
+    <p id="estudioMsg" class="estudio-msg" data-i18n-skip></p>
+  </section>
+</div>
 </main>
 
+<section class="radio-dock" id="radioDock" hidden aria-label="eki radio">
+  <div class="radio-dock-top">
+    <p class="radio-kicker" id="radioKicker" data-i18n-skip>eki radio</p>
+    <button class="radio-x" id="radioClose" type="button" aria-label="Cerrar eki radio">X</button>
+  </div>
+  <p class="radio-title" id="radioTitle" data-i18n-skip>Aún no hay programación</p>
+  <p class="radio-meta" id="radioMeta" data-i18n-skip></p>
+  <div class="radio-controls">
+    <button type="button" id="radioPlay" data-i18n-skip>Escuchar</button>
+  </div>
+  <audio id="radioAudio" preload="none"></audio>
+</section>
 <div class="mobile-sticky-cta" aria-label="Acciones rápidas móvil">
   <a href="#" data-modal="mChat">Demo</a>
   <a href="#" data-modal="mHablemos">Hablemos</a>
@@ -1533,11 +1605,11 @@
     </div>
     <div class="fc"><h5>Páginas</h5><ul><li><a href="/">Inicio</a></li><li><a href="/nosotros">Nosotros</a></li><li><a href="/soluciones">Soluciones</a></li><li><a href="/programas">Programas</a></li><li><a href="/cursos">Cursos</a></li><li><a href="/experiencias">Experiencias</a></li><li><a href="/noticias">Noticias</a></li><li><a href="#" data-modal="mChat">Demo</a></li></ul></div>
     <div class="fc"><h5>Soluciones</h5><ul><li><a href="/cursos">Cursos</a></li><li><a href="/programas">Programas</a></li><li><a href="#" data-modal="m1" role="button">WhatsApp + IA</a></li><li><a href="#" data-modal="m2" role="button">Proyectos</a></li><li><a href="#" data-modal="m3" role="button">Contenidos</a></li><li><a href="#" data-modal="m4" role="button">Plataforma LXP</a></li></ul></div>
-    <div class="fc"><h5>Contacto</h5><ul><li><a href="mailto:comunidad.educativa@eki.com.co">comunidad.educativa@eki.com.co</a></li><li><a href="https://wa.me/573026480629" target="_blank" rel="noopener noreferrer">WhatsApp: 302 648 0629</a></li><li><a href="/uso-de-ia">Uso de IA</a></li><li><a href="/habeas-data">Habeas Data</a></li></ul></div>
+    <div class="fc"><h5>Contacto</h5><ul><li><a href="mailto:comunidad.educativa@eki.com.co">comunidad.educativa@eki.com.co</a></li><li><a href="https://wa.me/573026480629" target="_blank" rel="noopener noreferrer">WhatsApp: 302 648 0629</a></li><li><a href="/uso-de-ia">Uso de IA</a></li><li><a href="/habeas-data">Habeas Data</a></li><li><a href="/estudio">Estudio de radio</a></li></ul></div>
   </div>
   <div class="fbt"><p>2025 Smart Skills Factory SAS — eki. Educación con equidad para la ruralidad. www.eki.com.co</p><div class="footer-policy-links"><a href="/uso-de-ia">Uso de IA</a><a href="/habeas-data">Política de Privacidad</a><a href="/habeas-data">Habeas Data</a></div></div>
 </footer>
 
-<script type="module" src="/js/main.js?v=20261019b"></script>
+<script type="module" src="/js/main.js?v=20261023c"></script>
 </body>
 </html>

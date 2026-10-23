@@ -1,0 +1,21 @@
+{
+  "conductora": "Yineth Ortiz",
+  "enVivo": false,
+  "actualizado": "2026-10-23T15:04:11.441Z",
+  "pista": [
+    {
+      "id": "ident-eki",
+      "tipo": "capsula",
+      "titulo": "Identificación eki",
+      "src": "/radio/audio/ident-eki.wav",
+      "duracion": 8.2
+    },
+    {
+      "id": "cama-eki",
+      "tipo": "musica",
+      "titulo": "Cama original eki",
+      "src": "/radio/audio/cama-eki.wav",
+      "duracion": 39.2
+    }
+  ]
+}

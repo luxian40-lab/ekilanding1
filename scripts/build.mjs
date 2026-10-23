@@ -13,7 +13,9 @@ const excludedNames = new Set([
   'media-originals',
   'package.json',
   'package-lock.json',
-  'wrangler.jsonc'
+  'wrangler.jsonc',
+  'wrangler.radio.jsonc',
+  'worker'
 ]);
 
 const shouldSkip = name => {

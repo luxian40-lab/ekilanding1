@@ -1,9 +1,20 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ekilanding1",
+  "main": "worker/index.js",
   "compatibility_date": "2026-05-31",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "single-page-application"
-  }
+  },
+  "r2_buckets": [
+    { "binding": "RADIO", "bucket_name": "eki-radio" }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "RADIO_ROOM", "class_name": "RadioRoom" }]
+  },
+  "migrations": [
+    { "tag": "v1-radio", "new_classes": ["RadioRoom"] }
+  ]
 }
