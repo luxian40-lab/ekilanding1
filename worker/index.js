@@ -126,9 +126,11 @@ export class RadioRoom {
       }
       this.host = server;
       await this.markLive(true);
-      server.addEventListener('message', event => {
+      server.addEventListener('message', async event => {
+        let data = event.data;
+        if (typeof Blob !== 'undefined' && data instanceof Blob) data = await data.arrayBuffer();
         for (const listener of this.listeners) {
-          if (listener.readyState === 1) listener.send(event.data);
+          if (listener.readyState === 1) listener.send(data);
         }
       });
       server.addEventListener('close', () => {

@@ -1,9 +1,12 @@
 .radio-launch{
+  position:fixed;
+  right:24px;
+  bottom:96px;
+  z-index:961;
   display:inline-flex;
   align-items:center;
   gap:8px;
-  margin-left:8px;
-  padding:7px 12px;
+  padding:8px 12px;
   border:2px solid var(--p);
   border-radius:999px;
   background:#fff;
@@ -14,6 +17,7 @@
   letter-spacing:.08em;
   text-transform:uppercase;
   cursor:pointer;
+  box-shadow:0 10px 24px rgba(42,18,64,.18);
 }
 .radio-launch-dot{
   width:8px;
@@ -126,14 +130,18 @@
   font-size:14px;
 }
 @media (max-width:860px){
-  .radio-launch{margin-left:auto;padding:6px 10px;}
+  .radio-launch{
+    right:16px;
+    bottom:calc(150px + env(safe-area-inset-bottom));
+  }
   .radio-dock{
     left:10px;
-    right:78px;
+    right:10px;
     width:auto;
-    bottom:calc(86px + env(safe-area-inset-bottom));
+    bottom:calc(198px + env(safe-area-inset-bottom));
   }
 }
+body.mobile-nav-open .radio-launch{visibility:hidden;}
 @media (prefers-reduced-motion:reduce){
   .radio-launch-dot.is-live{animation:none;}
 }

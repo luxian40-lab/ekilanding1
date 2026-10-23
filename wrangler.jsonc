@@ -15,6 +15,6 @@
     "bindings": [{ "name": "RADIO_ROOM", "class_name": "RadioRoom" }]
   },
   "migrations": [
-    { "tag": "v1-radio", "new_classes": ["RadioRoom"] }
+    { "tag": "v1-radio-sqlite", "new_sqlite_classes": ["RadioRoom"] }
   ]
 }
