@@ -9,7 +9,8 @@ class EkiPcmProcessor extends AudioWorkletProcessor {
   }
 
   process(_inputs, outputs) {
-    const out = outputs[0][0];
+    const out = outputs[0] && outputs[0][0];
+    if (!out) return true;
     let index = 0;
     while (index < out.length) {
       if (!this.chunks.length) {
