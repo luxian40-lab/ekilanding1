@@ -552,7 +552,7 @@ const bootStudio = async () => {
   }
   const note = document.getElementById('estudioNota');
   if (note) {
-    if (apiMode === 'sin-api') {
+    if (apiMode === 'sin-api' || apiMode === 'sin-carpeta') {
       note.textContent = tr('Desde aquí todavía no se pueden guardar audios. El botón de la página sí puede sonar con la programación publicada.');
       const gate = document.getElementById('estudioGate');
       if (gate) gate.hidden = true;

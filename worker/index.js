@@ -163,7 +163,9 @@ const handleRadio = async (request, env, url) => {
   if (!env.RADIO && url.pathname !== '/api/radio/salud') {
     return json({ error: 'sin-carpeta' }, 503);
   }
-  if (url.pathname === '/api/radio/salud') return json({ ok: true, modo: 'cloud' });
+  if (url.pathname === '/api/radio/salud') {
+    return json({ ok: Boolean(env.RADIO), modo: env.RADIO ? 'cloud' : 'sin-carpeta' });
+  }
   if (url.pathname === '/api/radio/entrar' && request.method === 'POST') {
     const body = await request.json().catch(() => ({}));
     const access = request.headers.get('Cf-Access-Authenticated-User-Email');

@@ -14,13 +14,14 @@ const excludedNames = new Set([
   'package.json',
   'package-lock.json',
   'wrangler.jsonc',
+  'wrangler.assets.jsonc',
   'wrangler.radio.jsonc',
   'worker'
 ]);
 
 const shouldSkip = name => {
   if (excludedNames.has(name)) return true;
-  if (name.startsWith('.git')) return true;
+  if (name.startsWith('.')) return true;
   return false;
 };
 
