@@ -106,6 +106,14 @@ const escapeXml = value => String(value)
 
 const liveSockets = (state, tag) => state.getWebSockets(tag).filter(ws => ws.readyState === 1);
 
+const copyAudio = async message => {
+  if (!message || typeof message === 'string') return null;
+  if (typeof Blob !== 'undefined' && message instanceof Blob) return message.arrayBuffer();
+  if (message instanceof ArrayBuffer) return message.slice(0);
+  if (ArrayBuffer.isView(message)) return message.buffer.slice(message.byteOffset, message.byteOffset + message.byteLength);
+  return null;
+};
+
 export class RadioRoom {
   constructor(state, env) {
     this.state = state;
@@ -137,10 +145,10 @@ export class RadioRoom {
 
   async webSocketMessage(ws, message) {
     if (!this.state.getTags(ws).includes('host')) return;
-    let data = message;
-    if (typeof Blob !== 'undefined' && data instanceof Blob) data = await data.arrayBuffer();
+    const audio = await copyAudio(message);
+    if (!audio) return;
     for (const listener of liveSockets(this.state, 'listener')) {
-      try { listener.send(data); } catch (_error) { /* el oyente ya se fue */ }
+      try { listener.send(audio.slice(0)); } catch (_error) { /* el oyente ya se fue */ }
     }
   }
 

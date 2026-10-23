@@ -10,8 +10,10 @@ let draft = null;
 let playing = false;
 let mode = 'lista';
 let liveSocket = null;
+let liveConnecting = false;
 let liveCtx = null;
 let liveNode = null;
+let liveArming = null;
 let hostGear = null;
 let hostStarting = false;
 let apiMode = 'sin-api';
@@ -115,41 +117,62 @@ const stopListener = () => {
     liveSocket.close();
     liveSocket = null;
   }
-  if (liveCtx) {
-    liveCtx.close().catch(() => {});
-    liveCtx = null;
-    liveNode = null;
-  }
 };
 
-const ensureLiveAudio = async () => {
-  if (liveCtx) {
-    await liveCtx.resume();
-    return;
+const armLiveAudio = () => {
+  if (!liveCtx) liveCtx = new AudioContext();
+  if (liveNode) return liveCtx.resume();
+  if (!liveArming) {
+    const resume = liveCtx.resume();
+    liveArming = resume.then(() => liveCtx.audioWorklet.addModule('/js/radio-worklet.js?v=20261023f')).then(() => {
+      if (!liveNode && liveCtx) {
+        liveNode = new AudioWorkletNode(liveCtx, 'eki-pcm');
+        liveNode.connect(liveCtx.destination);
+      }
+    }).catch(error => {
+      liveArming = null;
+      throw error;
+    });
   }
-  liveCtx = new AudioContext();
-  await liveCtx.resume();
-  await liveCtx.audioWorklet.addModule('/js/radio-worklet.js');
-  liveNode = new AudioWorkletNode(liveCtx, 'eki-pcm');
-  liveNode.connect(liveCtx.destination);
+  return liveArming;
+};
+
+const pcmToFloat = async data => {
+  let buffer = null;
+  if (data instanceof ArrayBuffer) buffer = data;
+  else if (ArrayBuffer.isView(data)) buffer = data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+  else if (typeof Blob !== 'undefined' && data instanceof Blob) buffer = await data.arrayBuffer();
+  if (!buffer || buffer.byteLength < 2) return null;
+  const pcm = new Int16Array(buffer);
+  const floats = new Float32Array(pcm.length);
+  for (let index = 0; index < pcm.length; index += 1) floats[index] = pcm[index] / 32768;
+  return floats;
 };
 
 const connectListener = async () => {
-  stopListener();
-  const socket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/api/radio/live?role=listener`);
-  socket.binaryType = 'arraybuffer';
-  liveSocket = socket;
-  socket.onmessage = async event => {
-    if (typeof event.data === 'string' || !playing || mode !== 'vivo') return;
-    await ensureLiveAudio();
-    const pcm = new Int16Array(event.data);
-    const floats = new Float32Array(pcm.length);
-    for (let index = 0; index < pcm.length; index += 1) floats[index] = pcm[index] / 32768;
-    liveNode.port.postMessage(resample(floats, 16000, liveCtx.sampleRate));
-  };
-  socket.onclose = () => {
-    if (liveSocket === socket) liveSocket = null;
-  };
+  if (liveSocket || liveConnecting) return;
+  liveConnecting = true;
+  try {
+    await armLiveAudio();
+    const socket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/api/radio/live?role=listener`);
+    socket.binaryType = 'arraybuffer';
+    liveSocket = socket;
+    let chain = Promise.resolve();
+    socket.onmessage = event => {
+      if (typeof event.data === 'string' || !playing || mode !== 'vivo') return;
+      const data = event.data;
+      chain = chain.then(async () => {
+        const floats = await pcmToFloat(data);
+        if (!floats || !liveNode || !liveCtx) return;
+        liveNode.port.postMessage(resample(floats, 16000, liveCtx.sampleRate));
+      }).catch(() => {});
+    };
+    socket.onclose = () => {
+      if (liveSocket === socket) liveSocket = null;
+    };
+  } finally {
+    liveConnecting = false;
+  }
 };
 
 const syncLista = async () => {
@@ -175,8 +198,8 @@ const tick = async () => {
     if (mode !== 'vivo') {
       mode = 'vivo';
       audioEl.pause();
-      if (playing) await connectListener();
     }
+    if (playing && !hostGear && !liveSocket) await connectListener();
     paint();
     return;
   }
@@ -210,7 +233,11 @@ const setDock = open => {
   if (open) document.getElementById('radioPlay')?.focus();
 };
 
-launch?.addEventListener('click', () => setDock(dock.hidden));
+launch?.addEventListener('click', () => {
+  const open = Boolean(dock?.hidden);
+  setDock(open);
+  if (open) loadAir().then(() => tick());
+});
 document.getElementById('radioClose')?.addEventListener('click', () => setDock(false));
 document.getElementById('radioPlay')?.addEventListener('click', async () => {
   if (playing) {
@@ -218,7 +245,9 @@ document.getElementById('radioPlay')?.addEventListener('click', async () => {
     return;
   }
   playing = true;
+  const ready = armLiveAudio();
   paint();
+  try { await ready; } catch (_error) { /* el en vivo avisa si no puede sonar */ }
   await tick();
 });
 audioEl?.addEventListener('ended', () => { tick(); });
@@ -386,8 +415,8 @@ const releaseHost = () => {
   if (!hostGear) return null;
   const gear = hostGear;
   hostGear = null;
-  gear.processor.onaudioprocess = null;
-  gear.processor.disconnect();
+  gear.node.port.onmessage = null;
+  gear.node.disconnect();
   gear.source.disconnect();
   gear.stream.getTracks().forEach(track => track.stop());
   gear.ctx.close().catch(() => {});
@@ -427,30 +456,30 @@ const startHost = async () => {
       audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1 }
     });
     await resume;
+    await ctx.audioWorklet.addModule('/js/radio-worklet.js?v=20261023f');
   } catch (_error) {
     ctx.close().catch(() => {});
+    stream?.getTracks().forEach(track => track.stop());
     hostStarting = false;
-    studioMsg('El navegador no dejó usar el micrófono.');
+    studioMsg(stream ? 'No se pudo abrir el en vivo.' : 'El navegador no dejó usar el micrófono.');
     return;
   }
   const source = ctx.createMediaStreamSource(stream);
-  const processor = ctx.createScriptProcessor(4096, 1, 1);
-  const mute = ctx.createGain();
-  mute.gain.value = 0;
-  source.connect(processor);
-  processor.connect(mute);
-  mute.connect(ctx.destination);
+  const node = new AudioWorkletNode(ctx, 'eki-mic');
+  source.connect(node);
+  node.connect(ctx.destination);
   const socket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/api/radio/live?role=host&token=${encodeURIComponent(token())}`);
   socket.binaryType = 'arraybuffer';
-  hostGear = { processor, source, stream, ctx, socket };
+  hostGear = { node, source, stream, ctx, socket };
   hostStarting = false;
   let opened = false;
   socket.onopen = () => {
     opened = true;
+    stopListener();
     air.enVivo = true;
     if (draft) draft.enVivo = true;
     renderDraft();
-    studioMsg('Ya estás al aire.');
+    studioMsg('Ya estás al aire. Para oírte, abre la página en otro celular y toca Escuchar.');
     tick();
   };
   socket.onclose = event => {
@@ -467,16 +496,17 @@ const startHost = async () => {
   socket.onerror = () => {
     if (!opened) studioMsg('No se pudo abrir el en vivo.');
   };
-  processor.onaudioprocess = event => {
+  node.port.onmessage = event => {
     if (socket.readyState !== 1) return;
-    const input = new Float32Array(event.inputBuffer.getChannelData(0));
+    const input = event.data;
+    if (!(input instanceof Float32Array) || !input.length) return;
     const down = resample(input, ctx.sampleRate, 16000);
     const pcm = new Int16Array(down.length);
     for (let index = 0; index < down.length; index += 1) {
       const sample = Math.max(-1, Math.min(1, down[index]));
       pcm[index] = sample < 0 ? sample * 0x8000 : sample * 0x7fff;
     }
-    socket.send(pcm.buffer);
+    try { socket.send(pcm.buffer); } catch (_error) { /* el socket se cerró */ }
   };
 };
 
@@ -600,7 +630,7 @@ loadAir().then(() => {
     await loadAir();
     if (Boolean(air.enVivo) !== wasLive || mode === 'lista') tick();
     else paint();
-  }, 8000);
+  }, 2000);
 });
 bootStudio();
 window.addEventListener('beforeunload', () => {

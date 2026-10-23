@@ -896,7 +896,7 @@ export default {
   "Terminó el en vivo. La programación sigue.": "The live segment ended. The schedule continues.",
   "Este navegador no puede usar el micrófono.": "This browser cannot use the microphone.",
   "El navegador no dejó usar el micrófono.": "The browser did not allow the microphone.",
-  "Ya estás al aire.": "You are on air.",
+  "Ya estás al aire. Para oírte, abre la página en otro celular y toca Escuchar.": "You are on air. To hear yourself, open the page on another phone and tap Listen.",
   "No se pudo abrir el en vivo.": "The live segment could not start.",
   "Ya hay un en vivo abierto en otra ventana.": "A live segment is already open in another window.",
   "Elige un audio y confirma que eki puede emitirlo.": "Choose an audio file and confirm eki may broadcast it.",
